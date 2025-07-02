@@ -9,6 +9,53 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      appointments: {
+        Row: {
+          created_at: string
+          dentist_id: string | null
+          email: string | null
+          id: string
+          message: string | null
+          name: string
+          phone: string
+          preferred_time: string | null
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          dentist_id?: string | null
+          email?: string | null
+          id?: string
+          message?: string | null
+          name: string
+          phone: string
+          preferred_time?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          dentist_id?: string | null
+          email?: string | null
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string
+          preferred_time?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_dentist_id_fkey"
+            columns: ["dentist_id"]
+            isOneToOne: false
+            referencedRelation: "dentists"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       dentists: {
         Row: {
           about_text: string | null
@@ -47,6 +94,88 @@ export type Database = {
           working_hours?: string | null
         }
         Relationships: []
+      }
+      faqs: {
+        Row: {
+          answer: string
+          created_at: string
+          dentist_id: string | null
+          display_order: number | null
+          id: string
+          is_active: boolean | null
+          question: string
+        }
+        Insert: {
+          answer: string
+          created_at?: string
+          dentist_id?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          question: string
+        }
+        Update: {
+          answer?: string
+          created_at?: string
+          dentist_id?: string | null
+          display_order?: number | null
+          id?: string
+          is_active?: boolean | null
+          question?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "faqs_dentist_id_fkey"
+            columns: ["dentist_id"]
+            isOneToOne: false
+            referencedRelation: "dentists"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      testimonials: {
+        Row: {
+          created_at: string
+          dentist_id: string | null
+          display_order: number | null
+          id: string
+          image_url: string | null
+          is_featured: boolean | null
+          patient_name: string
+          rating: number | null
+          review: string
+        }
+        Insert: {
+          created_at?: string
+          dentist_id?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean | null
+          patient_name: string
+          rating?: number | null
+          review: string
+        }
+        Update: {
+          created_at?: string
+          dentist_id?: string | null
+          display_order?: number | null
+          id?: string
+          image_url?: string | null
+          is_featured?: boolean | null
+          patient_name?: string
+          rating?: number | null
+          review?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "testimonials_dentist_id_fkey"
+            columns: ["dentist_id"]
+            isOneToOne: false
+            referencedRelation: "dentists"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
