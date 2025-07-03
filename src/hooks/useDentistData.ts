@@ -46,7 +46,7 @@ export interface Appointment {
   status?: string;
 }
 
-export function useDentistData() {
+export function useDentistData(slug?: string) {
   const [dentist, setDentist] = useState<DentistData | null>(null);
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [faqs, setFaqs] = useState<FAQ[]>([]);
@@ -59,12 +59,15 @@ export function useDentistData() {
     try {
       setLoading(true);
       
-      // Get the first dentist record (in production, this would be filtered by ID)
-      const { data: dentistData, error: dentistError } = await supabase
+      // Fetch dentist by slug if provided, otherwise fallback to first record
+      let dentistQuery: any = supabase
         .from('dentists')
         .select('*')
-        .limit(1)
-        .single();
+        .limit(1);
+      if (slug) {
+        dentistQuery = dentistQuery.eq('slug', slug);
+      }
+      const { data: dentistData, error: dentistError } = await dentistQuery.single();
 
       if (dentistError) {
         console.error('Error fetching dentist:', dentistError);
@@ -181,7 +184,7 @@ export function useDentistData() {
 
   useEffect(() => {
     fetchDentistData();
-  }, []);
+  }, [slug]);
 
   return {
     dentist,
