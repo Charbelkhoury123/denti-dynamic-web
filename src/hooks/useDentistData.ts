@@ -11,11 +11,11 @@ export interface DentistData {
   address: string;
   phone: string;
   place_url: string;
-  logo_url?: string;
   about_text?: string;
   services_list?: string[];
   working_hours?: string;
   created_at?: string;
+  slug: string;
 }
 
 export interface Testimonial {
