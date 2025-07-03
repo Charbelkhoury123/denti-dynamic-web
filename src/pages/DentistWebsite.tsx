@@ -5,6 +5,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
 import { Services } from '@/components/sections/Services';
+import { Footer } from '@/components/ui/footer-section';
 
 export default function DentistWebsite() {
   const { dentist, testimonials, faqs, loading, submitAppointment } = useDentistData();
@@ -39,6 +40,8 @@ export default function DentistWebsite() {
         <Services dentist={dentist} />
         
         {/* Additional sections would go here: Testimonials, FAQ, Contact, etc. */}
+        
+        <Footer />
       </div>
     </ThemeProvider>
   );
