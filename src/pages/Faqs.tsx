@@ -129,7 +129,7 @@ export default function Faqs() {
                 Contact Us
               </motion.a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </main>
