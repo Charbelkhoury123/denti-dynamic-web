@@ -95,11 +95,11 @@ export default function Faqs() {
                 >
                   <AccordionTrigger className="text-left hover:no-underline">
                     <span className="text-lg font-semibold text-foreground pr-4">
-                      {faq.question ?? ''}
+                      {String(faq.question || '')}
                     </span>
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground leading-relaxed pt-2 pb-4">
-                    {faq.answer ?? ''}
+                    {String(faq.answer || '')}
                   </AccordionContent>
                 </AccordionItem>
               </motion.div>
