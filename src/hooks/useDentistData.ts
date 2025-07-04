@@ -12,6 +12,7 @@ export interface DentistData {
   phone: string;
   place_url: string;
   about_text?: string;
+  services?: string[]; // Add this line for the services array
   services_list?: string[];
   working_hours?: string;
   created_at?: string;
@@ -68,6 +69,8 @@ export function useDentistData(slug?: string) {
         dentistQuery = dentistQuery.eq('slug', slug);
       }
       const { data: dentistData, error: dentistError } = await dentistQuery.single();
+
+      console.log("Fetched dentist data from Supabase:", dentistData);
 
       if (dentistError) {
         console.error('Error fetching dentist:', dentistError);

@@ -6,7 +6,7 @@ import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
 import { Services } from '@/components/sections/Services';
 import { Footer } from '@/components/ui/footer-section';
-import { useParams } from 'react-router-dom';
+import { useParams, Outlet } from 'react-router-dom';
 import { Navbar1 } from '@/components/ui/navbar-1';
 
 export default function DentistWebsite() {
@@ -29,6 +29,9 @@ export default function DentistWebsite() {
     );
   }
 
+  console.log("Dentist object:", dentist);
+  console.log("Dentist services:", dentist?.services);
+
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-background smooth-scroll">
@@ -38,13 +41,13 @@ export default function DentistWebsite() {
         </div>
 
         {/* Navbar */}
-        <Navbar1 />
+        <Navbar1 services={dentist?.services_list} />
 
         {/* Main Content */}
         <Hero dentist={dentist} onBookAppointment={handleBookAppointment} />
         <About dentist={dentist} />
         <Services dentist={dentist} />
-        
+        <Outlet />
         {/* Additional sections would go here: Testimonials, FAQ, Contact, etc. */}
         
         <Footer />

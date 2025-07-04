@@ -4,20 +4,38 @@ import * as React from "react"
 import { useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { Menu, X } from "lucide-react"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
+
+type Navbar1Props = {
+  services?: string[]
+}
+
+const slugify = (str: string) =>
+  str.toLowerCase().replace(/\s+/g, "-");
 
 const navLinks = [
-  { name: "Home", to: "/" },
+  { name: "Home", to: "home" },
   { name: "About", to: "/about" },
-  { name: "Services", to: "#services" },
+  { name: "Services", to: "#" },
   { name: "FAQs", to: "/faqs" },
-  { name: "Contact", to: "#contact" },
+  { name: "Contact", to: "contact" },
 ]
 
-const Navbar1 = () => {
+const Navbar1 = ({ services }: Navbar1Props) => {
+  console.log("Navbar1 services prop:", services);
   const [isOpen, setIsOpen] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
+  const closeTimeout = React.useRef<NodeJS.Timeout | null>(null);
+  const { slug: clinicSlug } = useParams();
 
   const toggleMenu = () => setIsOpen(!isOpen)
+  const handleServicesMouseEnter = () => {
+    if (closeTimeout.current) clearTimeout(closeTimeout.current);
+    setServicesOpen(true);
+  };
+  const handleServicesMouseLeave = () => {
+    closeTimeout.current = setTimeout(() => setServicesOpen(false), 150);
+  };
 
   return (
     <div className="flex justify-center w-full py-6 px-4">
@@ -43,25 +61,115 @@ const Navbar1 = () => {
         </div>
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          {navLinks.map((item) => (
-            <motion.div
-              key={item.name}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              whileHover={{ scale: 1.05 }}
-            >
-              {item.to.startsWith("#") ? (
-                <a href={item.to} className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium">
-                  {item.name}
-                </a>
-              ) : (
-                <Link to={item.to} className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium">
-                  {item.name}
-                </Link>
-              )}
-            </motion.div>
-          ))}
+          {navLinks.map((item) => {
+            if (item.name === "Services" && services && services.length > 0) {
+              return (
+                <div
+                  key="Services"
+                  className="relative"
+                  onMouseEnter={handleServicesMouseEnter}
+                  onMouseLeave={handleServicesMouseLeave}
+                >
+                  <span className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium cursor-pointer">
+                    Services
+                  </span>
+                  {servicesOpen && (
+                    <div className="absolute left-0 top-full mt-0 w-48 bg-white rounded shadow-lg z-20">
+                      {services.map((service) => (
+                        <Link
+                          key={service}
+                          to={`/${clinicSlug}/services/${slugify(service)}`}
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        >
+                          {service}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            }
+            // Special handling for Home link
+            if (item.name === "Home") {
+              return (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <Link
+                    to={clinicSlug ? `/${clinicSlug}` : "/"}
+                    className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium"
+                  >
+                    {item.name}
+                  </Link>
+                </motion.div>
+              );
+            }
+            // Special handling for About, FAQs, Pricing, Blog, Testimonials
+            const dynamicPages = ["About", "FAQs", "Pricing", "Blog", "Testimonials"];
+            if (dynamicPages.includes(item.name)) {
+              return (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <Link
+                    to={clinicSlug ? `/${clinicSlug}${item.to}` : item.to}
+                    className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium"
+                  >
+                    {item.name}
+                  </Link>
+                </motion.div>
+              );
+            }
+            // Special handling for Contact link
+            if (item.name === "Contact") {
+              return (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  {clinicSlug ? (
+                    <Link to={`/${clinicSlug}/contact`} className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium">
+                      {item.name}
+                    </Link>
+                  ) : (
+                    <a href="#contact" className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium">
+                      {item.name}
+                    </a>
+                  )}
+                </motion.div>
+              );
+            }
+            return (
+              <motion.div
+                key={item.name}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                {item.to.startsWith("#") ? (
+                  <a href={item.to} className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium">
+                    {item.name}
+                  </a>
+                ) : (
+                  <Link to={item.to} className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium">
+                    {item.name}
+                  </Link>
+                )}
+              </motion.div>
+            );
+          })}
         </nav>
         {/* Desktop CTA Button */}
         <motion.div
@@ -104,25 +212,109 @@ const Navbar1 = () => {
               <X className="h-6 w-6 text-gray-900" />
             </motion.button>
             <div className="flex flex-col space-y-6">
-              {navLinks.map((item, i) => (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 + 0.1 }}
-                  exit={{ opacity: 0, x: 20 }}
-                >
-                  {item.to.startsWith("#") ? (
-                    <a href={item.to} className="text-base text-gray-900 font-medium" onClick={toggleMenu}>
-                      {item.name}
-                    </a>
-                  ) : (
-                    <Link to={item.to} className="text-base text-gray-900 font-medium" onClick={toggleMenu}>
-                      {item.name}
-                    </Link>
-                  )}
-                </motion.div>
-              ))}
+              {navLinks.map((item, i) => {
+                // Special handling for Home link
+                if (item.name === "Home") {
+                  return (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 + 0.1 }}
+                      exit={{ opacity: 0, x: 20 }}
+                    >
+                      <Link
+                        to={clinicSlug ? `/${clinicSlug}` : "/"}
+                        className="text-base text-gray-900 font-medium"
+                        onClick={toggleMenu}
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  );
+                }
+                // Special handling for About, FAQs, Pricing, Blog, Testimonials
+                const dynamicPages = ["About", "FAQs", "Pricing", "Blog", "Testimonials"];
+                if (dynamicPages.includes(item.name)) {
+                  return (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 + 0.1 }}
+                      exit={{ opacity: 0, x: 20 }}
+                    >
+                      <Link
+                        to={clinicSlug ? `/${clinicSlug}${item.to}` : item.to}
+                        className="text-base text-gray-900 font-medium"
+                        onClick={toggleMenu}
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
+                  );
+                }
+                // Special handling for Contact link
+                if (item.name === "Contact") {
+                  return (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 + 0.1 }}
+                      exit={{ opacity: 0, x: 20 }}
+                    >
+                      {clinicSlug ? (
+                        <Link to={`/${clinicSlug}/contact`} className="text-base text-gray-900 font-medium" onClick={toggleMenu}>
+                          {item.name}
+                        </Link>
+                      ) : (
+                        <a href="#contact" className="text-base text-gray-900 font-medium" onClick={toggleMenu}>
+                          {item.name}
+                        </a>
+                      )}
+                    </motion.div>
+                  );
+                }
+                if (item.name === "Services" && services && services.length > 0) {
+                  return (
+                    <div key="Services" className="relative">
+                      <span className="text-base text-gray-900 font-medium">Services</span>
+                      <div className="mt-2 w-full bg-white rounded shadow-lg">
+                        {services.map((service) => (
+                          <Link
+                            key={service}
+                            to={`/services/${slugify(service)}`}
+                            className="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100"
+                            onClick={toggleMenu}
+                          >
+                            {service}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
+                return (
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.1 + 0.1 }}
+                    exit={{ opacity: 0, x: 20 }}
+                  >
+                    {item.to.startsWith("#") ? (
+                      <a href={item.to} className="text-base text-gray-900 font-medium" onClick={toggleMenu}>
+                        {item.name}
+                      </a>
+                    ) : (
+                      <Link to={item.to} className="text-base text-gray-900 font-medium" onClick={toggleMenu}>
+                        {item.name}
+                      </Link>
+                    )}
+                  </motion.div>
+                );
+              })}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
