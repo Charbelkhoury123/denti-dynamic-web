@@ -63,10 +63,10 @@ export type Database = {
           business_name: string
           created_at: string | null
           id: string
-          logo_url: string | null
           phone: string
           place_url: string
           services_list: string[] | null
+          slug: string
           working_hours: string | null
         }
         Insert: {
@@ -75,10 +75,10 @@ export type Database = {
           business_name: string
           created_at?: string | null
           id?: string
-          logo_url?: string | null
           phone: string
           place_url: string
           services_list?: string[] | null
+          slug: string
           working_hours?: string | null
         }
         Update: {
@@ -87,10 +87,10 @@ export type Database = {
           business_name?: string
           created_at?: string | null
           id?: string
-          logo_url?: string | null
           phone?: string
           place_url?: string
           services_list?: string[] | null
+          slug?: string
           working_hours?: string | null
         }
         Relationships: []
