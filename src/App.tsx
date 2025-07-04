@@ -26,18 +26,27 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          {/* Root route - shows default dentist website */}
           <Route path="/" element={<Index />} />
-          <Route path=":slug" element={<DentistWebsite />}>
+          
+          {/* Global pages (not clinic-specific) */}
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/features" element={<Features />} />
+          
+          {/* Clinic-specific routes with slug */}
+          <Route path="/:slug" element={<DentistWebsite />}>
+            {/* Nested routes that preserve the clinic slug */}
+            <Route path="about" element={<About />} />
             <Route path="services/:serviceSlug" element={<Service />} />
             <Route path="contact" element={<Contact />} />
-            <Route path="about" element={<About />} />
             <Route path="faqs" element={<Faqs />} />
             <Route path="pricing" element={<Pricing />} />
             <Route path="blog" element={<Blog />} />
             <Route path="testimonials" element={<Testimonials />} />
           </Route>
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/terms" element={<Terms />} />
+          
+          {/* Catch-all route for 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

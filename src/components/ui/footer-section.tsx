@@ -3,7 +3,7 @@ import React from 'react';
 import type { ComponentProps, ReactNode } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { FacebookIcon, FrameIcon, InstagramIcon, LinkedinIcon, YoutubeIcon } from 'lucide-react';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 interface FooterLink {
 	title: string;
@@ -16,49 +16,67 @@ interface FooterSection {
 	links: FooterLink[];
 }
 
-const footerLinks: FooterSection[] = [
-	{
-		label: 'Product',
-		links: [
-			{ title: 'Features', href: '/features' },
-			{ title: 'Pricing', href: '/pricing' },
-			{ title: 'Testimonials', href: '/testimonials' },
-		],
-	},
-	{
-		label: 'Company',
-		links: [
-			{ title: 'FAQs', href: '/faqs' },
-			{ title: 'About Us', href: '/about' },
-			{ title: 'Privacy Policy', href: '/privacy' },
-			{ title: 'Terms of Services', href: '/terms' },
-		],
-	},
-	{
-		label: 'Resources',
-		links: [
-			{ title: 'Blog', href: '/blog' },
-		],
-	},
-	{
-		label: 'Social Links',
-		links: [
-			{ title: 'Facebook', href: '#', icon: FacebookIcon },
-			{ title: 'Instagram', href: '#', icon: InstagramIcon },
-			{ title: 'Youtube', href: '#', icon: YoutubeIcon },
-			{ title: 'LinkedIn', href: '#', icon: LinkedinIcon },
-		],
-	},
-];
-
 export function Footer() {
+	const { slug } = useParams();
+
+	// Helper function to build URLs with slug preservation
+	const buildUrl = (path: string) => {
+		if (!slug) {
+			return path;
+		}
+		// For paths that start with /, preserve them as global routes
+		if (path.startsWith('/') && !path.startsWith(`/${slug}`)) {
+			return path;
+		}
+		// For relative paths, add the slug
+		return `/${slug}/${path}`;
+	};
+
+	const footerLinks: FooterSection[] = [
+		{
+			label: 'Services',
+			links: [
+				{ title: 'About', href: buildUrl('about') },
+				{ title: 'Services', href: buildUrl('') }, // Will show services on main page
+				{ title: 'Contact', href: buildUrl('contact') },
+			],
+		},
+		{
+			label: 'Information',
+			links: [
+				{ title: 'FAQs', href: buildUrl('faqs') },
+				{ title: 'Pricing', href: buildUrl('pricing') },
+				{ title: 'Testimonials', href: buildUrl('testimonials') },
+				{ title: 'Blog', href: buildUrl('blog') },
+			],
+		},
+		{
+			label: 'Legal',
+			links: [
+				{ title: 'Privacy Policy', href: '/privacy' },
+				{ title: 'Terms of Service', href: '/terms' },
+			],
+		},
+		{
+			label: 'Social Links',
+			links: [
+				{ title: 'Facebook', href: '#', icon: FacebookIcon },
+				{ title: 'Instagram', href: '#', icon: InstagramIcon },
+				{ title: 'Youtube', href: '#', icon: YoutubeIcon },
+				{ title: 'LinkedIn', href: '#', icon: LinkedinIcon },
+			],
+		},
+	];
+
 	return (
 		<footer className="relative w-full mx-auto flex flex-col items-center justify-center rounded-t-2xl md:rounded-t-3xl border-t border-border bg-card px-4 sm:px-6 py-8 sm:py-12 lg:py-16 font-sans">
 			<div className="bg-foreground/20 absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur" />
 
 			<div className="grid w-full max-w-6xl gap-8 xl:grid-cols-3 xl:gap-8">
 				<AnimatedContainer className="space-y-4">
-					<FrameIcon className="w-8 h-8 text-primary" />
+					<Link to={slug ? `/${slug}` : '/'} className="inline-block">
+						<FrameIcon className="w-8 h-8 text-primary" />
+					</Link>
 					<p className="text-muted-foreground mt-4 sm:mt-8 text-sm md:mt-0">
 						© {new Date().getFullYear()} Dental Practice. All rights reserved.
 					</p>

@@ -4,7 +4,7 @@ import * as React from "react"
 import { useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { Menu, X } from "lucide-react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useLocation } from "react-router-dom"
 
 type Navbar1Props = {
   services?: string[]
@@ -14,10 +14,10 @@ const slugify = (str: string) =>
   str.toLowerCase().replace(/\s+/g, "-");
 
 const navLinks = [
-  { name: "Home", to: "home" },
-  { name: "About", to: "/about" },
-  { name: "Services", to: "#" },
-  { name: "FAQs", to: "/faqs" },
+  { name: "Home", to: "" }, // Empty string for home route
+  { name: "About", to: "about" },
+  { name: "Services", to: "services" }, // Will be handled specially
+  { name: "FAQs", to: "faqs" },
   { name: "Contact", to: "contact" },
 ]
 
@@ -27,14 +27,42 @@ const Navbar1 = ({ services }: Navbar1Props) => {
   const [servicesOpen, setServicesOpen] = useState(false)
   const closeTimeout = React.useRef<NodeJS.Timeout | null>(null);
   const { slug: clinicSlug } = useParams();
+  const location = useLocation();
 
   const toggleMenu = () => setIsOpen(!isOpen)
+  
   const handleServicesMouseEnter = () => {
     if (closeTimeout.current) clearTimeout(closeTimeout.current);
     setServicesOpen(true);
   };
+  
   const handleServicesMouseLeave = () => {
     closeTimeout.current = setTimeout(() => setServicesOpen(false), 150);
+  };
+
+  // Helper function to build proper URLs with slug preservation
+  const buildUrl = (path: string) => {
+    if (!clinicSlug) {
+      // If no clinic slug, use root paths
+      return path === "" ? "/" : `/${path}`;
+    }
+    // If clinic slug exists, preserve it in the URL
+    return path === "" ? `/${clinicSlug}` : `/${clinicSlug}/${path}`;
+  };
+
+  // Helper function to build service URLs
+  const buildServiceUrl = (serviceName: string) => {
+    const serviceSlug = slugify(serviceName);
+    if (!clinicSlug) {
+      return `/services/${serviceSlug}`;
+    }
+    return `/${clinicSlug}/services/${serviceSlug}`;
+  };
+
+  // Check if current path matches the nav item
+  const isActiveLink = (path: string) => {
+    const expectedPath = buildUrl(path);
+    return location.pathname === expectedPath;
   };
 
   return (
@@ -48,17 +76,20 @@ const Navbar1 = ({ services }: Navbar1Props) => {
             whileHover={{ rotate: 10 }}
             transition={{ duration: 0.3 }}
           >
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="16" cy="16" r="16" fill="url(#paint0_linear)" />
-              <defs>
-                <linearGradient id="paint0_linear" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#FF9966" />
-                  <stop offset="1" stopColor="#FF5E62" />
-                </linearGradient>
-              </defs>
-            </svg>
+            <Link to={buildUrl("")} className="block">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="16" fill="url(#paint0_linear)" />
+                <defs>
+                  <linearGradient id="paint0_linear" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#FF9966" />
+                    <stop offset="1" stopColor="#FF5E62" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </Link>
           </motion.div>
         </div>
+
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           {navLinks.map((item) => {
@@ -70,86 +101,37 @@ const Navbar1 = ({ services }: Navbar1Props) => {
                   onMouseEnter={handleServicesMouseEnter}
                   onMouseLeave={handleServicesMouseLeave}
                 >
-                  <span className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium cursor-pointer">
+                  <span className={`text-sm hover:text-gray-600 transition-colors font-medium cursor-pointer ${
+                    location.pathname.includes('/services') ? 'text-primary font-semibold' : 'text-gray-900'
+                  }`}>
                     Services
                   </span>
-                  {servicesOpen && (
-                    <div className="absolute left-0 top-full mt-0 w-48 bg-white rounded shadow-lg z-20">
-                      {services.map((service) => (
-                        <Link
-                          key={service}
-                          to={`/${clinicSlug}/services/${slugify(service)}`}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                        >
-                          {service}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
+                  <AnimatePresence>
+                    {servicesOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute left-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border z-20"
+                      >
+                        {services.map((service) => (
+                          <Link
+                            key={service}
+                            to={buildServiceUrl(service)}
+                            className="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary transition-colors first:rounded-t-lg last:rounded-b-lg"
+                            onClick={() => setServicesOpen(false)}
+                          >
+                            {service}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               );
             }
-            // Special handling for Home link
-            if (item.name === "Home") {
-              return (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <Link
-                    to={clinicSlug ? `/${clinicSlug}` : "/"}
-                    className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium"
-                  >
-                    {item.name}
-                  </Link>
-                </motion.div>
-              );
-            }
-            // Special handling for About, FAQs, Pricing, Blog, Testimonials
-            const dynamicPages = ["About", "FAQs", "Pricing", "Blog", "Testimonials"];
-            if (dynamicPages.includes(item.name)) {
-              return (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <Link
-                    to={clinicSlug ? `/${clinicSlug}${item.to}` : item.to}
-                    className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium"
-                  >
-                    {item.name}
-                  </Link>
-                </motion.div>
-              );
-            }
-            // Special handling for Contact link
-            if (item.name === "Contact") {
-              return (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  {clinicSlug ? (
-                    <Link to={`/${clinicSlug}/contact`} className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium">
-                      {item.name}
-                    </Link>
-                  ) : (
-                    <a href="#contact" className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium">
-                      {item.name}
-                    </a>
-                  )}
-                </motion.div>
-              );
-            }
+
             return (
               <motion.div
                 key={item.name}
@@ -158,19 +140,19 @@ const Navbar1 = ({ services }: Navbar1Props) => {
                 transition={{ duration: 0.3 }}
                 whileHover={{ scale: 1.05 }}
               >
-                {item.to.startsWith("#") ? (
-                  <a href={item.to} className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium">
-                    {item.name}
-                  </a>
-                ) : (
-                  <Link to={item.to} className="text-sm text-gray-900 hover:text-gray-600 transition-colors font-medium">
-                    {item.name}
-                  </Link>
-                )}
+                <Link
+                  to={buildUrl(item.to)}
+                  className={`text-sm hover:text-gray-600 transition-colors font-medium ${
+                    isActiveLink(item.to) ? 'text-primary font-semibold' : 'text-gray-900'
+                  }`}
+                >
+                  {item.name}
+                </Link>
               </motion.div>
             );
           })}
         </nav>
+
         {/* Desktop CTA Button */}
         <motion.div
           className="hidden md:block"
@@ -179,18 +161,25 @@ const Navbar1 = ({ services }: Navbar1Props) => {
           transition={{ duration: 0.3, delay: 0.2 }}
           whileHover={{ scale: 1.05 }}
         >
-          <a
-            href="#contact"
+          <Link
+            to={buildUrl("contact")}
             className="inline-flex items-center justify-center px-5 py-2 text-sm text-white bg-black rounded-full hover:bg-gray-800 transition-colors"
           >
             Book Appointment
-          </a>
+          </Link>
         </motion.div>
+
         {/* Mobile Menu Button */}
-        <motion.button className="md:hidden flex items-center" onClick={toggleMenu} whileTap={{ scale: 0.9 }}>
+        <motion.button 
+          className="md:hidden flex items-center" 
+          onClick={toggleMenu} 
+          whileTap={{ scale: 0.9 }}
+          aria-label="Toggle mobile menu"
+        >
           <Menu className="h-6 w-6 text-gray-900" />
         </motion.button>
       </div>
+
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
@@ -208,93 +197,41 @@ const Navbar1 = ({ services }: Navbar1Props) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
+              aria-label="Close mobile menu"
             >
               <X className="h-6 w-6 text-gray-900" />
             </motion.button>
+
             <div className="flex flex-col space-y-6">
               {navLinks.map((item, i) => {
-                // Special handling for Home link
-                if (item.name === "Home") {
-                  return (
-                    <motion.div
-                      key={item.name}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1 + 0.1 }}
-                      exit={{ opacity: 0, x: 20 }}
-                    >
-                      <Link
-                        to={clinicSlug ? `/${clinicSlug}` : "/"}
-                        className="text-base text-gray-900 font-medium"
-                        onClick={toggleMenu}
-                      >
-                        {item.name}
-                      </Link>
-                    </motion.div>
-                  );
-                }
-                // Special handling for About, FAQs, Pricing, Blog, Testimonials
-                const dynamicPages = ["About", "FAQs", "Pricing", "Blog", "Testimonials"];
-                if (dynamicPages.includes(item.name)) {
-                  return (
-                    <motion.div
-                      key={item.name}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1 + 0.1 }}
-                      exit={{ opacity: 0, x: 20 }}
-                    >
-                      <Link
-                        to={clinicSlug ? `/${clinicSlug}${item.to}` : item.to}
-                        className="text-base text-gray-900 font-medium"
-                        onClick={toggleMenu}
-                      >
-                        {item.name}
-                      </Link>
-                    </motion.div>
-                  );
-                }
-                // Special handling for Contact link
-                if (item.name === "Contact") {
-                  return (
-                    <motion.div
-                      key={item.name}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1 + 0.1 }}
-                      exit={{ opacity: 0, x: 20 }}
-                    >
-                      {clinicSlug ? (
-                        <Link to={`/${clinicSlug}/contact`} className="text-base text-gray-900 font-medium" onClick={toggleMenu}>
-                          {item.name}
-                        </Link>
-                      ) : (
-                        <a href="#contact" className="text-base text-gray-900 font-medium" onClick={toggleMenu}>
-                          {item.name}
-                        </a>
-                      )}
-                    </motion.div>
-                  );
-                }
                 if (item.name === "Services" && services && services.length > 0) {
                   return (
-                    <div key="Services" className="relative">
-                      <span className="text-base text-gray-900 font-medium">Services</span>
-                      <div className="mt-2 w-full bg-white rounded shadow-lg">
-                        {services.map((service) => (
-                          <Link
-                            key={service}
-                            to={`/services/${slugify(service)}`}
-                            className="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100"
-                            onClick={toggleMenu}
-                          >
-                            {service}
-                          </Link>
-                        ))}
+                    <motion.div
+                      key="Services"
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 + 0.1 }}
+                      exit={{ opacity: 0, x: 20 }}
+                    >
+                      <div className="space-y-3">
+                        <span className="text-base text-gray-900 font-medium">Services</span>
+                        <div className="pl-4 space-y-2">
+                          {services.map((service) => (
+                            <Link
+                              key={service}
+                              to={buildServiceUrl(service)}
+                              className="block text-sm text-gray-600 hover:text-primary transition-colors"
+                              onClick={toggleMenu}
+                            >
+                              {service}
+                            </Link>
+                          ))}
+                        </div>
                       </div>
-                    </div>
+                    </motion.div>
                   );
                 }
+
                 return (
                   <motion.div
                     key={item.name}
@@ -303,18 +240,19 @@ const Navbar1 = ({ services }: Navbar1Props) => {
                     transition={{ delay: i * 0.1 + 0.1 }}
                     exit={{ opacity: 0, x: 20 }}
                   >
-                    {item.to.startsWith("#") ? (
-                      <a href={item.to} className="text-base text-gray-900 font-medium" onClick={toggleMenu}>
-                        {item.name}
-                      </a>
-                    ) : (
-                      <Link to={item.to} className="text-base text-gray-900 font-medium" onClick={toggleMenu}>
-                        {item.name}
-                      </Link>
-                    )}
+                    <Link
+                      to={buildUrl(item.to)}
+                      className={`text-base font-medium transition-colors ${
+                        isActiveLink(item.to) ? 'text-primary font-semibold' : 'text-gray-900'
+                      }`}
+                      onClick={toggleMenu}
+                    >
+                      {item.name}
+                    </Link>
                   </motion.div>
                 );
               })}
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -322,13 +260,13 @@ const Navbar1 = ({ services }: Navbar1Props) => {
                 exit={{ opacity: 0, y: 20 }}
                 className="pt-6"
               >
-                <a
-                  href="#contact"
-                  className="inline-flex items-center justify-center w-full px-5 py-3 text-base text-white bg-black rounded-full hover:bg-gray-800 transition-colors "
+                <Link
+                  to={buildUrl("contact")}
+                  className="inline-flex items-center justify-center w-full px-5 py-3 text-base text-white bg-black rounded-full hover:bg-gray-800 transition-colors"
                   onClick={toggleMenu}
                 >
                   Book Appointment
-                </a>
+                </Link>
               </motion.div>
             </div>
           </motion.div>
@@ -338,4 +276,4 @@ const Navbar1 = ({ services }: Navbar1Props) => {
   )
 }
 
-export { Navbar1 } 
+export { Navbar1 }
