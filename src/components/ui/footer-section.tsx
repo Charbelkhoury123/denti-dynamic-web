@@ -3,6 +3,7 @@ import React from 'react';
 import type { ComponentProps, ReactNode } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { FacebookIcon, FrameIcon, InstagramIcon, LinkedinIcon, YoutubeIcon } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 interface FooterLink {
 	title: string;
@@ -19,9 +20,9 @@ const footerLinks: FooterSection[] = [
 	{
 		label: 'Product',
 		links: [
-			{ title: 'Features', href: '#features' },
-			{ title: 'Pricing', href: '#pricing' },
-			{ title: 'Testimonials', href: '#testimonials' },
+			{ title: 'Features', href: '/features' },
+			{ title: 'Pricing', href: '/pricing' },
+			{ title: 'Testimonials', href: '/testimonials' },
 			{ title: 'Integration', href: '/' },
 		],
 	},
@@ -75,13 +76,25 @@ export function Footer() {
 								<ul className="space-y-2">
 									{section.links.map((link) => (
 										<li key={link.title}>
-											<a
-												href={link.href}
-												className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm transition-colors duration-200 hover:underline"
-											>
-												{link.icon && <link.icon className="mr-2 w-4 h-4" />}
-												{link.title}
-											</a>
+											{(section.label === 'Social Links') ? (
+												<a
+													href={link.href}
+													className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm transition-colors duration-200 hover:underline"
+													target="_blank"
+													rel="noopener noreferrer"
+												>
+													{link.icon && <link.icon className="mr-2 w-4 h-4" />}
+													{link.title}
+												</a>
+											) : (
+												<Link
+													to={link.href}
+													className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm transition-colors duration-200 hover:underline"
+												>
+													{link.icon && <link.icon className="mr-2 w-4 h-4" />}
+													{link.title}
+												</Link>
+											)}
 										</li>
 									))}
 								</ul>

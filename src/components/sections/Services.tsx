@@ -86,7 +86,7 @@ export function Services({ dentist }: ServicesProps) {
 
           <motion.div 
             variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"
           >
             {services.map((service, index) => (
               <motion.div
@@ -96,10 +96,10 @@ export function Services({ dentist }: ServicesProps) {
                   scale: 1.03,
                   transition: { duration: 0.2 }
                 }}
-                className="group"
+                className="group h-full flex"
               >
-                <Card className="p-6 h-full hover-lift dental-transition border-border/50 hover:border-primary/30 hover:shadow-dental-medium">
-                  <div className="flex flex-col items-center text-center">
+                <Card className="p-6 h-full min-h-[220px] flex flex-col justify-between hover-lift dental-transition border-border/50 hover:border-primary/30 hover:shadow-dental-medium">
+                  <div className="flex flex-col items-center text-center flex-1">
                     <motion.div 
                       className="text-4xl mb-4 p-4 bg-dental-blue-light rounded-full group-hover:scale-110 transition-transform duration-300"
                       whileHover={{ rotate: 5 }}

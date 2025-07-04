@@ -7,6 +7,7 @@ import { About } from '@/components/sections/About';
 import { Services } from '@/components/sections/Services';
 import { Footer } from '@/components/ui/footer-section';
 import { useParams } from 'react-router-dom';
+import { Navbar1 } from '@/components/ui/navbar-1';
 
 export default function DentistWebsite() {
   const { slug } = useParams();
@@ -35,6 +36,9 @@ export default function DentistWebsite() {
         <div className="fixed top-6 right-6 z-50">
           <ThemeToggle />
         </div>
+
+        {/* Navbar */}
+        <Navbar1 />
 
         {/* Main Content */}
         <Hero dentist={dentist} onBookAppointment={handleBookAppointment} />

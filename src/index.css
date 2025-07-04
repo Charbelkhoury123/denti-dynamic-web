@@ -38,17 +38,17 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
     --primary-foreground: 0 0% 100%;           /* #ffffff - Text on primary */
     --primary-light: 192 95% 35%;              /* #06b6c4 - Lighter primary variant */
     --primary-hover: 192 95% 20%;              /* #0e7980 - Hover state */
-    --primary-50: 192 95% 96%;                 /* #f0fdff - Lightest tint */
-    --primary-100: 192 95% 90%;                /* #cefafc - Very light tint */
-    --primary-200: 192 95% 80%;                /* #9df3f7 - Light tint */
+    --primary-50: 192 95% 98%;                 /* #fcfefe - Lightest tint (was 96%) */
+    --primary-100: 192 95% 96%;                /* #f6fefe - Very light tint (was 90%) */
+    --primary-200: 192 95% 92%;                /* #e6fffa - Light tint (was 80%) */
 
-    --secondary: 210 40% 95%;                  /* #f1f5f9 - Secondary background */
+    --secondary: 210 40% 98%;                  /* #fafcff - Even lighter secondary background */
     --secondary-foreground: 210 40% 8%;        /* #0f172a - Secondary text */
 
-    --muted: 210 40% 96%;                      /* #f8fafc - Muted background */
-    --muted-foreground: 215.4 16.3% 46.9%;    /* #64748b - Muted text (7.5:1 contrast) */
+    --muted: 210 40% 98%;                      /* #fafcff - Even lighter muted background */
+    --muted-foreground: 215.4 16.3% 60%;       /* #8ca0b8 - Lighter muted text */
 
-    --accent: 192 95% 92%;                     /* #e6fffa - Accent background */
+    --accent: 192 95% 98%;                     /* #fcfefe - Even lighter accent background */
     --accent-foreground: 192 95% 25%;          /* #03989e - Accent text */
 
     /* 

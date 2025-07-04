@@ -124,15 +124,16 @@ export function About({ dentist }: AboutProps) {
 
           {/* Features Grid */}
           <motion.div variants={itemVariants}>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
               {features.map((feature, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 30 }}
                   animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                   transition={{ delay: 0.8 + index * 0.1, duration: 0.6 }}
+                  className="h-full flex"
                 >
-                  <Card className="p-6 text-center hover-lift dental-transition">
+                  <Card className="p-6 h-full min-h-[220px] flex flex-col justify-between text-center hover-lift dental-transition">
                     <div className="text-4xl mb-4">{feature.icon}</div>
                     <h5 className="font-bold text-foreground mb-3">{feature.title}</h5>
                     <p className="text-sm text-muted-foreground">{feature.description}</p>
