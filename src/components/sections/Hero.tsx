@@ -85,10 +85,9 @@ export function Hero({ dentist, onBookAppointment }: HeroProps) {
               Book Appointment
             </Button>
             <Button
-              variant="outline"
               size="lg"
               onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-              className="border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg font-semibold"
+              className="bg-white text-primary hover:bg-white/90 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
               Our Services
             </Button>

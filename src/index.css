@@ -15,41 +15,39 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
   :root {
     /* 
     ==============================
-    CORE COLOR PALETTE
+    CORE COLOR PALETTE (DENTAL BLUE & WHITE)
     ==============================
-    Base colors with calculated contrast ratios for accessibility
     */
-    --background: 0 0% 100%;                    /* #ffffff - Base background */
-    --foreground: 210 40% 8%;                  /* #0f172a - Primary text (15.8:1 contrast) */
+    --background: 221 83% 98%;                    /* #f5faff - Very light blue background */
+    --foreground: 222 47% 11%;                  /* #1e293b - Deep blue-gray for text */
 
     --card: 0 0% 100%;                         /* #ffffff - Card backgrounds */
-    --card-foreground: 210 40% 8%;             /* #0f172a - Card text */
+    --card-foreground: 222 47% 11%;            /* #1e293b - Card text */
 
     --popover: 0 0% 100%;                      /* #ffffff - Popover backgrounds */
-    --popover-foreground: 210 40% 8%;          /* #0f172a - Popover text */
+    --popover-foreground: 222 47% 11%;         /* #1e293b - Popover text */
 
     /* 
     ==============================
-    BRAND COLORS - DENTAL THEME
+    BRAND COLORS - DENTAL THEME (BLUE)
     ==============================
-    Professional medical palette with trust-building blues and calming greens
     */
-    --primary: 192 95% 25%;                    /* #03989e - Primary brand (4.8:1 contrast on white) */
+    --primary: 221 83% 53%;                    /* #2563eb - Classic dental blue */
     --primary-foreground: 0 0% 100%;           /* #ffffff - Text on primary */
-    --primary-light: 192 95% 35%;              /* #06b6c4 - Lighter primary variant */
-    --primary-hover: 192 95% 20%;              /* #0e7980 - Hover state */
-    --primary-50: 192 95% 98%;                 /* #fcfefe - Lightest tint (was 96%) */
-    --primary-100: 192 95% 96%;                /* #f6fefe - Very light tint (was 90%) */
-    --primary-200: 192 95% 92%;                /* #e6fffa - Light tint (was 80%) */
+    --primary-light: 221 83% 63%;              /* #3b82f6 - Lighter blue */
+    --primary-hover: 221 83% 43%;              /* #1d4ed8 - Darker blue for hover */
+    --primary-50: 221 83% 98%;                 /* #f5faff - Lightest blue tint */
+    --primary-100: 221 83% 96%;                /* #e0f2fe - Very light blue tint */
+    --primary-200: 221 83% 92%;                /* #bae6fd - Light blue tint */
 
     --secondary: 210 40% 98%;                  /* #fafcff - Even lighter secondary background */
-    --secondary-foreground: 210 40% 8%;        /* #0f172a - Secondary text */
+    --secondary-foreground: 222 47% 11%;       /* #1e293b - Secondary text */
 
     --muted: 210 40% 98%;                      /* #fafcff - Even lighter muted background */
     --muted-foreground: 215.4 16.3% 60%;       /* #8ca0b8 - Lighter muted text */
 
-    --accent: 192 95% 98%;                     /* #fcfefe - Even lighter accent background */
-    --accent-foreground: 192 95% 25%;          /* #03989e - Accent text */
+    --accent: 221 83% 98%;                     /* #f5faff - Even lighter accent background */
+    --accent-foreground: 221 83% 53%;          /* #2563eb - Accent text */
 
     /* 
     ==============================
@@ -63,9 +61,9 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
     --success-foreground: 0 0% 100%;           /* #ffffff - Text on success */
     
     --warning: 38 92% 50%;                     /* #eab308 - Warning states */
-    --warning-foreground: 210 40% 8%;          /* #0f172a - Text on warning */
+    --warning-foreground: 222 47% 11%;         /* #1e293b - Text on warning */
     
-    --info: 217 91% 60%;                       /* #3b82f6 - Information */
+    --info: 221 83% 53%;                       /* #2563eb - Information */
     --info-foreground: 0 0% 100%;              /* #ffffff - Text on info */
 
     /* 
@@ -75,18 +73,17 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
     */
     --border: 214.3 31.8% 91.4%;               /* #e2e8f0 - Default borders */
     --input: 214.3 31.8% 91.4%;                /* #e2e8f0 - Input borders */
-    --ring: 192 95% 25%;                       /* #03989e - Focus rings */
+    --ring: 221 83% 53%;                       /* #2563eb - Focus rings */
 
     /* 
     ==============================
-    DENTAL-SPECIFIC BRAND COLORS
+    DENTAL-SPECIFIC BRAND COLORS (MINIMIZED GREEN)
     ==============================
-    Extended palette for dental practice theming
     */
-    --dental-mint: 160 84% 39%;                /* #0d9488 - Medical mint green */
-    --dental-mint-light: 160 84% 92%;          /* #f0fdfa - Light mint background */
-    --dental-blue: 192 95% 25%;                /* #03989e - Professional blue */
-    --dental-blue-light: 192 95% 92%;          /* #e6fffa - Light blue background */
+    --dental-mint: 160 84% 92%;                /* #f0fdfa - Very light mint, almost white */
+    --dental-mint-light: 160 84% 98%;          /* #f8fffe - Even lighter mint */
+    --dental-blue: 221 83% 53%;                /* #2563eb - Professional blue */
+    --dental-blue-light: 221 83% 92%;          /* #bae6fd - Light blue background */
     --dental-gray: 210 20% 50%;                /* #64748b - Professional gray */
     --dental-gray-light: 210 20% 95%;          /* #f1f5f9 - Light gray background */
 
@@ -173,13 +170,13 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
 
     /* 
     ==============================
-    GRADIENT SYSTEM
+    GRADIENT SYSTEM (BLUES)
     ==============================
     */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--dental-mint)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
     --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
-    --gradient-brand: linear-gradient(135deg, hsl(var(--dental-blue)), hsl(var(--dental-mint)));
+    --gradient-brand: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
 
     /* 
     ==============================

@@ -163,7 +163,7 @@ const Navbar1 = ({ services }: Navbar1Props) => {
         >
           <Link
             to={buildUrl("contact")}
-            className="inline-flex items-center justify-center px-5 py-2 text-sm text-white bg-black rounded-full hover:bg-gray-800 transition-colors"
+            className="inline-flex items-center justify-center px-5 py-2 text-sm bg-white text-primary border border-primary rounded-full hover:bg-primary-50 transition-colors"
           >
             Book Appointment
           </Link>
@@ -262,7 +262,7 @@ const Navbar1 = ({ services }: Navbar1Props) => {
               >
                 <Link
                   to={buildUrl("contact")}
-                  className="inline-flex items-center justify-center w-full px-5 py-3 text-base text-white bg-black rounded-full hover:bg-gray-800 transition-colors"
+                  className="inline-flex items-center justify-center w-full px-5 py-3 text-base bg-white text-primary border border-primary rounded-full hover:bg-primary-50 transition-colors"
                   onClick={toggleMenu}
                 >
                   Book Appointment
