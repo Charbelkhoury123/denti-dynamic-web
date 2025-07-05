@@ -4,9 +4,9 @@
 
 /* 
 ==============================
-ENTERPRISE DESIGN SYSTEM
+ENTERPRISE DESIGN SYSTEM - BLUE & WHITE THEME
 ==============================
-Complete design system with documented tokens for enterprise-level consistency.
+Complete design system with blue and white color palette.
 All colors use HSL format for better contrast control and accessibility.
 Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
 */
@@ -15,94 +15,105 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
   :root {
     /* 
     ==============================
-    CORE COLOR PALETTE (DENTAL BLUE & WHITE)
+    CORE COLOR PALETTE (BLUE & WHITE)
     ==============================
     */
-    --background: 221 83% 98%;                    /* #f5faff - Very light blue background */
-    --foreground: 222 47% 11%;                  /* #1e293b - Deep blue-gray for text */
+    --background: 0 0% 100%;                      /* #ffffff - Pure white background */
+    --foreground: 222 84% 4.9%;                  /* #0f172a - Deep blue-gray for text */
 
-    --card: 0 0% 100%;                         /* #ffffff - Card backgrounds */
-    --card-foreground: 222 47% 11%;            /* #1e293b - Card text */
+    --card: 0 0% 100%;                           /* #ffffff - Card backgrounds */
+    --card-foreground: 222 84% 4.9%;            /* #0f172a - Card text */
 
-    --popover: 0 0% 100%;                      /* #ffffff - Popover backgrounds */
-    --popover-foreground: 222 47% 11%;         /* #1e293b - Popover text */
+    --popover: 0 0% 100%;                        /* #ffffff - Popover backgrounds */
+    --popover-foreground: 222 84% 4.9%;         /* #0f172a - Popover text */
 
     /* 
     ==============================
-    BRAND COLORS - DENTAL THEME (BLUE)
+    BRAND COLORS - BLUE THEME
     ==============================
     */
-    --primary: 221 83% 53%;                    /* #2563eb - Classic dental blue */
-    --primary-foreground: 0 0% 100%;           /* #ffffff - Text on primary */
-    --primary-light: 221 83% 63%;              /* #3b82f6 - Lighter blue */
-    --primary-hover: 221 83% 43%;              /* #1d4ed8 - Darker blue for hover */
-    --primary-50: 221 83% 98%;                 /* #f5faff - Lightest blue tint */
-    --primary-100: 221 83% 96%;                /* #e0f2fe - Very light blue tint */
-    --primary-200: 221 83% 92%;                /* #bae6fd - Light blue tint */
+    --primary: 221 83% 53%;                      /* #2563eb - Classic blue */
+    --primary-foreground: 0 0% 100%;             /* #ffffff - Text on primary */
+    --primary-light: 221 83% 63%;                /* #3b82f6 - Lighter blue */
+    --primary-hover: 221 83% 43%;                /* #1d4ed8 - Darker blue for hover */
+    --primary-50: 221 83% 98%;                   /* #f5faff - Lightest blue tint */
+    --primary-100: 221 83% 96%;                  /* #e0f2fe - Very light blue tint */
+    --primary-200: 221 83% 92%;                  /* #bae6fd - Light blue tint */
 
-    --secondary: 210 40% 98%;                  /* #fafcff - Even lighter secondary background */
-    --secondary-foreground: 222 47% 11%;       /* #1e293b - Secondary text */
+    --secondary: 210 40% 98%;                    /* #f8fafc - Very light blue-gray */
+    --secondary-foreground: 222 84% 4.9%;       /* #0f172a - Secondary text */
 
-    --muted: 210 40% 98%;                      /* #fafcff - Even lighter muted background */
-    --muted-foreground: 215.4 16.3% 60%;       /* #8ca0b8 - Lighter muted text */
+    --muted: 210 40% 98%;                        /* #f8fafc - Muted background */
+    --muted-foreground: 215.4 16.3% 46.9%;      /* #64748b - Muted text */
 
-    --accent: 221 83% 98%;                     /* #f5faff - Even lighter accent background */
-    --accent-foreground: 221 83% 53%;          /* #2563eb - Accent text */
+    --accent: 221 83% 98%;                       /* #f5faff - Accent background */
+    --accent-foreground: 221 83% 53%;            /* #2563eb - Accent text */
 
     /* 
     ==============================
     SEMANTIC COLORS
     ==============================
     */
-    --destructive: 0 84.2% 60.2%;              /* #ef4444 - Error/danger */
-    --destructive-foreground: 210 40% 98%;     /* #f8fafc - Text on destructive */
+    --destructive: 0 84.2% 60.2%;                /* #ef4444 - Error/danger */
+    --destructive-foreground: 0 0% 100%;         /* #ffffff - Text on destructive */
     
-    --success: 142 76% 36%;                    /* #16a34a - Success states */
-    --success-foreground: 0 0% 100%;           /* #ffffff - Text on success */
+    --success: 142 76% 36%;                      /* #16a34a - Success states */
+    --success-foreground: 0 0% 100%;             /* #ffffff - Text on success */
     
-    --warning: 38 92% 50%;                     /* #eab308 - Warning states */
-    --warning-foreground: 222 47% 11%;         /* #1e293b - Text on warning */
+    --warning: 38 92% 50%;                       /* #eab308 - Warning states */
+    --warning-foreground: 222 84% 4.9%;         /* #0f172a - Text on warning */
     
-    --info: 221 83% 53%;                       /* #2563eb - Information */
-    --info-foreground: 0 0% 100%;              /* #ffffff - Text on info */
+    --info: 221 83% 53%;                         /* #2563eb - Information */
+    --info-foreground: 0 0% 100%;                /* #ffffff - Text on info */
 
     /* 
     ==============================
     INTERFACE COLORS
     ==============================
     */
-    --border: 214.3 31.8% 91.4%;               /* #e2e8f0 - Default borders */
-    --input: 214.3 31.8% 91.4%;                /* #e2e8f0 - Input borders */
-    --ring: 221 83% 53%;                       /* #2563eb - Focus rings */
+    --border: 214.3 31.8% 91.4%;                 /* #e2e8f0 - Default borders */
+    --input: 214.3 31.8% 91.4%;                  /* #e2e8f0 - Input borders */
+    --ring: 221 83% 53%;                         /* #2563eb - Focus rings */
 
     /* 
     ==============================
-    DENTAL-SPECIFIC BRAND COLORS (MINIMIZED GREEN)
+    DENTAL-SPECIFIC BRAND COLORS
     ==============================
     */
-    --dental-mint: 160 84% 92%;                /* #f0fdfa - Very light mint, almost white */
-    --dental-mint-light: 160 84% 98%;          /* #f8fffe - Even lighter mint */
-    --dental-blue: 221 83% 53%;                /* #2563eb - Professional blue */
-    --dental-blue-light: 221 83% 92%;          /* #bae6fd - Light blue background */
-    --dental-gray: 210 20% 50%;                /* #64748b - Professional gray */
-    --dental-gray-light: 210 20% 95%;          /* #f1f5f9 - Light gray background */
+    --dental-blue: 221 83% 53%;                  /* #2563eb - Professional blue */
+    --dental-blue-light: 221 83% 92%;            /* #bae6fd - Light blue background */
+    --dental-gray: 210 20% 50%;                  /* #64748b - Professional gray */
+    --dental-gray-light: 210 20% 95%;            /* #f1f5f9 - Light gray background */
+
+    /* 
+    ==============================
+    SIDEBAR COLORS
+    ==============================
+    */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 221 83% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 221 83% 98%;
+    --sidebar-accent-foreground: 221 83% 53%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 221 83% 53%;
 
     /* 
     ==============================
     TYPOGRAPHY SCALE
     ==============================
-    Modular scale with perfect mathematical ratios
     */
-    --font-size-xs: 0.75rem;                   /* 12px */
-    --font-size-sm: 0.875rem;                  /* 14px */
-    --font-size-base: 1rem;                    /* 16px - Base size */
-    --font-size-lg: 1.125rem;                  /* 18px */
-    --font-size-xl: 1.25rem;                   /* 20px */
-    --font-size-2xl: 1.5rem;                   /* 24px */
-    --font-size-3xl: 1.875rem;                 /* 30px */
-    --font-size-4xl: 2.25rem;                  /* 36px */
-    --font-size-5xl: 3rem;                     /* 48px */
-    --font-size-6xl: 3.75rem;                  /* 60px */
+    --font-size-xs: 0.75rem;                     /* 12px */
+    --font-size-sm: 0.875rem;                    /* 14px */
+    --font-size-base: 1rem;                      /* 16px - Base size */
+    --font-size-lg: 1.125rem;                    /* 18px */
+    --font-size-xl: 1.25rem;                     /* 20px */
+    --font-size-2xl: 1.5rem;                     /* 24px */
+    --font-size-3xl: 1.875rem;                   /* 30px */
+    --font-size-4xl: 2.25rem;                    /* 36px */
+    --font-size-5xl: 3rem;                       /* 48px */
+    --font-size-6xl: 3.75rem;                    /* 60px */
 
     --line-height-tight: 1.25;
     --line-height-normal: 1.5;
@@ -117,28 +128,27 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
     ==============================
     SPACING SCALE
     ==============================
-    Consistent spacing system based on 4px grid
     */
     --space-0: 0;
     --space-px: 1px;
-    --space-0-5: 0.125rem;                     /* 2px */
-    --space-1: 0.25rem;                        /* 4px */
-    --space-1-5: 0.375rem;                     /* 6px */
-    --space-2: 0.5rem;                         /* 8px */
-    --space-2-5: 0.625rem;                     /* 10px */
-    --space-3: 0.75rem;                        /* 12px */
-    --space-3-5: 0.875rem;                     /* 14px */
-    --space-4: 1rem;                           /* 16px */
-    --space-5: 1.25rem;                        /* 20px */
-    --space-6: 1.5rem;                         /* 24px */
-    --space-7: 1.75rem;                        /* 28px */
-    --space-8: 2rem;                           /* 32px */
-    --space-10: 2.5rem;                        /* 40px */
-    --space-12: 3rem;                          /* 48px */
-    --space-16: 4rem;                          /* 64px */
-    --space-20: 5rem;                          /* 80px */
-    --space-24: 6rem;                          /* 96px */
-    --space-32: 8rem;                          /* 128px */
+    --space-0-5: 0.125rem;                       /* 2px */
+    --space-1: 0.25rem;                          /* 4px */
+    --space-1-5: 0.375rem;                       /* 6px */
+    --space-2: 0.5rem;                           /* 8px */
+    --space-2-5: 0.625rem;                       /* 10px */
+    --space-3: 0.75rem;                          /* 12px */
+    --space-3-5: 0.875rem;                       /* 14px */
+    --space-4: 1rem;                             /* 16px */
+    --space-5: 1.25rem;                          /* 20px */
+    --space-6: 1.5rem;                           /* 24px */
+    --space-7: 1.75rem;                          /* 28px */
+    --space-8: 2rem;                             /* 32px */
+    --space-10: 2.5rem;                          /* 40px */
+    --space-12: 3rem;                            /* 48px */
+    --space-16: 4rem;                            /* 64px */
+    --space-20: 5rem;                            /* 80px */
+    --space-24: 6rem;                            /* 96px */
+    --space-32: 8rem;                            /* 128px */
 
     /* 
     ==============================
@@ -146,19 +156,18 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
     ==============================
     */
     --radius-none: 0;
-    --radius-sm: 0.125rem;                     /* 2px */
-    --radius: 0.375rem;                        /* 6px - Default */
-    --radius-md: 0.5rem;                       /* 8px */
-    --radius-lg: 0.75rem;                      /* 12px */
-    --radius-xl: 1rem;                         /* 16px */
-    --radius-2xl: 1.5rem;                      /* 24px */
+    --radius-sm: 0.125rem;                       /* 2px */
+    --radius: 0.375rem;                          /* 6px - Default */
+    --radius-md: 0.5rem;                         /* 8px */
+    --radius-lg: 0.75rem;                        /* 12px */
+    --radius-xl: 1rem;                           /* 16px */
+    --radius-2xl: 1.5rem;                        /* 24px */
     --radius-full: 9999px;
 
     /* 
     ==============================
     ELEVATION SYSTEM
     ==============================
-    Layered shadow system for depth hierarchy
     */
     --shadow-xs: 0 1px 2px 0 hsl(var(--primary) / 0.05);
     --shadow-sm: 0 1px 3px 0 hsl(var(--primary) / 0.1), 0 1px 2px -1px hsl(var(--primary) / 0.1);
@@ -170,7 +179,7 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
 
     /* 
     ==============================
-    GRADIENT SYSTEM (BLUES)
+    GRADIENT SYSTEM
     ==============================
     */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
@@ -188,82 +197,71 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
     --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-    /* 
-    ==============================
-    BREAKPOINT SYSTEM
-    ==============================
-    Mobile-first responsive breakpoints
-    */
-    --breakpoint-sm: 640px;                    /* Small devices */
-    --breakpoint-md: 768px;                    /* Medium devices */
-    --breakpoint-lg: 1024px;                   /* Large devices */
-    --breakpoint-xl: 1280px;                   /* Extra large devices */
-    --breakpoint-2xl: 1536px;                  /* 2X large devices */
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 210 40% 8%;
-    --foreground: 210 40% 98%;
+    /* 
+    ==============================
+    DARK MODE COLORS
+    ==============================
+    */
+    --background: 222 84% 4.9%;                  /* #0f172a - Dark blue background */
+    --foreground: 210 40% 98%;                   /* #f8fafc - Light text */
 
-    --card: 210 40% 10%;
-    --card-foreground: 210 40% 98%;
+    --card: 222 84% 4.9%;                        /* #0f172a - Dark card background */
+    --card-foreground: 210 40% 98%;              /* #f8fafc - Light card text */
 
-    --popover: 210 40% 10%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 222 84% 4.9%;                     /* #0f172a - Dark popover background */
+    --popover-foreground: 210 40% 98%;           /* #f8fafc - Light popover text */
 
-    --primary: 192 95% 35%;
-    --primary-foreground: 210 40% 8%;
-    --primary-light: 192 95% 45%;
-    --primary-hover: 192 95% 30%;
+    --primary: 221 83% 53%;                      /* #2563eb - Blue (same as light) */
+    --primary-foreground: 0 0% 100%;             /* #ffffff - White text on primary */
+    --primary-light: 221 83% 63%;                /* #3b82f6 - Lighter blue */
+    --primary-hover: 221 83% 43%;                /* #1d4ed8 - Darker blue for hover */
+    --primary-50: 221 83% 8%;                    /* Dark blue tint */
+    --primary-100: 221 83% 12%;                  /* Dark blue tint */
+    --primary-200: 221 83% 16%;                  /* Dark blue tint */
 
-    --secondary: 210 40% 15%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 217.2 32.6% 17.5%;              /* #1e293b - Dark secondary */
+    --secondary-foreground: 210 40% 98%;         /* #f8fafc - Light secondary text */
 
-    --muted: 210 40% 15%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 217.2 32.6% 17.5%;                  /* #1e293b - Dark muted background */
+    --muted-foreground: 215 20.2% 65.1%;        /* #94a3b8 - Muted text */
 
-    --accent: 192 95% 15%;
-    --accent-foreground: 192 95% 80%;
+    --accent: 217.2 32.6% 17.5%;                 /* #1e293b - Dark accent background */
+    --accent-foreground: 210 40% 98%;            /* #f8fafc - Light accent text */
 
-    --destructive: 0 62.8% 50.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 50.6%;                /* #dc2626 - Red for errors */
+    --destructive-foreground: 210 40% 98%;       /* #f8fafc - Light text on destructive */
 
-    --border: 210 40% 20%;
-    --input: 210 40% 20%;
-    --ring: 192 95% 35%;
+    --success: 142 76% 36%;                      /* #16a34a - Green for success */
+    --success-foreground: 0 0% 100%;             /* #ffffff - White text on success */
+
+    --warning: 38 92% 50%;                       /* #eab308 - Yellow for warnings */
+    --warning-foreground: 222 84% 4.9%;         /* #0f172a - Dark text on warning */
+
+    --info: 221 83% 53%;                         /* #2563eb - Blue for info */
+    --info-foreground: 0 0% 100%;                /* #ffffff - White text on info */
+
+    --border: 217.2 32.6% 17.5%;                 /* #1e293b - Dark borders */
+    --input: 217.2 32.6% 17.5%;                  /* #1e293b - Dark input borders */
+    --ring: 221 83% 53%;                         /* #2563eb - Blue focus rings */
 
     /* Dark mode dental colors */
-    --dental-mint: 160 84% 49%;
-    --dental-mint-light: 160 84% 15%;
-    --dental-blue: 192 95% 35%;
-    --dental-blue-light: 192 95% 15%;
-    --dental-gray: 210 20% 60%;
-    --dental-gray-light: 210 20% 15%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --dental-blue: 221 83% 53%;                  /* #2563eb - Blue (same as light) */
+    --dental-blue-light: 221 83% 16%;            /* Dark blue background */
+    --dental-gray: 210 20% 60%;                  /* #94a3b8 - Light gray text */
+    --dental-gray-light: 217.2 32.6% 17.5%;     /* #1e293b - Dark gray background */
+
+    /* Dark mode sidebar colors */
+    --sidebar-background: 222 84% 4.9%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 221 83% 53%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 221 83% 53%;
   }
 }
 
@@ -273,14 +271,18 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans transition-colors duration-300;
+  }
+
+  html {
+    @apply scroll-smooth;
   }
 }
 
 @layer components {
   /* Hero section styling */
   .hero-gradient {
-    @apply bg-gradient-to-br from-primary to-primary/80;
+    @apply bg-gradient-to-br from-primary to-primary-hover;
   }
 
   /* Section spacing */
@@ -307,11 +309,6 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
     @apply fixed bottom-6 right-6 w-14 h-14 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-110 z-50;
   }
 
-  /* Smooth scroll */
-  .smooth-scroll {
-    @apply scroll-smooth;
-  }
-
   /* Dental-specific utilities */
   .dental-gradient {
     background: var(--gradient-hero);
@@ -323,6 +320,11 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
 
   .dental-transition {
     transition: var(--transition-smooth);
+  }
+
+  /* Theme transition for smooth mode switching */
+  .theme-transition {
+    @apply transition-colors duration-300 ease-in-out;
   }
 }
 
@@ -365,6 +367,23 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
   .shadow-dental-strong {
     box-shadow: var(--shadow-strong);
   }
+
+  /* Blue theme utilities */
+  .text-blue-primary {
+    @apply text-primary;
+  }
+
+  .bg-blue-primary {
+    @apply bg-primary;
+  }
+
+  .border-blue-primary {
+    @apply border-primary;
+  }
+
+  .hover-blue-primary {
+    @apply hover:text-primary hover:bg-primary/5;
+  }
 }
 
 /* Keyframes */
@@ -399,4 +418,11 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
     opacity: 1;
     transform: scale(1);
   }
+}
+
+/* Smooth theme transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }

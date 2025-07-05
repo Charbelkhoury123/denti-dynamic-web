@@ -38,7 +38,7 @@ export function Hero({ dentist, onBookAppointment }: HeroProps) {
   };
 
   return (
-    <section ref={ref} className="relative min-h-[100dvh] sm:min-h-screen flex items-center justify-center overflow-hidden bg-hero-gradient px-4 sm:px-0">
+    <section ref={ref} className="relative min-h-[100dvh] sm:min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary via-primary to-primary-hover px-4 sm:px-0">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyIi8+PC9nPjwvZz48L3N2Zz4=')]"></div>
@@ -52,7 +52,7 @@ export function Hero({ dentist, onBookAppointment }: HeroProps) {
           className="text-center max-w-4xl mx-auto"
         >
           <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
-            <Badge variant="secondary" className="mb-3 sm:mb-4 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium">
+            <Badge variant="secondary" className="mb-3 sm:mb-4 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium bg-white/20 text-white border-white/30 hover:bg-white/30">
               Professional Dental Care
             </Badge>
           </motion.div>
@@ -87,7 +87,8 @@ export function Hero({ dentist, onBookAppointment }: HeroProps) {
             <Button
               size="lg"
               onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-              className="w-full sm:w-auto bg-white text-primary hover:bg-white/90 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 min-h-[44px]"
+              className="w-full sm:w-auto bg-white/10 text-white border-white/30 hover:bg-white/20 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 min-h-[44px]"
+              variant="outline"
             >
               Our Services
             </Button>

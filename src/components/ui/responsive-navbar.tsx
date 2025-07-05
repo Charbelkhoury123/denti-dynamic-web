@@ -108,7 +108,7 @@ const ResponsiveNavbar = ({ services }: ResponsiveNavbarProps) => {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-gray-100" role="banner">
+    <header className="sticky top-0 z-50 w-full bg-white/95 dark:bg-background/95 backdrop-blur-sm border-b border-gray-100 dark:border-border transition-colors duration-300" role="banner">
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Main navigation">
         <div className="flex items-center justify-between h-16 lg:h-20">
           
@@ -136,6 +136,7 @@ const ResponsiveNavbar = ({ services }: ResponsiveNavbarProps) => {
                   aria-hidden="true"
                 >
                   <circle cx="16" cy="16" r="16" fill="url(#paint0_linear)" />
+                  <path d="M16 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 12c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z" fill="white"/>
                   <defs>
                     <linearGradient id="paint0_linear" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
                       <stop stopColor="#2563eb" />
@@ -143,8 +144,8 @@ const ResponsiveNavbar = ({ services }: ResponsiveNavbarProps) => {
                     </linearGradient>
                   </defs>
                 </svg>
-                <span className="hidden sm:block text-xl lg:text-2xl font-bold text-gray-900">
-                  Dental Care
+                <span className="hidden sm:block text-xl lg:text-2xl font-bold text-primary">
+                  DentalCare
                 </span>
               </Link>
             </motion.div>
@@ -165,7 +166,7 @@ const ResponsiveNavbar = ({ services }: ResponsiveNavbarProps) => {
                       className={`flex items-center space-x-1 px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-md hover:text-primary hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                         location.pathname.includes('/services') 
                           ? 'text-primary bg-primary/5' 
-                          : 'text-gray-700'
+                          : 'text-foreground'
                       }`}
                       aria-expanded={servicesOpen}
                       aria-haspopup="true"
@@ -187,7 +188,7 @@ const ResponsiveNavbar = ({ services }: ResponsiveNavbarProps) => {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: -10, scale: 0.95 }}
                           transition={{ duration: 0.15 }}
-                          className="absolute left-0 top-full mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2"
+                          className="absolute left-0 top-full mt-2 w-64 bg-white dark:bg-card rounded-lg shadow-lg border border-gray-200 dark:border-border py-2"
                           role="menu"
                           aria-label="Services submenu"
                         >
@@ -195,7 +196,7 @@ const ResponsiveNavbar = ({ services }: ResponsiveNavbarProps) => {
                             <Link
                               key={service}
                               to={buildServiceUrl(service)}
-                              className="block px-4 py-3 text-sm text-gray-700 hover:bg-primary/5 hover:text-primary transition-colors duration-150 focus:outline-none focus:bg-primary/5 focus:text-primary"
+                              className="block px-4 py-3 text-sm text-foreground hover:bg-primary/5 hover:text-primary transition-colors duration-150 focus:outline-none focus:bg-primary/5 focus:text-primary"
                               onClick={() => setServicesOpen(false)}
                               role="menuitem"
                               tabIndex={servicesOpen ? 0 : -1}
@@ -217,7 +218,7 @@ const ResponsiveNavbar = ({ services }: ResponsiveNavbarProps) => {
                   className={`px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-md hover:text-primary hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                     isActiveLink(item.to) 
                       ? 'text-primary bg-primary/5' 
-                      : 'text-gray-700'
+                      : 'text-foreground'
                   }`}
                   aria-label={item.ariaLabel}
                   aria-current={isActiveLink(item.to) ? 'page' : undefined}
@@ -248,7 +249,7 @@ const ResponsiveNavbar = ({ services }: ResponsiveNavbarProps) => {
           <div className="lg:hidden">
             <motion.button
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary transition-colors duration-200"
+              className="inline-flex items-center justify-center p-2 rounded-md text-foreground hover:text-primary hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary transition-colors duration-200"
               aria-controls="mobile-menu"
               aria-expanded={isOpen}
               aria-label={isOpen ? "Close main menu" : "Open main menu"}
@@ -284,7 +285,7 @@ const ResponsiveNavbar = ({ services }: ResponsiveNavbarProps) => {
               {/* Mobile menu panel */}
               <motion.div
                 id="mobile-menu"
-                className="absolute top-full left-0 right-0 bg-white border-t border-gray-200 shadow-lg lg:hidden"
+                className="absolute top-full left-0 right-0 bg-white dark:bg-card border-t border-gray-200 dark:border-border shadow-lg lg:hidden"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
@@ -305,7 +306,7 @@ const ResponsiveNavbar = ({ services }: ResponsiveNavbarProps) => {
                             className={`flex items-center justify-between w-full px-3 py-3 text-base font-medium text-left rounded-md transition-colors duration-200 hover:text-primary hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                               location.pathname.includes('/services') 
                                 ? 'text-primary bg-primary/5' 
-                                : 'text-gray-700'
+                                : 'text-foreground'
                             }`}
                             aria-expanded={mobileServicesOpen}
                             aria-controls="mobile-services-menu"
@@ -336,7 +337,7 @@ const ResponsiveNavbar = ({ services }: ResponsiveNavbarProps) => {
                                   <Link
                                     key={service}
                                     to={buildServiceUrl(service)}
-                                    className="block px-3 py-2 text-sm text-gray-600 rounded-md hover:text-primary hover:bg-primary/5 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                                    className="block px-3 py-2 text-sm text-muted-foreground rounded-md hover:text-primary hover:bg-primary/5 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                                     onClick={handleMobileLinkClick}
                                     role="menuitem"
                                   >
@@ -362,7 +363,7 @@ const ResponsiveNavbar = ({ services }: ResponsiveNavbarProps) => {
                           className={`block px-3 py-3 text-base font-medium rounded-md transition-colors duration-200 hover:text-primary hover:bg-primary/5 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
                             isActiveLink(item.to) 
                               ? 'text-primary bg-primary/5' 
-                              : 'text-gray-700'
+                              : 'text-foreground'
                           }`}
                           onClick={handleMobileLinkClick}
                           aria-label={item.ariaLabel}
@@ -380,7 +381,7 @@ const ResponsiveNavbar = ({ services }: ResponsiveNavbarProps) => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
-                    className="pt-4 mt-4 border-t border-gray-200"
+                    className="pt-4 mt-4 border-t border-gray-200 dark:border-border"
                   >
                     <Link
                       to={buildUrl("contact")}
