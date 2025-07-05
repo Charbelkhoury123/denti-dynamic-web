@@ -7,7 +7,6 @@ import { About } from '@/components/sections/About';
 import { Services } from '@/components/sections/Services';
 import { Footer } from '@/components/ui/footer-section';
 import { useParams, Outlet, useLocation } from 'react-router-dom';
-import { Navbar1 } from '@/components/ui/navbar-1';
 
 export default function DentistWebsite() {
   const { slug } = useParams();
@@ -44,13 +43,12 @@ export default function DentistWebsite() {
           <ThemeToggle />
         </div>
 
-        {/* Navbar - always visible */}
-        <Navbar1 services={dentist?.services_list} />
-
         {/* Conditional rendering based on route */}
         {isNestedRoute ? (
-          /* Render nested route content */
-          <Outlet />
+          /* Render nested route content with top padding */
+          <div className="pt-8">
+            <Outlet />
+          </div>
         ) : (
           /* Render main clinic page content */
           <>

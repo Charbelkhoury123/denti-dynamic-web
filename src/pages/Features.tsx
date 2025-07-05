@@ -2,7 +2,6 @@ import React from "react";
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Footer } from '@/components/ui/footer-section';
-import { Navbar1 } from '@/components/ui/navbar-1';
 
 export default function Features() {
   return (
@@ -13,11 +12,8 @@ export default function Features() {
           <ThemeToggle />
         </div>
 
-        {/* Navbar */}
-        <Navbar1 />
-
         {/* Main Content */}
-        <main className="container mx-auto px-4 py-16">
+        <main className="container mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold mb-6 text-center">Our Features</h1>
           <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <li className="bg-card rounded-xl shadow p-6">

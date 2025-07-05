@@ -38,7 +38,7 @@ export default function Pricing() {
   ];
 
   return (
-    <main className="container mx-auto px-4 py-16 min-h-screen">
+    <main className="container mx-auto px-4 py-8 min-h-screen">
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 30 }}
