@@ -3,7 +3,7 @@
 import * as React from "react"
 import { useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, ChevronDown } from "lucide-react"
 import { Link, useParams, useLocation } from "react-router-dom"
 
 type Navbar1Props = {
@@ -25,6 +25,7 @@ const Navbar1 = ({ services }: Navbar1Props) => {
   console.log("Navbar1 services prop:", services);
   const [isOpen, setIsOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
   const closeTimeout = React.useRef<NodeJS.Timeout | null>(null);
   const { slug: clinicSlug } = useParams();
   const location = useLocation();
@@ -65,19 +66,25 @@ const Navbar1 = ({ services }: Navbar1Props) => {
     return location.pathname === expectedPath;
   };
 
+  // Close mobile menu when clicking on a link
+  const handleMobileLinkClick = () => {
+    setIsOpen(false);
+    setMobileServicesOpen(false);
+  };
+
   return (
-    <div className="flex justify-center w-full py-4 sm:py-6 px-4">
-      <div className="flex items-center justify-between px-4 sm:px-6 py-2 sm:py-3 bg-white rounded-full shadow-lg w-full max-w-3xl relative z-10">
+    <div className="flex justify-center w-full py-2 sm:py-4 lg:py-6 px-4">
+      <div className="flex items-center justify-between px-3 sm:px-4 lg:px-6 py-2 sm:py-3 bg-white rounded-full shadow-lg w-full max-w-4xl relative z-10">
         <div className="flex items-center">
           <motion.div
-            className="w-6 h-6 sm:w-8 sm:h-8 mr-3 sm:mr-6"
+            className="w-6 h-6 sm:w-8 sm:h-8 mr-2 sm:mr-3 lg:mr-6"
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             whileHover={{ rotate: 10 }}
             transition={{ duration: 0.3 }}
           >
             <Link to={buildUrl("")} className="block">
-              <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="sm:w-8 sm:h-8">
+              <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full sm:w-8 sm:h-8">
                 <circle cx="16" cy="16" r="16" fill="url(#paint0_linear)" />
                 <defs>
                   <linearGradient id="paint0_linear" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
@@ -91,7 +98,7 @@ const Navbar1 = ({ services }: Navbar1Props) => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-4 lg:space-x-8">
+        <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
           {navLinks.map((item) => {
             if (item.name === "Services" && services && services.length > 0) {
               return (
@@ -101,10 +108,11 @@ const Navbar1 = ({ services }: Navbar1Props) => {
                   onMouseEnter={handleServicesMouseEnter}
                   onMouseLeave={handleServicesMouseLeave}
                 >
-                  <span className={`text-sm hover:text-gray-600 transition-colors font-medium cursor-pointer ${
+                  <span className={`text-sm xl:text-base hover:text-gray-600 transition-colors font-medium cursor-pointer flex items-center ${
                     location.pathname.includes('/services') ? 'text-primary font-semibold' : 'text-gray-900'
                   }`}>
                     Services
+                    <ChevronDown className="ml-1 h-3 w-3" />
                   </span>
                   <AnimatePresence>
                     {servicesOpen && (
@@ -113,7 +121,7 @@ const Navbar1 = ({ services }: Navbar1Props) => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute left-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border z-20"
+                        className="absolute left-0 top-full mt-2 w-56 bg-white rounded-lg shadow-lg border z-20"
                       >
                         {services.map((service) => (
                           <Link
@@ -142,7 +150,7 @@ const Navbar1 = ({ services }: Navbar1Props) => {
               >
                 <Link
                   to={buildUrl(item.to)}
-                  className={`text-sm hover:text-gray-600 transition-colors font-medium ${
+                  className={`text-sm xl:text-base hover:text-gray-600 transition-colors font-medium ${
                     isActiveLink(item.to) ? 'text-primary font-semibold' : 'text-gray-900'
                   }`}
                 >
@@ -155,7 +163,7 @@ const Navbar1 = ({ services }: Navbar1Props) => {
 
         {/* Desktop CTA Button */}
         <motion.div
-          className="hidden md:block"
+          className="hidden lg:block"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3, delay: 0.2 }}
@@ -163,7 +171,7 @@ const Navbar1 = ({ services }: Navbar1Props) => {
         >
           <Link
             to={buildUrl("contact")}
-            className="inline-flex items-center justify-center px-4 lg:px-5 py-2 text-sm bg-white text-primary border border-primary rounded-full hover:bg-primary-50 transition-colors min-h-[40px]"
+            className="inline-flex items-center justify-center px-4 xl:px-6 py-2 xl:py-2.5 text-sm xl:text-base bg-white text-primary border border-primary rounded-full hover:bg-primary-50 transition-colors min-h-[40px] xl:min-h-[44px]"
           >
             Book Appointment
           </Link>
@@ -171,105 +179,128 @@ const Navbar1 = ({ services }: Navbar1Props) => {
 
         {/* Mobile Menu Button */}
         <motion.button 
-          className="md:hidden flex items-center p-2 min-h-[44px] min-w-[44px] justify-center" 
+          className="lg:hidden flex items-center justify-center p-2 min-h-[44px] min-w-[44px] rounded-full hover:bg-gray-100 transition-colors" 
           onClick={toggleMenu} 
           whileTap={{ scale: 0.9 }}
           aria-label="Toggle mobile menu"
         >
-          <Menu className="h-5 w-5 text-gray-900" />
+          {isOpen ? (
+            <X className="h-5 w-5 text-gray-900" />
+          ) : (
+            <Menu className="h-5 w-5 text-gray-900" />
+          )}
         </motion.button>
       </div>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            className="fixed inset-0 bg-white z-50 pt-20 px-6 md:hidden"
-            initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          >
-            <motion.button
-              className="absolute top-4 right-4 p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
-              onClick={toggleMenu}
-              whileTap={{ scale: 0.9 }}
+          <>
+            {/* Backdrop */}
+            <motion.div
+              className="fixed inset-0 bg-black/20 z-40 lg:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              aria-label="Close mobile menu"
+              exit={{ opacity: 0 }}
+              onClick={toggleMenu}
+            />
+            
+            {/* Mobile Menu */}
+            <motion.div
+              className="fixed inset-x-4 top-20 bg-white rounded-2xl shadow-2xl z-50 lg:hidden max-h-[calc(100vh-6rem)] overflow-y-auto"
+              initial={{ opacity: 0, scale: 0.95, y: -20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: -20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
             >
-              <X className="h-5 w-5 text-gray-900" />
-            </motion.button>
+              <div className="p-6">
+                <div className="space-y-1">
+                  {navLinks.map((item, i) => {
+                    if (item.name === "Services" && services && services.length > 0) {
+                      return (
+                        <motion.div
+                          key="Services"
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.1 + 0.1 }}
+                        >
+                          <button
+                            onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                            className="flex items-center justify-between w-full px-4 py-3 text-left text-base font-medium text-gray-900 hover:bg-gray-50 rounded-lg transition-colors min-h-[48px]"
+                          >
+                            <span className={location.pathname.includes('/services') ? 'text-primary font-semibold' : ''}>
+                              Services
+                            </span>
+                            <ChevronDown className={`h-4 w-4 transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                          </button>
+                          
+                          <AnimatePresence>
+                            {mobileServicesOpen && (
+                              <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                transition={{ duration: 0.2 }}
+                                className="overflow-hidden"
+                              >
+                                <div className="pl-4 space-y-1 mt-1">
+                                  {services.map((service) => (
+                                    <Link
+                                      key={service}
+                                      to={buildServiceUrl(service)}
+                                      className="block px-4 py-2.5 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors min-h-[44px] flex items-center"
+                                      onClick={handleMobileLinkClick}
+                                    >
+                                      {service}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </motion.div>
+                      );
+                    }
 
-            <div className="flex flex-col space-y-6 mt-4">
-              {navLinks.map((item, i) => {
-                if (item.name === "Services" && services && services.length > 0) {
-                  return (
-                    <motion.div
-                      key="Services"
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1 + 0.1 }}
-                      exit={{ opacity: 0, x: 20 }}
-                    >
-                      <div className="space-y-3">
-                        <span className="text-base text-gray-900 font-medium">Services</span>
-                        <div className="pl-4 space-y-2">
-                          {services.map((service) => (
-                            <Link
-                              key={service}
-                              to={buildServiceUrl(service)}
-                              className="block text-sm text-gray-600 hover:text-primary transition-colors"
-                              onClick={toggleMenu}
-                            >
-                              {service}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                }
+                    return (
+                      <motion.div
+                        key={item.name}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.1 + 0.1 }}
+                      >
+                        <Link
+                          to={buildUrl(item.to)}
+                          className={`block px-4 py-3 text-base font-medium transition-colors hover:bg-gray-50 rounded-lg min-h-[48px] flex items-center ${
+                            isActiveLink(item.to) ? 'text-primary font-semibold bg-primary/5' : 'text-gray-900'
+                          }`}
+                          onClick={handleMobileLinkClick}
+                        >
+                          {item.name}
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </div>
 
-                return (
-                  <motion.div
-                    key={item.name}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.1 + 0.1 }}
-                    exit={{ opacity: 0, x: 20 }}
-                  >
-                    <Link
-                      to={buildUrl(item.to)}
-                      className={`text-base font-medium transition-colors ${
-                        isActiveLink(item.to) ? 'text-primary font-semibold' : 'text-gray-900'
-                      }`}
-                      onClick={toggleMenu}
-                    >
-                      {item.name}
-                    </Link>
-                  </motion.div>
-                );
-              })}
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                exit={{ opacity: 0, y: 20 }}
-                className="pt-6"
-              >
-                <Link
-                  to={buildUrl("contact")}
-                  className="inline-flex items-center justify-center w-full px-5 py-4 text-base bg-white text-primary border border-primary rounded-full hover:bg-primary-50 transition-colors min-h-[48px]"
-                  onClick={toggleMenu}
+                {/* Mobile CTA Button */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="pt-6 mt-6 border-t border-gray-100"
                 >
-                  Book Appointment
-                </Link>
-              </motion.div>
-            </div>
-          </motion.div>
+                  <Link
+                    to={buildUrl("contact")}
+                    className="flex items-center justify-center w-full px-6 py-4 text-base font-semibold bg-primary text-white rounded-xl hover:bg-primary-hover transition-colors min-h-[52px]"
+                    onClick={handleMobileLinkClick}
+                  >
+                    Book Appointment
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </div>
