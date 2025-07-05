@@ -69,10 +69,10 @@ export function Footer() {
 	];
 
 	return (
-		<footer className="relative w-full mx-auto flex flex-col items-center justify-center rounded-t-2xl md:rounded-t-3xl border-t border-border bg-card px-4 sm:px-6 py-8 sm:py-12 lg:py-16 font-sans">
+		<footer className="relative w-full mx-auto flex flex-col items-center justify-center rounded-t-xl sm:rounded-t-2xl md:rounded-t-3xl border-t border-border bg-card px-4 sm:px-6 py-6 sm:py-8 md:py-12 lg:py-16 font-sans">
 			<div className="bg-foreground/20 absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur" />
 
-			<div className="grid w-full max-w-6xl gap-8 xl:grid-cols-3 xl:gap-8">
+			<div className="grid w-full max-w-6xl gap-6 sm:gap-8 xl:grid-cols-3 xl:gap-8">
 				<AnimatedContainer className="space-y-4">
 					<Link to={slug ? `/${slug}` : '/'} className="inline-block">
 						<FrameIcon className="w-8 h-8 text-primary" />
@@ -82,11 +82,11 @@ export function Footer() {
 					</p>
 				</AnimatedContainer>
 
-				<div className="mt-6 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4 xl:col-span-2 xl:mt-0">
+				<div className="mt-4 sm:mt-6 md:mt-10 grid grid-cols-2 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 md:grid-cols-4 xl:col-span-2 xl:mt-0">
 					{footerLinks.map((section, index) => (
 						<AnimatedContainer key={section.label} delay={0.1 + index * 0.1}>
-							<div className="mb-6 sm:mb-10 md:mb-0">
-								<h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-3">{section.label}</h3>
+							<div className="mb-4 sm:mb-6 md:mb-8 lg:mb-10 xl:mb-0">
+								<h3 className="text-xs sm:text-sm font-semibold text-foreground uppercase tracking-wider mb-2 sm:mb-3">{section.label}</h3>
 								<ul className="space-y-2">
 									{section.links.map((link) => (
 										<li key={link.title}>

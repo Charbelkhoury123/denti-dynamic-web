@@ -38,28 +38,28 @@ export function Hero({ dentist, onBookAppointment }: HeroProps) {
   };
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-hero-gradient">
+    <section ref={ref} className="relative min-h-[100dvh] sm:min-h-screen flex items-center justify-center overflow-hidden bg-hero-gradient px-4 sm:px-0">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyIi8+PC9nPjwvZz48L3N2Zz4=')]"></div>
       </div>
 
-      <div className="container-custom relative z-10">
+      <div className="container-custom relative z-10 py-8 sm:py-12">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           className="text-center max-w-4xl mx-auto"
         >
-          <motion.div variants={itemVariants} className="mb-6">
-            <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm font-medium">
+          <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
+            <Badge variant="secondary" className="mb-3 sm:mb-4 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium">
               Professional Dental Care
             </Badge>
           </motion.div>
 
           <motion.h1 
             variants={itemVariants}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight px-2 sm:px-0"
           >
             {dentist?.business_name || 'Your Bright Smile'}
             <br />
@@ -68,26 +68,26 @@ export function Hero({ dentist, onBookAppointment }: HeroProps) {
 
           <motion.p 
             variants={itemVariants}
-            className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0"
           >
             Experience exceptional dental care with cutting-edge technology and a gentle, personalized approach to your oral health.
           </motion.p>
 
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 sm:px-0"
           >
             <Button
               size="lg"
               onClick={onBookAppointment}
-              className="bg-white text-primary hover:bg-white/90 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="w-full sm:w-auto bg-white text-primary hover:bg-white/90 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 min-h-[44px]"
             >
               Book Appointment
             </Button>
             <Button
               size="lg"
               onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-white text-primary hover:bg-white/90 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              className="w-full sm:w-auto bg-white text-primary hover:bg-white/90 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 min-h-[44px]"
             >
               Our Services
             </Button>
@@ -96,7 +96,7 @@ export function Hero({ dentist, onBookAppointment }: HeroProps) {
           {/* Statistics */}
           <motion.div 
             variants={itemVariants}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/20"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-white/20 px-4 sm:px-0"
           >
             {[
               { number: "5000+", label: "Happy Patients" },
@@ -110,10 +110,10 @@ export function Hero({ dentist, onBookAppointment }: HeroProps) {
                 transition={{ delay: 1 + index * 0.2, duration: 0.5 }}
                 className="text-center"
               >
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
                   {stat.number}
                 </div>
-                <div className="text-white/80 font-medium">
+                <div className="text-white/80 font-medium text-sm sm:text-base">
                   {stat.label}
                 </div>
               </motion.div>

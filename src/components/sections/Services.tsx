@@ -86,7 +86,7 @@ export function Services({ dentist }: ServicesProps) {
 
           <motion.div 
             variants={containerVariants}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch px-4 sm:px-0"
           >
             {services.map((service, index) => (
               <motion.div
@@ -98,7 +98,7 @@ export function Services({ dentist }: ServicesProps) {
                 }}
                 className="group h-full flex"
               >
-                <Card className="p-6 h-full min-h-[220px] flex flex-col justify-between hover-lift dental-transition border-border/50 hover:border-primary/30 hover:shadow-dental-medium">
+                <Card className="p-4 sm:p-6 h-full min-h-[200px] sm:min-h-[220px] flex flex-col justify-between hover-lift dental-transition border-border/50 hover:border-primary/30 hover:shadow-dental-medium">
                   <div className="flex flex-col items-center text-center flex-1">
                     <motion.div 
                       className="text-4xl mb-4 p-4 bg-dental-blue-light rounded-full group-hover:scale-110 transition-transform duration-300"
@@ -106,10 +106,10 @@ export function Services({ dentist }: ServicesProps) {
                     >
                       {getServiceIcon(service)}
                     </motion.div>
-                    <h3 className="text-lg font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                    <h3 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3 group-hover:text-primary transition-colors">
                       {service}
                     </h3>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs sm:text-sm text-muted-foreground">
                       Professional {service.toLowerCase()} services with modern techniques and equipment for optimal results.
                     </p>
                   </div>

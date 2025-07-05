@@ -66,18 +66,18 @@ const Navbar1 = ({ services }: Navbar1Props) => {
   };
 
   return (
-    <div className="flex justify-center w-full py-6 px-4">
-      <div className="flex items-center justify-between px-6 py-3 bg-white rounded-full shadow-lg w-full max-w-3xl relative z-10">
+    <div className="flex justify-center w-full py-4 sm:py-6 px-4">
+      <div className="flex items-center justify-between px-4 sm:px-6 py-2 sm:py-3 bg-white rounded-full shadow-lg w-full max-w-3xl relative z-10">
         <div className="flex items-center">
           <motion.div
-            className="w-8 h-8 mr-6"
+            className="w-6 h-6 sm:w-8 sm:h-8 mr-3 sm:mr-6"
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
             whileHover={{ rotate: 10 }}
             transition={{ duration: 0.3 }}
           >
             <Link to={buildUrl("")} className="block">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="sm:w-8 sm:h-8">
                 <circle cx="16" cy="16" r="16" fill="url(#paint0_linear)" />
                 <defs>
                   <linearGradient id="paint0_linear" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
@@ -91,7 +91,7 @@ const Navbar1 = ({ services }: Navbar1Props) => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-4 lg:space-x-8">
           {navLinks.map((item) => {
             if (item.name === "Services" && services && services.length > 0) {
               return (
@@ -163,7 +163,7 @@ const Navbar1 = ({ services }: Navbar1Props) => {
         >
           <Link
             to={buildUrl("contact")}
-            className="inline-flex items-center justify-center px-5 py-2 text-sm bg-white text-primary border border-primary rounded-full hover:bg-primary-50 transition-colors"
+            className="inline-flex items-center justify-center px-4 lg:px-5 py-2 text-sm bg-white text-primary border border-primary rounded-full hover:bg-primary-50 transition-colors min-h-[40px]"
           >
             Book Appointment
           </Link>
@@ -171,12 +171,12 @@ const Navbar1 = ({ services }: Navbar1Props) => {
 
         {/* Mobile Menu Button */}
         <motion.button 
-          className="md:hidden flex items-center" 
+          className="md:hidden flex items-center p-2 min-h-[44px] min-w-[44px] justify-center" 
           onClick={toggleMenu} 
           whileTap={{ scale: 0.9 }}
           aria-label="Toggle mobile menu"
         >
-          <Menu className="h-6 w-6 text-gray-900" />
+          <Menu className="h-5 w-5 text-gray-900" />
         </motion.button>
       </div>
 
@@ -184,14 +184,14 @@ const Navbar1 = ({ services }: Navbar1Props) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-white z-50 pt-24 px-6 md:hidden"
+            className="fixed inset-0 bg-white z-50 pt-20 px-6 md:hidden"
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
           >
             <motion.button
-              className="absolute top-6 right-6 p-2"
+              className="absolute top-4 right-4 p-2 min-h-[44px] min-w-[44px] flex items-center justify-center"
               onClick={toggleMenu}
               whileTap={{ scale: 0.9 }}
               initial={{ opacity: 0 }}
@@ -199,10 +199,10 @@ const Navbar1 = ({ services }: Navbar1Props) => {
               transition={{ delay: 0.2 }}
               aria-label="Close mobile menu"
             >
-              <X className="h-6 w-6 text-gray-900" />
+              <X className="h-5 w-5 text-gray-900" />
             </motion.button>
 
-            <div className="flex flex-col space-y-6">
+            <div className="flex flex-col space-y-6 mt-4">
               {navLinks.map((item, i) => {
                 if (item.name === "Services" && services && services.length > 0) {
                   return (
@@ -262,7 +262,7 @@ const Navbar1 = ({ services }: Navbar1Props) => {
               >
                 <Link
                   to={buildUrl("contact")}
-                  className="inline-flex items-center justify-center w-full px-5 py-3 text-base bg-white text-primary border border-primary rounded-full hover:bg-primary-50 transition-colors"
+                  className="inline-flex items-center justify-center w-full px-5 py-4 text-base bg-white text-primary border border-primary rounded-full hover:bg-primary-50 transition-colors min-h-[48px]"
                   onClick={toggleMenu}
                 >
                   Book Appointment
