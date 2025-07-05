@@ -2,6 +2,7 @@ import React from "react";
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Footer } from '@/components/ui/footer-section';
+import { ResponsiveNavbar } from '@/components/ui/responsive-navbar';
 
 export default function Privacy() {
   return (
@@ -11,6 +12,9 @@ export default function Privacy() {
         <div className="fixed top-6 right-6 z-50">
           <ThemeToggle />
         </div>
+
+        {/* Responsive Navbar */}
+        <ResponsiveNavbar />
 
         {/* Main Content */}
         <main className="container mx-auto px-4 py-8">

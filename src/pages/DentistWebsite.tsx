@@ -7,6 +7,7 @@ import { About } from '@/components/sections/About';
 import { Services } from '@/components/sections/Services';
 import { Footer } from '@/components/ui/footer-section';
 import { useParams, Outlet, useLocation } from 'react-router-dom';
+import { ResponsiveNavbar } from '@/components/ui/responsive-navbar';
 
 export default function DentistWebsite() {
   const { slug } = useParams();
@@ -32,9 +33,6 @@ export default function DentistWebsite() {
   // Check if we're on a nested route (not the main clinic page)
   const isNestedRoute = location.pathname !== `/${slug}` && location.pathname !== '/';
 
-  console.log("Dentist object:", dentist);
-  console.log("Dentist services:", dentist?.services);
-
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-background smooth-scroll">
@@ -43,12 +41,15 @@ export default function DentistWebsite() {
           <ThemeToggle />
         </div>
 
+        {/* Responsive Navbar - always visible */}
+        <ResponsiveNavbar services={dentist?.services_list} />
+
         {/* Conditional rendering based on route */}
         {isNestedRoute ? (
-          /* Render nested route content with top padding */
-          <div className="pt-8">
+          /* Render nested route content */
+          <main className="pt-4">
             <Outlet />
-          </div>
+          </main>
         ) : (
           /* Render main clinic page content */
           <>
