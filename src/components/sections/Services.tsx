@@ -63,7 +63,7 @@ export function Services({ dentist }: ServicesProps) {
   ];
 
   return (
-    <section id="services" className="section-padding bg-background">
+    <section id="services" className="py-12 lg:py-16 bg-background">
       <div className="container-custom">
         <motion.div
           ref={ref}

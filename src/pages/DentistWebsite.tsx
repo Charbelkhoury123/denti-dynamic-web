@@ -54,7 +54,7 @@ export default function DentistWebsite() {
           /* Render main clinic page content */
           <>
             <Hero dentist={dentist} onBookAppointment={handleBookAppointment} />
-            <About dentist={dentist} />
+            <About dentist={dentist} className="mb-12 lg:mb-16" />
             <Services dentist={dentist} />
           </>
         )}

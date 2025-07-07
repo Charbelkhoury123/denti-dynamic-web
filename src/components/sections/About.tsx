@@ -2,12 +2,14 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Card } from '@/components/ui/card';
 import { DentistData } from '@/hooks/useDentistData';
+import { cn } from '@/lib/utils';
 
 interface AboutProps {
   dentist: DentistData | null;
+  className?: string;
 }
 
-export function About({ dentist }: AboutProps) {
+export function About({ dentist, className }: AboutProps) {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -59,7 +61,7 @@ export function About({ dentist }: AboutProps) {
   ];
 
   return (
-    <section id="about" className="section-padding bg-subtle-gradient">
+    <section id="about" className="py-12 lg:py-16 bg-subtle-gradient">
       <div className="container-custom">
         <motion.div
           ref={ref}
