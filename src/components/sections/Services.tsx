@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Shield, Star, Award, Phone } from 'lucide-react';
 import { DentistData } from '@/hooks/useDentistData';
 
 interface ServicesProps {
@@ -36,35 +37,35 @@ export function Services({ dentist }: ServicesProps) {
     }
   };
 
-  const serviceIcons: { [key: string]: string } = {
-    'General Dentistry': '🦷',
-    'Teeth Cleaning': '🧽',
-    'Dental Fillings': '⚕️',
-    'Root Canal Treatment': '🔧',
-    'Dental Crowns': '👑',
-    'Teeth Whitening': '✨',
-    'Dental Implants': '🔩',
-    'Orthodontics': '🦷',
-    'Periodontal Treatment': '🩺',
-    'Emergency Dental Care': '🚨'
+  const serviceIcons: { [key: string]: any } = {
+    'General Dentistry': Shield,
+    'Teeth Cleaning': Shield,
+    'Dental Fillings': Shield,
+    'Root Canal Treatment': Shield,
+    'Dental Crowns': Award,
+    'Teeth Whitening': Star,
+    'Dental Implants': Shield,
+    'Orthodontics': Award,
+    'Periodontal Treatment': Shield,
+    'Emergency Dental Care': Phone,
+    'Cosmetic Dentistry': Star,
+    'Emergency Care': Phone
   };
 
   const getServiceIcon = (service: string) => {
-    return serviceIcons[service] || '🦷';
+    return serviceIcons[service] || Shield;
   };
 
   const services = dentist?.services_list || [
     'General Dentistry',
-    'Teeth Cleaning',
-    'Dental Fillings',
-    'Root Canal Treatment',
-    'Dental Crowns',
-    'Teeth Whitening'
+    'Cosmetic Dentistry', 
+    'Orthodontics',
+    'Emergency Care'
   ];
 
   return (
-    <section id="services" className="py-12 lg:py-16 bg-background">
-      <div className="container-custom">
+    <section id="services" className="py-20 bg-muted/30">
+      <div className="container mx-auto px-4">
         <motion.div
           ref={ref}
           variants={containerVariants}
@@ -76,54 +77,47 @@ export function Services({ dentist }: ServicesProps) {
             <Badge variant="outline" className="mb-4 px-4 py-2">
               Our Services
             </Badge>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              Comprehensive Dental Care
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              From routine check-ups to advanced procedures, we offer a full range of dental services to keep your smile healthy and beautiful.
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              We offer a comprehensive range of dental services to keep your smile healthy and beautiful
             </p>
           </motion.div>
 
-          <motion.div 
-            variants={containerVariants}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-stretch px-4 sm:px-0"
-          >
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                whileHover={{ 
-                  scale: 1.03,
-                  transition: { duration: 0.2 }
-                }}
-                className="group h-full flex"
-              >
-                <Card className="p-4 sm:p-6 h-full min-h-[200px] sm:min-h-[220px] flex flex-col justify-between hover-lift dental-transition border-border/50 hover:border-primary/30 hover:shadow-dental-medium">
-                  <div className="flex flex-col items-center text-center flex-1">
-                    <motion.div 
-                      className="text-4xl mb-4 p-4 bg-dental-blue-light rounded-full group-hover:scale-110 transition-transform duration-300"
-                      whileHover={{ rotate: 5 }}
-                    >
-                      {getServiceIcon(service)}
-                    </motion.div>
-                    <h3 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3 group-hover:text-primary transition-colors">
-                      {service}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground">
-                      Professional {service.toLowerCase()} services with modern techniques and equipment for optimal results.
-                    </p>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {services.map((service, index) => {
+              const IconComponent = getServiceIcon(service);
+              return (
+                <motion.div
+                  key={service}
+                  variants={itemVariants}
+                  whileHover={{ 
+                    scale: 1.03,
+                    transition: { duration: 0.2 }
+                  }}
+                  className="group h-full flex"
+                >
+                  <Card className="p-6 h-full min-h-[220px] flex flex-col justify-between text-center hover:shadow-xl transition-shadow border border-border bg-background">
+                    <div className="flex flex-col items-center flex-1">
+                      <IconComponent className="h-12 w-12 text-primary mb-4 group-hover:scale-110 transition-transform duration-300" />
+                      <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                        {service}
+                      </h3>
+                      <p className="text-muted-foreground text-sm">
+                        Professional {service.toLowerCase()} services with modern techniques and equipment for optimal results.
+                      </p>
+                    </div>
+                  </Card>
+                </motion.div>
+              );
+            })}
+          </div>
 
           {/* Call to Action */}
           <motion.div 
             variants={itemVariants}
             className="text-center mt-16"
           >
-            <Card className="p-8 bg-dental-gradient text-white shadow-dental-strong">
+            <Card className="p-8 bg-dental-gradient text-white shadow-lg">
               <h3 className="text-2xl md:text-3xl font-bold mb-4">
                 Need a Consultation?
               </h3>

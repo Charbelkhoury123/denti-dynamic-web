@@ -2,7 +2,10 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Calendar as CalendarIcon, Phone } from 'lucide-react';
 import { DentistData } from '@/hooks/useDentistData';
+import { AuroraBackground } from './AuroraBackground';
+import { SparklesCore } from './Sparkles';
 
 interface HeroProps {
   dentist: DentistData | null;
@@ -15,90 +18,47 @@ export function Hero({ dentist, onBookAppointment }: HeroProps) {
     threshold: 0.1,
   });
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        duration: 0.8
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6
-      }
-    }
-  };
-
   return (
-    <section ref={ref} className="relative min-h-[100dvh] sm:min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary via-primary to-primary-hover px-4 sm:px-0">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyIi8+PC9nPjwvZz48L3N2Zz4=')]"></div>
-      </div>
-
-      <div className="container-custom relative z-10 py-8 sm:py-12">
+    <section ref={ref} id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <AuroraBackground className="absolute inset-0">
+        <div className="absolute inset-0 bg-background/50" />
+      </AuroraBackground>
+      
+      <div className="relative z-10 container mx-auto px-4 text-center">
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="text-center max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="max-w-4xl mx-auto"
         >
-          <motion.div variants={itemVariants} className="mb-4 sm:mb-6">
-            <Badge variant="secondary" className="mb-3 sm:mb-4 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium bg-white/20 text-white border-white/30 hover:bg-white/30">
-              Professional Dental Care
-            </Badge>
-          </motion.div>
+          <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm font-medium bg-white/20 text-white border-white/30 hover:bg-white/30">
+            Professional Dental Care
+          </Badge>
 
-          <motion.h1 
-            variants={itemVariants}
-            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight px-2 sm:px-0"
-          >
-            {dentist?.business_name || 'Your Bright Smile'}
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+            {dentist?.business_name ? `${dentist.business_name}` : 'Your Perfect Smile'}
             <br />
             <span className="text-white/90">Starts Here</span>
-          </motion.h1>
-
-          <motion.p 
-            variants={itemVariants}
-            className="text-lg sm:text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0"
-          >
-            Experience exceptional dental care with cutting-edge technology and a gentle, personalized approach to your oral health.
-          </motion.p>
-
-          <motion.div 
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 sm:px-0"
-          >
-            <Button
-              size="lg"
-              onClick={onBookAppointment}
-              className="w-full sm:w-auto bg-white text-primary hover:bg-white/90 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 min-h-[44px]"
-            >
+          </h1>
+          
+          <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+            Experience world-class dental care with our team of expert dentists. 
+            We provide comprehensive dental services in a comfortable, modern environment.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="text-lg px-8 py-3 bg-white text-primary hover:bg-white/90" onClick={onBookAppointment}>
+              <CalendarIcon className="mr-2 h-5 w-5" />
               Book Appointment
             </Button>
-            <Button
-              size="lg"
-              onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-              className="w-full sm:w-auto bg-white/10 text-white border-white/30 hover:bg-white/20 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 min-h-[44px]"
-              variant="outline"
-            >
-              Our Services
+            <Button variant="outline" size="lg" className="text-lg px-8 py-3 bg-white/10 text-white border-white/30 hover:bg-white/20">
+              <Phone className="mr-2 h-5 w-5" />
+              Call Now
             </Button>
-          </motion.div>
+          </div>
 
           {/* Statistics */}
-          <motion.div 
-            variants={itemVariants}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-white/20 px-4 sm:px-0"
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/20">
             {[
               { number: "5000+", label: "Happy Patients" },
               { number: "15+", label: "Years Experience" },
@@ -111,16 +71,29 @@ export function Hero({ dentist, onBookAppointment }: HeroProps) {
                 transition={{ delay: 1 + index * 0.2, duration: 0.5 }}
                 className="text-center"
               >
-                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
+                <div className="text-3xl md:text-4xl font-bold text-white mb-2">
                   {stat.number}
                 </div>
-                <div className="text-white/80 font-medium text-sm sm:text-base">
+                <div className="text-white/80 font-medium">
                   {stat.label}
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </motion.div>
+      </div>
+
+      {/* Floating sparkles */}
+      <div className="absolute inset-0 pointer-events-none">
+        <SparklesCore
+          background="transparent"
+          minSize={0.4}
+          maxSize={1}
+          particleDensity={50}
+          className="w-full h-full"
+          particleColor="#3b82f6"
+          speed={0.5}
+        />
       </div>
     </section>
   );
