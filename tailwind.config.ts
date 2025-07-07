@@ -153,6 +153,17 @@ export default {
 				'spring': 'var(--transition-spring)'
 			},
 			keyframes: {
+				'aurora': {
+					'0%': {
+						'background-position': '50% 50%, 50% 50%'
+					},
+					'50%': {
+						'background-position': '350% 50%, 350% 50%'
+					},
+					'100%': {
+						'background-position': '50% 50%, 50% 50%'
+					}
+				},
 				'accordion-down': {
 					from: {
 						height: '0'
@@ -171,6 +182,7 @@ export default {
 				}
 			},
 			animation: {
+				'aurora': 'aurora 60s linear infinite',
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out'
 			},

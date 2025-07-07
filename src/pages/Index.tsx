@@ -1,7 +1,7 @@
-import DentistWebsite from './DentistWebsite';
+import DentistHomepage from '@/components/ui/dentist-homepage';
 
 const Index = () => {
-  return <DentistWebsite />;
+  return <DentistHomepage />;
 };
 
 export default Index;
