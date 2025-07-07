@@ -36,11 +36,6 @@ export default function DentistWebsite() {
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-background smooth-scroll">
-        {/* Theme Toggle FAB */}
-        <div className="fixed top-6 right-6 z-50">
-          <ThemeToggle />
-        </div>
-
         {/* Responsive Navbar - always visible */}
         <ResponsiveNavbar services={dentist?.services_list} />
 

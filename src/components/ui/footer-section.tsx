@@ -4,6 +4,7 @@ import type { ComponentProps, ReactNode } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { FacebookIcon, FrameIcon, InstagramIcon, LinkedinIcon, YoutubeIcon } from 'lucide-react';
 import { Link, useParams } from "react-router-dom";
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface FooterLink {
 	title: string;
@@ -77,9 +78,13 @@ export function Footer() {
 					<Link to={slug ? `/${slug}` : '/'} className="inline-block">
 						<FrameIcon className="w-8 h-8 text-primary" />
 					</Link>
-					<p className="text-muted-foreground mt-4 sm:mt-8 text-sm md:mt-0">
+					<p className="text-muted-foreground mt-4 sm:mt-8 text-sm md:mt-0 mb-4">
 						© {new Date().getFullYear()} Dental Practice. All rights reserved.
 					</p>
+					<div className="flex items-center gap-3">
+						<span className="text-sm text-muted-foreground">Theme:</span>
+						<ThemeToggle />
+					</div>
 				</AnimatedContainer>
 
 				<div className="mt-4 sm:mt-6 md:mt-10 grid grid-cols-2 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 md:grid-cols-4 xl:col-span-2 xl:mt-0">
