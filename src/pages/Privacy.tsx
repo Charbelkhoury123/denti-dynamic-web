@@ -139,7 +139,7 @@ export default function PrivacyPolicyPage() {
   return (
     <PrivacyPolicy 
       companyName={companyName} 
-      lastUpdated="March 1, 2024" 
+      lastUpdated="8 July 2025" 
       phone={phone}
       address={address}
     />
