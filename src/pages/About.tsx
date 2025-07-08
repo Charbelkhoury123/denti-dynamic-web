@@ -62,11 +62,71 @@ export default function About() {
                     <span className="text-muted-foreground">{dentist?.phone}</span>
                   </div>
                   {dentist?.working_hours && (
-                    <div className="mt-4">
-                      <h4 className="font-medium text-foreground mb-2">Working Hours:</h4>
-                      <pre className="text-sm text-muted-foreground whitespace-pre-wrap">
-                        {dentist.working_hours}
-                      </pre>
+                    <div className="mt-6 pt-6 border-t border-border">
+                      <h4 className="font-semibold mb-3">Working Hours</h4>
+                      <div className="space-y-2">
+                        {(() => {
+                          const parseWorkingHours = (workingHoursString: string) => {
+                            if (!workingHoursString) return null;
+                            
+                            const parsedHours: { [key: string]: string } = {};
+                            const dayPattern = /(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday):\s*([^|]+)/gi;
+                            let match;
+                            
+                            while ((match = dayPattern.exec(workingHoursString)) !== null) {
+                              const day = match[1];
+                              const hours = match[2].trim();
+                              const cleanHours = hours
+                                .replace(/AM\s*-\s*/g, 'AM - ')
+                                .replace(/,\s*/g, ', ')
+                                .replace(/\s+/g, ' ')
+                                .trim();
+                              parsedHours[day] = cleanHours;
+                            }
+                            
+                            return parsedHours;
+                          };
+
+                          const formatTimeRange = (timeString: string) => {
+                            if (!timeString) return 'Closed';
+                            const ranges = timeString.split(',').map(range => range.trim());
+                            return ranges.map(range => {
+                              return range
+                                .replace(/(\d{1,2}):(\d{2})\s*(AM|PM)/g, '$1:$2 $3')
+                                .replace(/\s*-\s*/g, ' - ');
+                            }).join(', ');
+                          };
+
+                          const parsedHours = parseWorkingHours(dentist.working_hours);
+                          if (parsedHours) {
+                            return Object.entries(parsedHours).map(([day, hours]) => (
+                              <div key={day} className="flex justify-between items-center py-1">
+                                <span className="font-medium text-foreground">{day}</span>
+                                <span className="text-muted-foreground text-sm">
+                                  {formatTimeRange(hours)}
+                                </span>
+                              </div>
+                            ));
+                          } else {
+                            return (
+                              <div className="space-y-2 text-sm">
+                                <div className="flex justify-between items-center py-1">
+                                  <span className="font-medium text-foreground">Monday - Friday</span>
+                                  <span className="text-muted-foreground">8:00 AM - 6:00 PM</span>
+                                </div>
+                                <div className="flex justify-between items-center py-1">
+                                  <span className="font-medium text-foreground">Saturday</span>
+                                  <span className="text-muted-foreground">9:00 AM - 4:00 PM</span>
+                                </div>
+                                <div className="flex justify-between items-center py-1">
+                                  <span className="font-medium text-foreground">Sunday</span>
+                                  <span className="text-muted-foreground">Emergency Only</span>
+                                </div>
+                              </div>
+                            );
+                          }
+                        })()}
+                      </div>
                     </div>
                   )}
                 </div>
