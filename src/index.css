@@ -18,7 +18,7 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
     CORE COLOR PALETTE (BLUE & WHITE)
     ==============================
     */
-    --background: 0 0% 100%;                      /* #ffffff - Pure white background */
+    --background: 0 0% 80%;                      /* #ffffff - Pure white background */
     --foreground: 222 84% 4.9%;                  /* #0f172a - Deep blue-gray for text */
 
     --card: 0 0% 100%;                           /* #ffffff - Card backgrounds */
