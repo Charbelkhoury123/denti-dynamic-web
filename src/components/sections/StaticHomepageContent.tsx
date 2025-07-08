@@ -509,26 +509,28 @@ const StaticHomepageContent = ({
               <Card className="shadow-xl border-2 border-primary/10">
                 <div className="grid lg:grid-cols-2 gap-0">
                   {/* Calendar Section */}
-                  <div className="p-6 lg:p-8 border-b lg:border-b-0 lg:border-r border-border">
+                  <div className="p-6 lg:p-8 border-b lg:border-b-0 lg:border-r border-border bg-white">
                     <h3 className="text-xl font-semibold mb-6 text-center lg:text-left">
                       Select Date
                     </h3>
-                  <Calendar
-                    mode="single"
-                    selected={selectedDate}
-                    onSelect={(newDate) => {
-                      if (newDate) {
-                        setSelectedDate(newDate);
-                        setSelectedTime(null);
-                      }
-                    }}
-                    className="w-full flex justify-center"
-                    disabled={[{ before: new Date() }]}
-                  />
+                    <div className="flex justify-center">
+                      <Calendar
+                        mode="single"
+                        selected={selectedDate}
+                        onSelect={(newDate) => {
+                          if (newDate) {
+                            setSelectedDate(newDate);
+                            setSelectedTime(null);
+                          }
+                        }}
+                        className="rounded-md border border-border"
+                        disabled={[{ before: new Date() }]}
+                      />
+                    </div>
                   </div>
                   
                   {/* Time Selection Section */}
-                  <div className="p-6 lg:p-8">
+                  <div className="p-6 lg:p-8 bg-white">
                     <h3 className="text-xl font-semibold mb-6 text-center lg:text-left">
                       Available Times
                     </h3>
@@ -545,9 +547,9 @@ const StaticHomepageContent = ({
                           variant={selectedTime === time ? "default" : "outline"}
                           size="sm"
                           className={cn(
-                            "w-full h-12 text-sm font-medium transition-all duration-200",
+                            "w-full h-12 text-sm font-medium transition-all duration-200 border-primary/20",
                             selectedTime === time && "ring-2 ring-primary ring-offset-2",
-                            !available && "opacity-50 cursor-not-allowed"
+                            !available && "opacity-50 cursor-not-allowed bg-gray-100 text-gray-400"
                           )}
                           onClick={() => available && setSelectedTime(time)}
                           disabled={!available}
@@ -564,12 +566,12 @@ const StaticHomepageContent = ({
                       <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="bg-primary/5 border border-primary/20 rounded-lg p-4"
+                        className="bg-blue-50 border border-blue-200 rounded-lg p-4"
                       >
                         <div className="flex items-center justify-between mb-3">
                           <div>
-                            <p className="font-semibold text-foreground">Selected Appointment</p>
-                            <p className="text-sm text-muted-foreground">
+                            <p className="font-semibold text-black">Selected Appointment</p>
+                            <p className="text-sm text-gray-600">
                               {format(selectedDate, "EEEE, MMMM d, yyyy")} at {selectedTime}
                             </p>
                           </div>
@@ -586,8 +588,8 @@ const StaticHomepageContent = ({
                     
                     {!selectedTime && (
                       <div className="text-center py-8">
-                        <Clock className="h-12 w-12 text-muted-foreground/50 mx-auto mb-3" />
-                        <p className="text-muted-foreground">
+                        <Clock className="h-12 w-12 text-gray-400 mx-auto mb-3" />
+                        <p className="text-gray-600">
                           Please select a time slot above
                         </p>
                       </div>
