@@ -27,6 +27,48 @@ import { AuroraBackground } from "@/components/sections/AuroraBackground";
 import { SparklesCore } from "@/components/sections/Sparkles";
 import { DentistData, Testimonial, Appointment } from '@/hooks/useDentistData';
 
+// Helper function to parse working hours string into structured data
+const parseWorkingHours = (workingHoursString: string) => {
+  if (!workingHoursString) return null;
+  
+  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const parsedHours: { [key: string]: string } = {};
+  
+  // Split by day patterns and extract hours
+  const dayPattern = /(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday):\s*([^|]+)/gi;
+  let match;
+  
+  while ((match = dayPattern.exec(workingHoursString)) !== null) {
+    const day = match[1];
+    const hours = match[2].trim();
+    
+    // Clean up the hours format
+    const cleanHours = hours
+      .replace(/AM\s*-\s*/g, 'AM - ')
+      .replace(/,\s*/g, ', ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    
+    parsedHours[day] = cleanHours;
+  }
+  
+  return parsedHours;
+};
+
+// Helper function to format time ranges nicely
+const formatTimeRange = (timeString: string) => {
+  if (!timeString) return 'Closed';
+  
+  // Handle multiple time ranges (e.g., "12:00 AM - 7:00 AM, 8:30 AM - 12:00 AM")
+  const ranges = timeString.split(',').map(range => range.trim());
+  
+  return ranges.map(range => {
+    // Clean up the format
+    return range
+      .replace(/(\d{1,2}):(\d{2})\s*(AM|PM)/g, '$1:$2 $3')
+      .replace(/\s*-\s*/g, ' - ');
+  }).join(', ');
+};
 interface StaticHomepageContentProps {
   dentist: DentistData | null;
   testimonials: Testimonial[];
@@ -362,27 +404,56 @@ const StaticHomepageContent = ({
               className="bg-muted/30 rounded-lg p-8"
             >
               <h3 className="text-2xl font-semibold mb-4">Office Hours</h3>
-              <div className="space-y-2 text-muted-foreground">
-                <div className="flex justify-between">
-                  <span>Monday - Friday</span>
-                  <span>8:00 AM - 6:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Saturday</span>
-                  <span>9:00 AM - 4:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Sunday</span>
-                  <span>Emergency Only</span>
-                </div>
-              </div>
               
               {dentist?.working_hours && (
-                <div className="mt-6 pt-6 border-t border-border">
-                  <h4 className="font-semibold mb-2">Working Hours:</h4>
-                  <pre className="text-sm text-muted-foreground whitespace-pre-wrap">
-                    {dentist.working_hours}
-                  </pre>
+                <div className="space-y-3">
+                  {(() => {
+                    const parsedHours = parseWorkingHours(dentist.working_hours);
+                    if (parsedHours) {
+                      return Object.entries(parsedHours).map(([day, hours]) => (
+                        <div key={day} className="flex justify-between items-center py-2 border-b border-border/50 last:border-b-0">
+                          <span className="font-medium text-foreground">{day}</span>
+                          <span className="text-muted-foreground text-sm">
+                            {formatTimeRange(hours)}
+                          </span>
+                        </div>
+                      ));
+                    } else {
+                      // Fallback to default hours if parsing fails
+                      return (
+                        <>
+                          <div className="flex justify-between items-center py-2 border-b border-border/50">
+                            <span className="font-medium text-foreground">Monday - Friday</span>
+                            <span className="text-muted-foreground text-sm">8:00 AM - 6:00 PM</span>
+                          </div>
+                          <div className="flex justify-between items-center py-2 border-b border-border/50">
+                            <span className="font-medium text-foreground">Saturday</span>
+                            <span className="text-muted-foreground text-sm">9:00 AM - 4:00 PM</span>
+                          </div>
+                          <div className="flex justify-between items-center py-2">
+                            <span className="font-medium text-foreground">Sunday</span>
+                            <span className="text-muted-foreground text-sm">Emergency Only</span>
+                          </div>
+                        </>
+                      );
+                    }
+                  })()}
+                </div>
+              ) || (
+                // Default hours when no working_hours data is available
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center py-2 border-b border-border/50">
+                    <span className="font-medium text-foreground">Monday - Friday</span>
+                    <span className="text-muted-foreground text-sm">8:00 AM - 6:00 PM</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2 border-b border-border/50">
+                    <span className="font-medium text-foreground">Saturday</span>
+                    <span className="text-muted-foreground text-sm">9:00 AM - 4:00 PM</span>
+                  </div>
+                  <div className="flex justify-between items-center py-2">
+                    <span className="font-medium text-foreground">Sunday</span>
+                    <span className="text-muted-foreground text-sm">Emergency Only</span>
+                  </div>
                 </div>
               )}
               
@@ -564,16 +635,63 @@ const StaticHomepageContent = ({
                           </div>
                         </div>
                       )}
-                    </div>
 
-                    {dentist?.working_hours && (
-                      <div className="pt-4 border-t">
-                        <h3 className="font-medium text-foreground mb-3">Working Hours</h3>
-                        <pre className="text-sm text-muted-foreground whitespace-pre-wrap">
-                          {dentist.working_hours}
-                        </pre>
+                      <div className="flex items-start space-x-3">
+                        <Clock className="text-2xl text-primary mt-1" />
+                        <div className="flex-1">
+                          <h3 className="font-medium text-foreground mb-3">Working Hours</h3>
+                          {dentist?.working_hours ? (
+                            <div className="space-y-2">
+                              {(() => {
+                                const parsedHours = parseWorkingHours(dentist.working_hours);
+                                if (parsedHours) {
+                                  return Object.entries(parsedHours).map(([day, hours]) => (
+                                    <div key={day} className="flex justify-between text-sm">
+                                      <span className="text-foreground font-medium">{day}:</span>
+                                      <span className="text-muted-foreground">
+                                        {formatTimeRange(hours)}
+                                      </span>
+                                    </div>
+                                  ));
+                                } else {
+                                  return (
+                                    <div className="text-sm text-muted-foreground">
+                                      <div className="flex justify-between">
+                                        <span>Mon - Fri:</span>
+                                        <span>8:00 AM - 6:00 PM</span>
+                                      </div>
+                                      <div className="flex justify-between">
+                                        <span>Saturday:</span>
+                                        <span>9:00 AM - 4:00 PM</span>
+                                      </div>
+                                      <div className="flex justify-between">
+                                        <span>Sunday:</span>
+                                        <span>Emergency Only</span>
+                                      </div>
+                                    </div>
+                                  );
+                                }
+                              })()}
+                            </div>
+                          ) : (
+                            <div className="space-y-2 text-sm text-muted-foreground">
+                              <div className="flex justify-between">
+                                <span>Mon - Fri:</span>
+                                <span>8:00 AM - 6:00 PM</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span>Saturday:</span>
+                                <span>9:00 AM - 4:00 PM</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span>Sunday:</span>
+                                <span>Emergency Only</span>
+                              </div>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    )}
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
