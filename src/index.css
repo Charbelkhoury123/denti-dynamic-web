@@ -426,3 +426,51 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 300ms;
 }
+/* Aurora Background Animation Utilities */
+@layer utilities {
+  .aurora-gradient-vars {
+    --white-gradient: repeating-linear-gradient(100deg,var(--white) 0%,var(--white) 7%,var(--transparent) 10%,var(--transparent) 12%,var(--white) 16%);
+    --dark-gradient: repeating-linear-gradient(100deg,var(--black) 0%,var(--black) 7%,var(--transparent) 10%,var(--transparent) 12%,var(--black) 16%);
+    --aurora: repeating-linear-gradient(100deg,var(--blue-500) 10%,var(--indigo-300) 15%,var(--blue-300) 20%,var(--violet-200) 25%,var(--blue-400) 30%);
+  }
+
+  .aurora-background {
+    background-image: var(--white-gradient), var(--aurora);
+    background-size: 300%, 200%;
+    background-position: 50% 50%, 50% 50%;
+    filter: blur(10px);
+    @apply invert dark:invert-0;
+  }
+
+  .aurora-background-dark {
+    background-image: var(--dark-gradient), var(--aurora);
+  }
+
+  .aurora-after {
+    content: "";
+    @apply absolute inset-0;
+    background-image: var(--white-gradient), var(--aurora);
+    background-size: 200%, 100%;
+    background-attachment: fixed;
+    mix-blend-mode: difference;
+    @apply animate-aurora;
+  }
+
+  .aurora-after-dark {
+    background-image: var(--dark-gradient), var(--aurora);
+  }
+
+  .aurora-mask-radial {
+    mask-image: radial-gradient(ellipse at 100% 0%, black 10%, var(--transparent) 70%);
+  }
+}
+
+/* Aurora animation keyframes */
+@keyframes aurora {
+  0%, 100% {
+    background-position: 50% 50%, 50% 50%;
+  }
+  50% {
+    background-position: 350% 50%, 350% 50%;
+  }
+}
