@@ -253,10 +253,10 @@ const StaticHomepageContent = ({
                   transition={{ delay: 1 + index * 0.2, duration: 0.5 }}
                   className="text-center"
                 >
-                  <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
                     {stat.number}
                   </div>
-                  <div className="text-white/80 font-medium">
+                  <div className="text-primary/80 font-medium">
                     {stat.label}
                   </div>
                 </motion.div>
