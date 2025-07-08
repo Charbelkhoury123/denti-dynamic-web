@@ -2,7 +2,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from 'react';
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import DentistWebsite from "./pages/DentistWebsite";
@@ -19,12 +20,21 @@ import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           {/* Root route - shows default dentist website */}
           <Route path="/" element={<Index />} />
@@ -44,6 +54,8 @@ const App = () => (
             <Route path="pricing" element={<Pricing />} />
             <Route path="blog" element={<Blog />} />
             <Route path="testimonials" element={<Testimonials />} />
+            <Route path="privacy" element={<Privacy />} />
+            <Route path="terms" element={<Terms />} />
           </Route>
           
           {/* Catch-all route for 404 */}

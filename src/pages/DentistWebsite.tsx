@@ -34,7 +34,7 @@ export default function DentistWebsite() {
     <ThemeProvider>
       <div className="min-h-screen bg-background smooth-scroll">
         {/* Responsive Navbar - always visible */}
-        <ResponsiveNavbar services={dentist?.services_list} />
+        <ResponsiveNavbar services={dentist?.services_list} businessName={dentist?.business_name} />
 
         {/* Conditional rendering based on route */}
         {isNestedRoute ? (

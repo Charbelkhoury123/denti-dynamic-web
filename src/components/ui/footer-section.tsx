@@ -6,6 +6,7 @@ import { FacebookIcon, FrameIcon, InstagramIcon, LinkedinIcon, YoutubeIcon } fro
 import { Link, useParams } from "react-router-dom";
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useDentistData } from '@/hooks/useDentistData';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 
 interface FooterLink {
 	title: string;
@@ -58,8 +59,8 @@ export function Footer() {
 		{
 			label: 'Legal',
 			links: [
-				{ title: 'Privacy Policy', href: '/privacy' },
-				{ title: 'Terms of Service', href: '/terms' },
+				{ title: 'Privacy Policy', href: buildUrl('privacy') },
+				{ title: 'Terms of Service', href: buildUrl('terms') },
 			],
 		},
 		{
@@ -80,7 +81,7 @@ export function Footer() {
 			<div className="grid w-full max-w-6xl gap-6 sm:gap-8 xl:grid-cols-3 xl:gap-8">
 				<AnimatedContainer className="space-y-4">
 					<Link to={slug ? `/${slug}` : '/'} className="inline-block">
-						<FrameIcon className="w-8 h-8 text-primary" />
+						<img src="/logo-tooth.png" alt="Dental Logo" className="w-20 h-20" />
 					</Link>
 					<p className="text-muted-foreground mt-4 sm:mt-8 text-sm md:mt-0 mb-4">
 						© {new Date().getFullYear()} Dental Practice. All rights reserved.

@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 
 const Contact = () => {
   const { slug } = useParams();
@@ -135,88 +136,99 @@ const Contact = () => {
 
                 {dentist?.working_hours ? (
                   <div className="pt-4 border-t border-border">
-                    <h3 className="font-medium text-foreground mb-3">Working Hours</h3>
-                    <div className="space-y-2">
-                      {(() => {
-                        const parseWorkingHours = (workingHoursString: string) => {
-                          if (!workingHoursString) return null;
-                          
-                          const parsedHours: { [key: string]: string } = {};
-                          const dayPattern = /(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday):\s*([^|]+)/gi;
-                          let match;
-                          
-                          while ((match = dayPattern.exec(workingHoursString)) !== null) {
-                            const day = match[1];
-                            const hours = match[2].trim();
-                            const cleanHours = hours
-                              .replace(/AM\s*-\s*/g, 'AM - ')
-                              .replace(/,\s*/g, ', ')
-                              .replace(/\s+/g, ' ')
-                              .trim();
-                            parsedHours[day] = cleanHours;
-                          }
-                          
-                          return parsedHours;
-                        };
-
-                        const formatTimeRange = (timeString: string) => {
-                          if (!timeString) return 'Closed';
-                          const ranges = timeString.split(',').map(range => range.trim());
-                          return ranges.map(range => {
-                            return range
-                              .replace(/(\d{1,2}):(\d{2})\s*(AM|PM)/g, '$1:$2 $3')
-                              .replace(/\s*-\s*/g, ' - ');
-                          }).join(', ');
-                        };
-
-                        const parsedHours = parseWorkingHours(dentist.working_hours);
-                        if (parsedHours) {
-                          return Object.entries(parsedHours).map(([day, hours]) => (
-                            <div key={day} className="flex justify-between text-sm py-1">
-                              <span className="text-foreground font-medium">{day}:</span>
-                              <span className="text-muted-foreground">
-                                {formatTimeRange(hours)}
-                              </span>
-                            </div>
-                          ));
-                        } else {
-                          return (
-                            <div className="text-sm text-muted-foreground space-y-1">
-                              <div className="flex justify-between py-1">
-                                <span className="font-medium text-foreground">Mon - Fri:</span>
-                                <span>8:00 AM - 6:00 PM</span>
-                              </div>
-                              <div className="flex justify-between py-1">
-                                <span className="font-medium text-foreground">Saturday:</span>
-                                <span>9:00 AM - 4:00 PM</span>
-                              </div>
-                              <div className="flex justify-between py-1">
-                                <span className="font-medium text-foreground">Sunday:</span>
-                                <span>Emergency Only</span>
-                              </div>
-                            </div>
-                          );
-                        }
-                      })()}
-                    </div>
+                    <Accordion type="single" collapsible defaultValue="working-hours">
+                      <AccordionItem value="working-hours">
+                        <AccordionTrigger className="font-medium text-foreground mb-3 px-0 py-2 text-left w-full">
+                          Working Hours
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="space-y-2">
+                            {(() => {
+                              const parseWorkingHours = (workingHoursString: string) => {
+                                if (!workingHoursString) return null;
+                                const parsedHours: { [key: string]: string } = {};
+                                const dayPattern = /(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday):\s*([^|]+)/gi;
+                                let match;
+                                while ((match = dayPattern.exec(workingHoursString)) !== null) {
+                                  const day = match[1];
+                                  const hours = match[2].trim();
+                                  const cleanHours = hours
+                                    .replace(/AM\s*-\s*/g, 'AM - ')
+                                    .replace(/,\s*/g, ', ')
+                                    .replace(/\s+/g, ' ')
+                                    .trim();
+                                  parsedHours[day] = cleanHours;
+                                }
+                                return parsedHours;
+                              };
+                              const formatTimeRange = (timeString: string) => {
+                                if (!timeString) return 'Closed';
+                                const ranges = timeString.split(',').map(range => range.trim());
+                                return ranges.map(range => {
+                                  return range
+                                    .replace(/(\d{1,2}):(\d{2})\s*(AM|PM)/g, '$1:$2 $3')
+                                    .replace(/\s*-\s*/g, ' - ');
+                                }).join(', ');
+                              };
+                              const parsedHours = parseWorkingHours(dentist.working_hours);
+                              if (parsedHours) {
+                                return Object.entries(parsedHours).map(([day, hours]) => (
+                                  <div key={day} className="flex justify-between text-sm py-1">
+                                    <span className="text-foreground font-medium">{day}:</span>
+                                    <span className="text-muted-foreground">
+                                      {formatTimeRange(hours)}
+                                    </span>
+                                  </div>
+                                ));
+                              } else {
+                                return (
+                                  <div className="text-sm text-muted-foreground space-y-1">
+                                    <div className="flex justify-between py-1">
+                                      <span className="font-medium text-foreground">Mon - Fri:</span>
+                                      <span>8:00 AM - 6:00 PM</span>
+                                    </div>
+                                    <div className="flex justify-between py-1">
+                                      <span className="font-medium text-foreground">Saturday:</span>
+                                      <span>9:00 AM - 4:00 PM</span>
+                                    </div>
+                                    <div className="flex justify-between py-1">
+                                      <span className="font-medium text-foreground">Sunday:</span>
+                                      <span>Emergency Only</span>
+                                    </div>
+                                  </div>
+                                );
+                              }
+                            })()}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
                   </div>
                 ) : (
                   <div className="pt-4 border-t border-border">
-                    <h3 className="font-medium text-foreground mb-3">Working Hours</h3>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between py-1">
-                        <span className="font-medium text-foreground">Mon - Fri:</span>
-                        <span className="text-muted-foreground">8:00 AM - 6:00 PM</span>
-                      </div>
-                      <div className="flex justify-between py-1">
-                        <span className="font-medium text-foreground">Saturday:</span>
-                        <span className="text-muted-foreground">9:00 AM - 4:00 PM</span>
-                      </div>
-                      <div className="flex justify-between py-1">
-                        <span className="font-medium text-foreground">Sunday:</span>
-                        <span className="text-muted-foreground">Emergency Only</span>
-                      </div>
-                    </div>
+                    <Accordion type="single" collapsible defaultValue="working-hours">
+                      <AccordionItem value="working-hours">
+                        <AccordionTrigger className="font-medium text-foreground mb-3 px-0 py-2 text-left w-full">
+                          Working Hours
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="space-y-2 text-sm">
+                            <div className="flex justify-between py-1">
+                              <span className="font-medium text-foreground">Mon - Fri:</span>
+                              <span className="text-muted-foreground">8:00 AM - 6:00 PM</span>
+                            </div>
+                            <div className="flex justify-between py-1">
+                              <span className="font-medium text-foreground">Saturday:</span>
+                              <span className="text-muted-foreground">9:00 AM - 4:00 PM</span>
+                            </div>
+                            <div className="flex justify-between py-1">
+                              <span className="font-medium text-foreground">Sunday:</span>
+                              <span className="text-muted-foreground">Emergency Only</span>
+                            </div>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
                   </div>
                 )}
               </CardContent>

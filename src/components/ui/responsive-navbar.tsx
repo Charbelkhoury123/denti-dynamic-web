@@ -7,7 +7,8 @@ import { Menu, X, ChevronDown } from "lucide-react"
 import { Link, useParams, useLocation } from "react-router-dom"
 
 interface ResponsiveNavbarProps {
-  services?: string[]
+  services?: string[];
+  businessName?: string;
 }
 
 const slugify = (str: string) =>
@@ -21,7 +22,7 @@ const navLinks = [
   { name: "Contact", to: "contact", ariaLabel: "Contact us" },
 ]
 
-const ResponsiveNavbar = ({ services }: ResponsiveNavbarProps) => {
+const ResponsiveNavbar = ({ services, businessName }: ResponsiveNavbarProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
@@ -123,29 +124,12 @@ const ResponsiveNavbar = ({ services }: ResponsiveNavbarProps) => {
             >
               <Link 
                 to={buildUrl("")} 
-                className="flex items-center space-x-2"
+                className="flex items-center"
                 aria-label="Go to homepage"
               >
-                <svg 
-                  width="32" 
-                  height="32" 
-                  viewBox="0 0 32 32" 
-                  fill="none" 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="w-8 h-8 lg:w-10 lg:h-10"
-                  aria-hidden="true"
-                >
-                  <circle cx="16" cy="16" r="16" fill="url(#paint0_linear)" />
-                  <path d="M16 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 12c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z" fill="white"/>
-                  <defs>
-                    <linearGradient id="paint0_linear" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-                      <stop stopColor="#2563eb" />
-                      <stop offset="1" stopColor="#1d4ed8" />
-                    </linearGradient>
-                  </defs>
-                </svg>
+                <img src="/logo-tooth.png" alt="Dental Logo" className="w-12 h-12 lg:w-16 lg:h-16" />
                 <span className="hidden sm:block text-xl lg:text-2xl font-bold text-primary">
-                  DentalCare
+                  {businessName || 'DentalCare'}
                 </span>
               </Link>
             </motion.div>

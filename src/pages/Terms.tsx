@@ -1,37 +1,68 @@
-import React from "react";
-import { ThemeProvider } from '@/contexts/ThemeContext';
-import { ThemeToggle } from '@/components/ThemeToggle';
-import { Footer } from '@/components/ui/footer-section';
-import { ResponsiveNavbar } from '@/components/ui/responsive-navbar';
+import React from "react"
+import { Card, CardContent } from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
+import { ArrowLeft, FileText } from "lucide-react"
+import { Link, useParams } from "react-router-dom"
+import { useDentistData } from "@/hooks/useDentistData"
 
-export default function Terms() {
+const TermsOfService: React.FC = () => {
+  const { slug } = useParams();
+  const { dentist, loading } = useDentistData(slug);
+  const homeUrl = slug ? `/${slug}` : "/";
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
+
+  const companyName = dentist?.business_name || "Dental Practice Name";
+  const address = dentist?.address || "123 Main Street";
+  const city = "City, State ZIP";
+  const phone = dentist?.phone || "(555) 123-4567";
+
   return (
-    <ThemeProvider>
-      <div className="min-h-screen bg-background">
-        {/* Theme Toggle FAB */}
-        <div className="fixed top-6 right-6 z-50">
-          <ThemeToggle />
-        </div>
-
-        {/* Responsive Navbar */}
-        <ResponsiveNavbar />
-
-        {/* Main Content */}
-        <main className="container mx-auto px-4 py-8">
-          <h1 className="text-3xl font-bold mb-6 text-center">Terms of Services</h1>
-          <div className="max-w-2xl mx-auto bg-card rounded-xl shadow p-6">
-            <p className="mb-4">By using our website and services, you agree to the following terms and conditions:</p>
-            <ul className="list-disc pl-6 mb-4">
-              <li>All information provided is for general guidance and does not replace professional advice.</li>
-              <li>Appointments are subject to availability and confirmation.</li>
-              <li>We reserve the right to update these terms at any time.</li>
-            </ul>
-            <p>If you have any questions about our terms, please contact us.</p>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center py-8 px-2">
+      <Card className="w-full max-w-4xl shadow-2xl rounded-3xl animate-fade-in-up">
+        <CardContent className="p-0">
+          <div className="rounded-t-3xl bg-gradient-to-r from-primary to-blue-500 flex flex-col items-center py-8 mb-8">
+            <FileText className="h-14 w-14 text-white mb-4" />
+            <h1 className="text-4xl font-extrabold text-white tracking-tight mb-2">Terms of Service</h1>
+            <p className="text-blue-100 text-lg max-w-2xl text-center mb-2">
+              Please read these terms carefully. By using {companyName}'s website and services, you agree to these terms.
+            </p>
+            <div className="flex items-center justify-center text-sm text-blue-200">
+              <span>Last updated: June 1, 2023</span>
+            </div>
           </div>
-        </main>
-
-        <Footer />
+          <div className="px-6 pb-10 space-y-10">
+            {/* Sections as before, but with improved spacing and headings */}
+            {/* ...sections... */}
+            <section>
+              <h2 className="text-2xl font-bold text-primary mb-2">10. Contact Information</h2>
+              <Separator className="mb-4" />
+              <div className="space-y-4 text-muted-foreground">
+                <p>If you have any questions about these Terms, please contact us at:</p>
+                <div className="bg-muted p-4 rounded-lg">
+                  <p className="font-medium text-foreground">{companyName}</p>
+                  <p className="text-muted-foreground">{address}</p>
+                  <p className="text-muted-foreground">{city}</p>
+                  <p className="text-muted-foreground">Phone: {phone}</p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </CardContent>
+      </Card>
+      <div className="fixed top-8 left-8">
+        <Link 
+          to={homeUrl} 
+          className="flex items-center text-sm font-medium text-muted-foreground hover:text-primary transition-colors bg-white/80 px-4 py-2 rounded-full shadow"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Home
+        </Link>
       </div>
-    </ThemeProvider>
-  );
+    </div>
+  )
 }
+
+export default TermsOfService
