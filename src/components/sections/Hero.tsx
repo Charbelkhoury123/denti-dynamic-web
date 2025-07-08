@@ -19,46 +19,46 @@ export function Hero({ dentist, onBookAppointment }: HeroProps) {
   });
 
   return (
-    <section ref={ref} id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section ref={ref} id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden px-2 sm:px-0">
       <AuroraBackground className="absolute inset-0">
         <div className="absolute inset-0 bg-background/50" />
       </AuroraBackground>
       
-      <div className="relative z-10 container mx-auto px-4 text-center">
+      <div className="relative z-10 container mx-auto px-2 sm:px-4 text-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="max-w-4xl mx-auto"
         >
-          <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm font-medium bg-white/20 text-white border-white/30 hover:bg-white/30">
+          <div className="mb-4 inline-block px-4 py-2 text-sm font-semibold rounded-full bg-blue-600 text-white shadow-md">
             Professional Dental Care
-          </Badge>
+          </div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
             {dentist?.business_name ? `${dentist.business_name}` : 'Your Perfect Smile'}
             <br />
             <span className="text-black">Starts Here</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-black/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-black/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
             Experience world-class dental care with our team of expert dentists. 
             We provide comprehensive dental services in a comfortable, modern environment.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8 py-3 bg-white text-primary hover:bg-white/90" onClick={onBookAppointment}>
+          <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center w-full max-w-md mx-auto">
+            <Button size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 bg-white text-primary hover:bg-white/90 rounded-lg shadow" onClick={onBookAppointment}>
               <CalendarIcon className="mr-2 h-5 w-5" />
               Book Appointment
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-3 bg-white/10 text-white border-white/30 hover:bg-white/20">
+            <Button variant="outline" size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 bg-white/10 text-white border-white/30 hover:bg-white/20 rounded-lg shadow">
               <Phone className="mr-2 h-5 w-5" />
               Call Now
             </Button>
           </div>
 
           {/* Statistics */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/20">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-10 sm:mt-16 pt-8 border-t border-white/20">
             {[
               { number: "5000+", label: "Happy Patients" },
               { number: "15+", label: "Years Experience" },
@@ -71,10 +71,10 @@ export function Hero({ dentist, onBookAppointment }: HeroProps) {
                 transition={{ delay: 1 + index * 0.2, duration: 0.5 }}
                 className="text-center"
               >
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-1 sm:mb-2">
                   {stat.number}
                 </div>
-                <div className="text-white/80 font-medium">
+                <div className="text-blue-600/80 font-medium text-sm sm:text-base">
                   {stat.label}
                 </div>
               </motion.div>

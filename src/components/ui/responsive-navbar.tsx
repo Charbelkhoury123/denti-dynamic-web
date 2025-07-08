@@ -19,6 +19,7 @@ const navLinks = [
   { name: "About", to: "about", ariaLabel: "Learn about our practice" },
   { name: "Services", to: "services", ariaLabel: "View our dental services" },
   { name: "FAQs", to: "faqs", ariaLabel: "Frequently asked questions" },
+  { name: "Testimonials", to: "testimonials", ariaLabel: "Read patient testimonials" },
   { name: "Contact", to: "contact", ariaLabel: "Contact us" },
 ]
 
@@ -128,7 +129,7 @@ const ResponsiveNavbar = ({ services, businessName }: ResponsiveNavbarProps) => 
                 aria-label="Go to homepage"
               >
                 <img src="/logo-tooth.png" alt="Dental Logo" className="w-12 h-12 lg:w-16 lg:h-16" />
-                <span className="hidden sm:block text-xl lg:text-2xl font-bold text-primary">
+                <span className="ml-2 text-lg sm:text-xl lg:text-2xl font-bold text-primary">
                   {businessName || 'DentalCare'}
                 </span>
               </Link>
@@ -258,14 +259,13 @@ const ResponsiveNavbar = ({ services, businessName }: ResponsiveNavbarProps) => 
             <>
               {/* Backdrop */}
               <motion.div
-                className="fixed inset-0 bg-black/20 backdrop-blur-sm lg:hidden"
+                className="fixed inset-0 bg-black/20 lg:hidden" // removed backdrop-blur-sm
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={toggleMenu}
                 aria-hidden="true"
               />
-              
               {/* Mobile menu panel */}
               <motion.div
                 id="mobile-menu"
@@ -277,7 +277,7 @@ const ResponsiveNavbar = ({ services, businessName }: ResponsiveNavbarProps) => 
                 role="menu"
                 aria-label="Mobile navigation menu"
               >
-                <div className="px-4 py-6 space-y-1">
+                <div className="px-4 py-6 space-y-1 mt-8">
                   {navLinks.map((item, index) => {
                     if (item.name === "Services" && services && services.length > 0) {
                       return (

@@ -83,9 +83,6 @@ export function Footer() {
 					<Link to={slug ? `/${slug}` : '/'} className="inline-block">
 						<img src="/logo-tooth.png" alt="Dental Logo" className="w-20 h-20" />
 					</Link>
-					<p className="text-muted-foreground mt-4 sm:mt-8 text-sm md:mt-0 mb-4">
-						© {new Date().getFullYear()} Dental Practice. All rights reserved.
-					</p>
 					<div className="flex items-center gap-3">
 						<span className="text-sm text-muted-foreground">Theme:</span>
 						<ThemeToggle />
@@ -126,6 +123,9 @@ export function Footer() {
 						</AnimatedContainer>
 					))}
 				</div>
+			</div>
+			<div className="w-full text-center text-xs text-muted-foreground py-4">
+				© 2025 {businessName}. All rights reserved.
 			</div>
 		</footer>
 	);

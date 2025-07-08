@@ -200,48 +200,48 @@ const StaticHomepageContent = ({
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background px-2 sm:px-0">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-2 sm:px-0">
         <AuroraBackground className="absolute inset-0">
           <div className="absolute inset-0 bg-background/50" />
         </AuroraBackground>
         
-        <div className="relative z-10 container mx-auto px-4 text-center">
+        <div className="relative z-10 container mx-auto px-2 sm:px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-4xl mx-auto"
           >
-            <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm font-medium bg-white/20 text-white border-white/30 hover:bg-white/30">
+            <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-full shadow-md">
               Professional Dental Care
             </Badge>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
               {dentist?.business_name ? `${dentist.business_name}` : 'Your Perfect Smile'}
               <br />
               <span className="text-black font-bold drop-shadow-lg">Starts Here</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-black/90 mb-8 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-black/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
               Experience world-class dental care with our team of expert dentists. 
               We provide comprehensive dental services in a comfortable, modern environment.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="text-lg px-8 py-3 bg-white text-primary hover:bg-white/90" onClick={onBookAppointment}>
+            <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center w-full max-w-md mx-auto">
+              <Button size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 bg-white text-primary hover:bg-white/90 rounded-lg shadow" onClick={onBookAppointment}>
                 <CalendarIcon className="mr-2 h-5 w-5" />
                 Book Appointment
               </Button>
-              <Button size="lg" className="text-lg px-8 py-3 bg-white text-primary hover:bg-white/90">
+              <Button size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 bg-white text-primary hover:bg-white/90 rounded-lg shadow">
                 <Phone className="mr-2 h-5 w-5" />
                 Call Now
               </Button>
             </div>
 
             {/* Statistics */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/20">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-10 sm:mt-16 pt-8 border-t border-white/20">
               {[
                 { number: "5000+", label: "Happy Patients" },
                 { number: "15+", label: "Years Experience" },
@@ -254,10 +254,10 @@ const StaticHomepageContent = ({
                   transition={{ delay: 1 + index * 0.2, duration: 0.5 }}
                   className="text-center"
                 >
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-1 sm:mb-2">
                     {stat.number}
                   </div>
-                  <div className="text-primary/80 font-medium">
+                  <div className="text-blue-600/80 font-medium text-sm sm:text-base">
                     {stat.label}
                   </div>
                 </motion.div>
@@ -318,7 +318,7 @@ const StaticHomepageContent = ({
                     }}
                     className="group h-full flex"
                   >
-                    <Card className="p-6 h-full min-h-[220px] flex flex-col justify-between text-center hover:shadow-xl transition-shadow border border-border bg-background">
+                    <Card className="p-6 h-full min-h-[220px] flex flex-col justify-between text-center hover:shadow-xl transition-shadow border border-border bg-background rounded-lg shadow-md">
                       <div className="flex flex-col items-center flex-1">
                         <IconComponent className="h-12 w-12 text-primary mb-4 group-hover:scale-110 transition-transform duration-300" />
                         <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
@@ -340,7 +340,7 @@ const StaticHomepageContent = ({
               whileInView={{ opacity: 1, y: 0 }}
               className="text-center mt-16"
             >
-              <Card className="p-8 bg-dental-gradient text-white shadow-lg">
+              <Card className="p-8 bg-dental-gradient text-white shadow-lg rounded-lg shadow-md">
                 <h3 className="text-2xl md:text-3xl font-bold mb-4">
                   Need a Consultation?
                 </h3>
@@ -351,7 +351,7 @@ const StaticHomepageContent = ({
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-white/90 transition-colors"
+                  className="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-white/90 transition-colors w-full sm:w-auto"
                 >
                   Schedule Consultation
                 </motion.button>
@@ -477,26 +477,26 @@ const StaticHomepageContent = ({
       </section>
 
       {/* Appointment Booking Section */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-4">
+      <section className="py-12 sm:py-20 bg-muted/30">
+        <div className="container mx-auto px-2 sm:px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Book Your Appointment</h2>
-              <p className="text-lg text-muted-foreground">
+            <div className="text-center mb-8 sm:mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4">Book Your Appointment</h2>
+              <p className="text-base sm:text-lg text-muted-foreground">
                 Choose your preferred date and time for your dental visit
               </p>
             </div>
 
-            <div className="max-w-6xl mx-auto">
-              <Card className="shadow-xl border-2 border-primary/10">
-                <div className="grid lg:grid-cols-2 gap-0">
+            <div className="max-w-2xl sm:max-w-6xl mx-auto">
+              <Card className="shadow-xl border-2 border-primary/10 rounded-lg shadow-md">
+                <div className="flex flex-col lg:grid lg:grid-cols-2 gap-0">
                   {/* Calendar Section */}
-                  <div className="p-6 lg:p-8 border-b lg:border-b-0 lg:border-r border-border bg-white">
-                    <h3 className="text-xl font-semibold mb-6 text-center lg:text-left">
+                  <div className="p-4 sm:p-6 lg:p-8 border-b lg:border-b-0 lg:border-r border-border bg-white rounded-t-lg lg:rounded-l-lg lg:rounded-tr-none shadow-md">
+                    <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-center lg:text-left">
                       Select Date
                     </h3>
                     <div className="flex justify-center">
@@ -516,24 +516,24 @@ const StaticHomepageContent = ({
                   </div>
                   
                   {/* Time Selection Section */}
-                  <div className="p-6 lg:p-8 bg-white">
-                    <h3 className="text-xl font-semibold mb-6 text-center lg:text-left">
+                  <div className="p-4 sm:p-6 lg:p-8 bg-white rounded-b-lg lg:rounded-r-lg lg:rounded-bl-none shadow-md">
+                    <h3 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-center lg:text-left">
                       Available Times
                     </h3>
-                    <div className="mb-4">
-                      <p className="text-sm text-muted-foreground text-center lg:text-left">
+                    <div className="mb-2 sm:mb-4">
+                      <p className="text-xs sm:text-sm text-muted-foreground text-center lg:text-left">
                         {format(selectedDate, "EEEE, MMMM d, yyyy")}
                       </p>
                     </div>
                     
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 mb-4 sm:mb-6">
                       {timeSlots.map(({ time, available }) => (
                         <Button
                           key={time}
                           variant={selectedTime === time ? "default" : "outline"}
                           size="sm"
                           className={cn(
-                            "w-full h-12 text-sm font-medium transition-all duration-200 border-primary/20",
+                            "w-full h-12 text-xs sm:text-sm font-medium transition-all duration-200 border-primary/20 rounded-md shadow-sm",
                             selectedTime === time && "ring-2 ring-primary ring-offset-2",
                             !available && "opacity-50 cursor-not-allowed bg-gray-100 text-gray-400"
                           )}
@@ -554,17 +554,17 @@ const StaticHomepageContent = ({
                         animate={{ opacity: 1, y: 0 }}
                         className="bg-blue-50 border border-blue-200 rounded-lg p-4"
                       >
-                        <div className="flex items-center justify-between mb-3">
-                          <div>
+                        <div className="flex flex-col sm:flex-row items-center justify-between mb-3 gap-2 sm:gap-0">
+                          <div className="text-center sm:text-left">
                             <p className="font-semibold text-black">Selected Appointment</p>
-                            <p className="text-sm text-gray-600">
+                            <p className="text-xs sm:text-sm text-gray-600">
                               {format(selectedDate, "EEEE, MMMM d, yyyy")} at {selectedTime}
                             </p>
                           </div>
                           <CalendarIcon className="h-5 w-5 text-primary" />
                         </div>
                         <Button 
-                          className="w-full h-12 text-base font-semibold" 
+                          className="w-full h-12 text-base font-semibold rounded-md shadow-sm" 
                           onClick={handleConfirmAppointment}
                         >
                           Confirm Appointment
@@ -573,9 +573,9 @@ const StaticHomepageContent = ({
                     )}
                     
                     {!selectedTime && (
-                      <div className="text-center py-8">
-                        <Clock className="h-12 w-12 text-gray-400 mx-auto mb-3" />
-                        <p className="text-gray-600">
+                      <div className="text-center py-6 sm:py-8">
+                        <Clock className="h-10 w-10 sm:h-12 sm:w-12 text-gray-400 mx-auto mb-2 sm:mb-3" />
+                        <p className="text-gray-600 text-xs sm:text-sm">
                           Please select a time slot above
                         </p>
                       </div>
@@ -639,7 +639,7 @@ const StaticHomepageContent = ({
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
               >
-                <Card className="h-fit">
+                <Card className="h-fit rounded-lg shadow-md">
                   <CardHeader>
                     <CardTitle className="text-xl text-primary">Get in Touch</CardTitle>
                   </CardHeader>
@@ -757,7 +757,7 @@ const StaticHomepageContent = ({
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                <Card>
+                <Card className="rounded-lg shadow-md">
                   <CardHeader>
                     <CardTitle className="text-xl text-primary">Book an Appointment</CardTitle>
                   </CardHeader>
@@ -778,7 +778,7 @@ const StaticHomepageContent = ({
                         <Button 
                           onClick={() => setSubmitted(false)}
                           variant="outline"
-                          className="mt-4"
+                          className="mt-4 rounded-md shadow-sm"
                         >
                           Send Another Message
                         </Button>
@@ -797,6 +797,7 @@ const StaticHomepageContent = ({
                               onChange={handleContactFormChange}
                               required
                               placeholder="Your full name"
+                              className="w-full rounded-md shadow-sm"
                             />
                           </div>
                           <div>
@@ -810,6 +811,7 @@ const StaticHomepageContent = ({
                               onChange={handleContactFormChange}
                               required
                               placeholder="Your phone number"
+                              className="w-full rounded-md shadow-sm"
                             />
                           </div>
                         </div>
@@ -824,6 +826,7 @@ const StaticHomepageContent = ({
                             value={contactForm.email}
                             onChange={handleContactFormChange}
                             placeholder="your.email@example.com"
+                            className="w-full rounded-md shadow-sm"
                           />
                         </div>
 
@@ -837,6 +840,7 @@ const StaticHomepageContent = ({
                             value={contactForm.preferred_time}
                             onChange={handleContactFormChange}
                             placeholder="e.g., Monday morning, weekday afternoons"
+                            className="w-full rounded-md shadow-sm"
                           />
                         </div>
 
@@ -851,12 +855,13 @@ const StaticHomepageContent = ({
                             required
                             rows={4}
                             placeholder="Please describe your dental needs or any questions you have..."
+                            className="w-full rounded-md shadow-sm"
                           />
                         </div>
 
                         <Button 
                           type="submit" 
-                          className="w-full"
+                          className="w-full rounded-md shadow-sm"
                           disabled={isSubmitting}
                         >
                           {isSubmitting ? (
@@ -877,6 +882,7 @@ const StaticHomepageContent = ({
           </motion.div>
         </div>
       </section>
+    {/* Footer */}
     </div>
   );
 };

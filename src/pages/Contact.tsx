@@ -9,6 +9,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 
+function extractLatLngFromUrl(url: string): { lat: string, lng: string } | null {
+  const match = url.match(/!3d([0-9.-]+)!4d([0-9.-]+)/);
+  if (match) {
+    return { lat: match[1], lng: match[2] };
+  }
+  return null;
+}
+
 const Contact = () => {
   const { slug } = useParams();
   const { dentist, loading, submitAppointment } = useDentistData(slug);
@@ -366,8 +374,11 @@ const Contact = () => {
               {/* Static Google Maps image, clickable */}
               <div className="w-full">
                 {(() => {
+                  const latLng = dentist.place_url ? extractLatLngFromUrl(dentist.place_url) : null;
                   const mapsUrl = dentist.place_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(dentist.address)}`;
-                  const staticMapUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${encodeURIComponent(dentist.address)}&zoom=16&size=600x300&markers=color:red%7C${encodeURIComponent(dentist.address)}&key=AIzaSyA7zHiqjWPvWS3Az2BWsINeWW4cnTEK5Mo`;
+                  const staticMapUrl = latLng
+                    ? `https://maps.googleapis.com/maps/api/staticmap?center=${latLng.lat},${latLng.lng}&zoom=16&size=600x300&markers=color:red%7C${latLng.lat},${latLng.lng}&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`
+                    : `https://maps.googleapis.com/maps/api/staticmap?center=${encodeURIComponent(dentist.address)}&zoom=16&size=600x300&markers=color:red%7C${encodeURIComponent(dentist.address)}&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`;
                   return (
                     <a
                       href={mapsUrl}
