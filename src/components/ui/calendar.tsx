@@ -19,14 +19,14 @@ function Calendar({
     month: "w-full",
     month_caption: "relative mx-10 mb-1 flex h-9 items-center justify-center z-20",
     caption_label: "text-sm font-medium",
-    nav: "absolute top-0 flex w-full justify-between z-10",
+    nav: "absolute top-0 left-0 right-0 flex justify-between items-center z-10 px-2",
     button_previous: cn(
       buttonVariants({ variant: "ghost" }),
-      "size-9 text-muted-foreground/80 hover:text-foreground p-0",
+      "size-9 text-muted-foreground/80 hover:text-foreground p-0 absolute left-0",
     ),
     button_next: cn(
       buttonVariants({ variant: "ghost" }),
-      "size-9 text-muted-foreground/80 hover:text-foreground p-0",
+      "size-9 text-muted-foreground/80 hover:text-foreground p-0 absolute right-0",
     ),
     weekday: "size-9 p-0 text-xs font-medium text-muted-foreground/80",
     day_button: "relative flex size-9 items-center justify-center whitespace-nowrap rounded-lg p-0 text-foreground outline-offset-2 group-[[data-selected]:not(.range-middle)]:[transition-property:color,background-color,border-radius,box-shadow] group-[[data-selected]:not(.range-middle)]:duration-150 focus:outline-none group-data-[disabled]:pointer-events-none focus-visible:z-10 hover:bg-accent group-data-[selected]:bg-primary hover:text-foreground group-data-[selected]:text-primary-foreground group-data-[disabled]:text-foreground/30 group-data-[disabled]:line-through group-data-[outside]:text-foreground/30 group-data-[outside]:group-data-[selected]:text-primary-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring/70",

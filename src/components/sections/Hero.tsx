@@ -38,10 +38,10 @@ export function Hero({ dentist, onBookAppointment }: HeroProps) {
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
             {dentist?.business_name ? `${dentist.business_name}` : 'Your Perfect Smile'}
             <br />
-            <span className="text-white/90">Starts Here</span>
+            <span className="text-black">Starts Here</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-black/90 mb-8 max-w-2xl mx-auto">
             Experience world-class dental care with our team of expert dentists. 
             We provide comprehensive dental services in a comfortable, modern environment.
           </p>
