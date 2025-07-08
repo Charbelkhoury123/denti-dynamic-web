@@ -580,7 +580,6 @@ const StaticHomepageContent = ({
                           onClick={handleConfirmAppointment}
                         >
                           Confirm Appointment
-                        </h3>
                         </Button>
                       </motion.div>
                     )}
