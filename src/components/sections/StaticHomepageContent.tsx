@@ -84,6 +84,7 @@ const StaticHomepageContent = ({
 }: StaticHomepageContentProps) => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [workingHoursExpanded, setWorkingHoursExpanded] = useState(false);
   const [contactForm, setContactForm] = useState({
     name: '',
     email: '',
@@ -219,7 +220,7 @@ const StaticHomepageContent = ({
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
               {dentist?.business_name ? `${dentist.business_name}` : 'Your Perfect Smile'}
               <br />
-              <span className="text-white/90">Starts Here</span>
+              <span className="text-white font-bold drop-shadow-lg">Starts Here</span>
             </h1>
             
             <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
@@ -232,7 +233,7 @@ const StaticHomepageContent = ({
                 <CalendarIcon className="mr-2 h-5 w-5" />
                 Book Appointment
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-3 bg-white/10 text-white border-white/30 hover:bg-white/20">
+              <Button size="lg" className="text-lg px-8 py-3 bg-white text-primary hover:bg-white/90">
                 <Phone className="mr-2 h-5 w-5" />
                 Call Now
               </Button>
@@ -403,59 +404,80 @@ const StaticHomepageContent = ({
               transition={{ duration: 0.6 }}
               className="bg-muted/30 rounded-lg p-8"
             >
-              <h3 className="text-2xl font-semibold mb-4">Office Hours</h3>
+              <div 
+                className="flex items-center justify-between cursor-pointer mb-4"
+                onClick={() => setWorkingHoursExpanded(!workingHoursExpanded)}
+              >
+                <h3 className="text-2xl font-semibold">Office Hours</h3>
+                <motion.div
+                  animate={{ rotate: workingHoursExpanded ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown className="h-6 w-6 text-primary" />
+                </motion.div>
+              </div>
               
-              {dentist?.working_hours && (
-                <div className="space-y-3">
-                  {(() => {
-                    const parsedHours = parseWorkingHours(dentist.working_hours);
-                    if (parsedHours) {
-                      return Object.entries(parsedHours).map(([day, hours]) => (
-                        <div key={day} className="flex justify-between items-center py-2 border-b border-border/50 last:border-b-0">
-                          <span className="font-medium text-foreground">{day}</span>
-                          <span className="text-muted-foreground text-sm">
-                            {formatTimeRange(hours)}
-                          </span>
-                        </div>
-                      ));
-                    } else {
-                      // Fallback to default hours if parsing fails
-                      return (
-                        <>
-                          <div className="flex justify-between items-center py-2 border-b border-border/50">
-                            <span className="font-medium text-foreground">Monday - Friday</span>
-                            <span className="text-muted-foreground text-sm">8:00 AM - 6:00 PM</span>
+              <motion.div
+                initial={false}
+                animate={{ 
+                  height: workingHoursExpanded ? "auto" : 0,
+                  opacity: workingHoursExpanded ? 1 : 0
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                style={{ overflow: "hidden" }}
+              >
+                {dentist?.working_hours && (
+                  <div className="space-y-3 pt-2">
+                    {(() => {
+                      const parsedHours = parseWorkingHours(dentist.working_hours);
+                      if (parsedHours) {
+                        return Object.entries(parsedHours).map(([day, hours]) => (
+                          <div key={day} className="flex justify-between items-center py-2 border-b border-border/50 last:border-b-0">
+                            <span className="font-medium text-foreground">{day}</span>
+                            <span className="text-muted-foreground text-sm">
+                              {formatTimeRange(hours)}
+                            </span>
                           </div>
-                          <div className="flex justify-between items-center py-2 border-b border-border/50">
-                            <span className="font-medium text-foreground">Saturday</span>
-                            <span className="text-muted-foreground text-sm">9:00 AM - 4:00 PM</span>
-                          </div>
-                          <div className="flex justify-between items-center py-2">
-                            <span className="font-medium text-foreground">Sunday</span>
-                            <span className="text-muted-foreground text-sm">Emergency Only</span>
-                          </div>
-                        </>
-                      );
-                    }
-                  })()}
-                </div>
-              ) || (
-                // Default hours when no working_hours data is available
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center py-2 border-b border-border/50">
-                    <span className="font-medium text-foreground">Monday - Friday</span>
-                    <span className="text-muted-foreground text-sm">8:00 AM - 6:00 PM</span>
+                        ));
+                      } else {
+                        // Fallback to default hours if parsing fails
+                        return (
+                          <>
+                            <div className="flex justify-between items-center py-2 border-b border-border/50">
+                              <span className="font-medium text-foreground">Monday - Friday</span>
+                              <span className="text-muted-foreground text-sm">8:00 AM - 6:00 PM</span>
+                            </div>
+                            <div className="flex justify-between items-center py-2 border-b border-border/50">
+                              <span className="font-medium text-foreground">Saturday</span>
+                              <span className="text-muted-foreground text-sm">9:00 AM - 4:00 PM</span>
+                            </div>
+                            <div className="flex justify-between items-center py-2">
+                              <span className="font-medium text-foreground">Sunday</span>
+                              <span className="text-muted-foreground text-sm">Emergency Only</span>
+                            </div>
+                          </>
+                        );
+                      }
+                    })()}
                   </div>
-                  <div className="flex justify-between items-center py-2 border-b border-border/50">
-                    <span className="font-medium text-foreground">Saturday</span>
-                    <span className="text-muted-foreground text-sm">9:00 AM - 4:00 PM</span>
+                ) || (
+                  // Default hours when no working_hours data is available
+                  <div className="space-y-3 pt-2">
+                    <div className="flex justify-between items-center py-2 border-b border-border/50">
+                      <span className="font-medium text-foreground">Monday - Friday</span>
+                      <span className="text-muted-foreground text-sm">8:00 AM - 6:00 PM</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2 border-b border-border/50">
+                      <span className="font-medium text-foreground">Saturday</span>
+                      <span className="text-muted-foreground text-sm">9:00 AM - 4:00 PM</span>
+                    </div>
+                    <div className="flex justify-between items-center py-2">
+                      <span className="font-medium text-foreground">Sunday</span>
+                      <span className="text-muted-foreground text-sm">Emergency Only</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-center py-2">
-                    <span className="font-medium text-foreground">Sunday</span>
-                    <span className="text-muted-foreground text-sm">Emergency Only</span>
-                  </div>
-                </div>
-              )}
+                )}
+              </motion.div>
               
               <div className="mt-6 pt-6 border-t border-border">
                 <h4 className="font-semibold mb-2">Emergency Contact</h4>
@@ -483,9 +505,14 @@ const StaticHomepageContent = ({
               </p>
             </div>
 
-            <div className="max-w-4xl mx-auto">
-              <div className="rounded-lg border border-border bg-background shadow-lg">
-                <div className="flex max-lg:flex-col">
+            <div className="max-w-6xl mx-auto">
+              <Card className="shadow-xl border-2 border-primary/10">
+                <div className="grid lg:grid-cols-2 gap-0">
+                  {/* Calendar Section */}
+                  <div className="p-6 lg:p-8 border-b lg:border-b-0 lg:border-r border-border">
+                    <h3 className="text-xl font-semibold mb-6 text-center lg:text-left">
+                      Select Date
+                    </h3>
                   <Calendar
                     mode="single"
                     selected={selectedDate}
@@ -495,47 +522,80 @@ const StaticHomepageContent = ({
                         setSelectedTime(null);
                       }
                     }}
-                    className="p-4 lg:pe-8"
+                    className="w-full flex justify-center"
                     disabled={[{ before: new Date() }]}
                   />
+                  </div>
                   
-                  <div className="relative w-full lg:w-80">
-                    <div className="border-border py-6 lg:border-l">
-                      <div className="px-6">
-                        <h3 className="font-semibold mb-4">
-                          Available Times - {format(selectedDate, "EEEE, MMM d")}
-                        </h3>
-                        <div className="grid grid-cols-2 gap-2">
-                          {timeSlots.map(({ time, available }) => (
-                            <Button
-                              key={time}
-                              variant={selectedTime === time ? "default" : "outline"}
-                              size="sm"
-                              className="w-full"
-                              onClick={() => setSelectedTime(time)}
-                              disabled={!available}
-                            >
-                              {time}
-                            </Button>
-                          ))}
-                        </div>
-                        
-                        {selectedTime && (
-                          <div className="mt-6 p-4 bg-muted rounded-lg">
-                            <p className="text-sm font-medium">Selected Appointment:</p>
+                  {/* Time Selection Section */}
+                  <div className="p-6 lg:p-8">
+                    <h3 className="text-xl font-semibold mb-6 text-center lg:text-left">
+                      Available Times
+                    </h3>
+                    <div className="mb-4">
+                      <p className="text-sm text-muted-foreground text-center lg:text-left">
+                        {format(selectedDate, "EEEE, MMMM d, yyyy")}
+                      </p>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+                      {timeSlots.map(({ time, available }) => (
+                        <Button
+                          key={time}
+                          variant={selectedTime === time ? "default" : "outline"}
+                          size="sm"
+                          className={cn(
+                            "w-full h-12 text-sm font-medium transition-all duration-200",
+                            selectedTime === time && "ring-2 ring-primary ring-offset-2",
+                            !available && "opacity-50 cursor-not-allowed"
+                          )}
+                          onClick={() => available && setSelectedTime(time)}
+                          disabled={!available}
+                        >
+                          {time}
+                          {!available && (
+                            <span className="ml-1 text-xs">(Booked)</span>
+                          )}
+                        </Button>
+                      ))}
+                    </div>
+                    
+                    {selectedTime && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="bg-primary/5 border border-primary/20 rounded-lg p-4"
+                      >
+                        <div className="flex items-center justify-between mb-3">
+                          <div>
+                            <p className="font-semibold text-foreground">Selected Appointment</p>
                             <p className="text-sm text-muted-foreground">
                               {format(selectedDate, "EEEE, MMMM d, yyyy")} at {selectedTime}
                             </p>
-                            <Button className="w-full mt-3" onClick={handleConfirmAppointment}>
-                              Confirm Appointment
-                            </Button>
                           </div>
-                        )}
+                          <CalendarIcon className="h-5 w-5 text-primary" />
+                        </div>
+                        <Button 
+                          className="w-full h-12 text-base font-semibold" 
+                          onClick={handleConfirmAppointment}
+                        >
+                          Confirm Appointment
+                        </h3>
+                        </Button>
+                      </motion.div>
+                    )}
+                    
+                    {!selectedTime && (
+                      <div className="text-center py-8">
+                        <Clock className="h-12 w-12 text-muted-foreground/50 mx-auto mb-3" />
+                        <p className="text-muted-foreground">
+                          Please select a time slot above
+                        </p>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
-              </div>
+              </Card>
             </div>
           </motion.div>
         </div>

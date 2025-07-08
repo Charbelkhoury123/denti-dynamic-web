@@ -11,18 +11,17 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('light');
+  const [theme, setThemeState] = useState<Theme>('light'); // Default to light theme
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    // Check for saved theme preference or default to system preference
+    // Check for saved theme preference or default to light theme
     const savedTheme = localStorage.getItem('dental-theme') as Theme;
     if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
       setThemeState(savedTheme);
     } else {
-      // Check system preference
-      const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      setThemeState(systemPreference);
+      // Default to light theme instead of system preference
+      setThemeState('light');
     }
     setIsInitialized(true);
   }, []);

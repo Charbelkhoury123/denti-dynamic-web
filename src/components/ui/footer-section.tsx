@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from 'motion/react';
 import { FacebookIcon, FrameIcon, InstagramIcon, LinkedinIcon, YoutubeIcon } from 'lucide-react';
 import { Link, useParams } from "react-router-dom";
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { useDentistData } from '@/hooks/useDentistData';
 
 interface FooterLink {
 	title: string;
@@ -19,6 +20,9 @@ interface FooterSection {
 
 export function Footer() {
 	const { slug } = useParams();
+	const { dentist } = useDentistData(slug);
+	const currentYear = new Date().getFullYear();
+	const businessName = dentist?.business_name || 'Dental Practice';
 
 	// Helper function to build URLs with slug preservation
 	const buildUrl = (path: string) => {
@@ -112,10 +116,19 @@ export function Footer() {
 												>
 													{link.icon && <link.icon className="mr-2 w-4 h-4" />}
 													{link.title}
-												</Link>
+					<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8">
+						<circle cx="16" cy="16" r="16" fill="url(#paint0_linear)" />
+						<path d="M16 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 12c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z" fill="white"/>
+						<defs>
+							<linearGradient id="paint0_linear" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+								<stop stopColor="#2563eb" />
+								<stop offset="1" stopColor="#1d4ed8" />
+							</linearGradient>
+						</defs>
+					</svg>
 											)}
-										</li>
-									))}
+				<p className="text-muted-foreground mt-4 sm:mt-8 text-sm md:mt-0 mb-4">
+					© {currentYear} {businessName}. All rights reserved.
 								</ul>
 							</div>
 						</AnimatedContainer>
