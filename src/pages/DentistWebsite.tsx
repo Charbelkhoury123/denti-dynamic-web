@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import { useDentistData } from '@/hooks/useDentistData';
 import { ThemeProvider } from '@/contexts/ThemeContext';
-import { Hero } from '@/components/sections/Hero';
-import { About } from '@/components/sections/About';
-import { Services } from '@/components/sections/Services';
-import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
-import { AppointmentBooking } from '@/components/sections/AppointmentBooking';
+import StaticHomepageContent from '@/components/sections/StaticHomepageContent';
 import { Footer } from '@/components/ui/footer-section';
 import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { ResponsiveNavbar } from '@/components/ui/responsive-navbar';
@@ -48,13 +44,12 @@ export default function DentistWebsite() {
           </main>
         ) : (
           /* Render main clinic page content */
-          <>
-            <Hero dentist={dentist} onBookAppointment={handleBookAppointment} />
-            <About dentist={dentist} />
-            <Services dentist={dentist} />
-            <AppointmentBooking onSubmitAppointment={submitAppointment} />
-            <TestimonialsSection testimonials={testimonials} />
-          </>
+          <StaticHomepageContent
+            dentist={dentist}
+            testimonials={testimonials}
+            submitAppointment={submitAppointment}
+            onBookAppointment={handleBookAppointment}
+          />
         )}
         
         <Footer />
