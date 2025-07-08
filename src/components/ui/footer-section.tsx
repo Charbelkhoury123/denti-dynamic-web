@@ -116,19 +116,10 @@ export function Footer() {
 												>
 													{link.icon && <link.icon className="mr-2 w-4 h-4" />}
 													{link.title}
-					<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8">
-						<circle cx="16" cy="16" r="16" fill="url(#paint0_linear)" />
-						<path d="M16 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 12c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4z" fill="white"/>
-						<defs>
-							<linearGradient id="paint0_linear" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-								<stop stopColor="#2563eb" />
-								<stop offset="1" stopColor="#1d4ed8" />
-							</linearGradient>
-						</defs>
-					</svg>
+												</Link>
 											)}
-				<p className="text-muted-foreground mt-4 sm:mt-8 text-sm md:mt-0 mb-4">
-					© {currentYear} {businessName}. All rights reserved.
+										</li>
+									))}
 								</ul>
 							</div>
 						</AnimatedContainer>
@@ -137,7 +128,7 @@ export function Footer() {
 			</div>
 		</footer>
 	);
-};
+}
 
 type ViewAnimationProps = {
 	delay?: number;
@@ -163,4 +154,4 @@ function AnimatedContainer({ className, delay = 0.1, children }: ViewAnimationPr
 			{children}
 		</motion.div>
 	);
-};
+}
