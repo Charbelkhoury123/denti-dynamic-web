@@ -43,7 +43,7 @@ export function Footer() {
 			label: 'Services',
 			links: [
 				{ title: 'About', href: buildUrl('about') },
-				{ title: 'Services', href: buildUrl('') + '#services' },
+				{ title: 'Services', href: buildUrl('services') },
 				{ title: 'Contact', href: buildUrl('contact') },
 			],
 		},

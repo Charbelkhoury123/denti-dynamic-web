@@ -17,6 +17,7 @@ import Pricing from "./pages/Pricing";
 import Testimonials from "./pages/Testimonials";
 import Service from "./pages/Service";
 import Contact from "./pages/Contact";
+import ServicesList from "./pages/ServicesList";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
           <Route path="/:slug" element={<DentistWebsite />}>
             {/* Nested routes that preserve the clinic slug */}
             <Route path="about" element={<About />} />
+            <Route path="services" element={<ServicesList />} />
             <Route path="services/:serviceSlug" element={<Service />} />
             <Route path="contact" element={<Contact />} />
             <Route path="faqs" element={<Faqs />} />
