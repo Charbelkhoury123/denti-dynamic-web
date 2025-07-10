@@ -108,13 +108,32 @@ export function Footer() {
 													{link.title}
 												</a>
 											) : (
-												<Link
-													to={link.href}
-													className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm transition-colors duration-200 hover:underline"
-												>
-													{link.icon && <link.icon className="mr-2 w-4 h-4" />}
-													{link.title}
-												</Link>
+												link.href.includes('#') ? (
+													<a
+														href={link.href}
+														className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm transition-colors duration-200 hover:underline"
+														onClick={(e) => {
+															if (link.href.includes('#services')) {
+																e.preventDefault();
+																const servicesSection = document.getElementById('services');
+																if (servicesSection) {
+																	servicesSection.scrollIntoView({ behavior: 'smooth' });
+																}
+															}
+														}}
+													>
+														{link.icon && <link.icon className="mr-2 w-4 h-4" />}
+														{link.title}
+													</a>
+												) : (
+													<Link
+														to={link.href}
+														className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm transition-colors duration-200 hover:underline"
+													>
+														{link.icon && <link.icon className="mr-2 w-4 h-4" />}
+														{link.title}
+													</Link>
+												)
 											)}
 										</li>
 									))}
