@@ -43,7 +43,7 @@ export function Footer() {
 			label: 'Services',
 			links: [
 				{ title: 'About', href: buildUrl('about') },
-				{ title: 'Services', href: buildUrl('') + '#services' }, // Link to services section on main page
+				{ title: 'Services', href: buildUrl('') + '#services' },
 				{ title: 'Contact', href: buildUrl('contact') },
 			],
 		},
@@ -110,14 +110,82 @@ export function Footer() {
 											) : (
 												link.href.includes('#') ? (
 													<a
-														href={link.href}
+														href={link.href.split('#')[0]}
 														className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm transition-colors duration-200 hover:underline"
 														onClick={(e) => {
-															if (link.href.includes('#services')) {
-																e.preventDefault();
-																const servicesSection = document.getElementById('services');
-																if (servicesSection) {
-																	servicesSection.scrollIntoView({ behavior: 'smooth' });
+															e.preventDefault();
+															const targetUrl = link.href.split('#')[0];
+															const anchor = link.href.split('#')[1];
+															
+															// Check if we're already on the target page
+															const currentPath = window.location.pathname;
+															const isOnTargetPage = currentPath === targetUrl || (targetUrl === '/' && currentPath === '/') || (slug && currentPath === `/${slug}` && targetUrl === `/${slug}`);
+															
+															if (isOnTargetPage && anchor) {
+																// We're on the right page, just scroll to the section
+																const targetSection = document.getElementById(anchor);
+																if (targetSection) {
+																	targetSection.scrollIntoView({ behavior: 'smooth' });
+																}
+															} else {
+																// Navigate to the page first, then scroll
+																window.location.href = link.href;
+															}
+														}}
+													>
+														{link.icon && <link.icon className="mr-2 w-4 h-4" />}
+														{link.title}
+													</a>
+												) : (
+													<Link
+														to={link.href}
+														className="text-muted-foreground hover:text-foreground inline-flex items-center text-sm transition-colors duration-200 hover:underline"
+													>
+														{link.icon && <link.icon className="mr-2 w-4 h-4" />}
+														{link.title}
+													</Link>
+												)
+											)}
+										</li>
+									))}
+								</ul>
+							</div>
+						</AnimatedContainer>
+					))}
+				</div>
+			</div>
+			<div className="w-full text-center text-xs text-muted-foreground py-4">
+				© 2025 {businessName}. All rights reserved.
+			</div>
+		</footer>
+	);
+}
+
+type ViewAnimationProps = {
+	delay?: number;
+	className?: ComponentProps<typeof motion.div>['className'];
+	children: ReactNode;
+};
+
+function AnimatedContainer({ className, delay = 0.1, children }: ViewAnimationProps) {
+	const shouldReduceMotion = useReducedMotion();
+
+	if (shouldReduceMotion) {
+		return children;
+	}
+
+	return (
+		<motion.div
+			initial={{ filter: 'blur(4px)', translateY: -8, opacity: 0 }}
+			whileInView={{ filter: 'blur(0px)', translateY: 0, opacity: 1 }}
+			viewport={{ once: true }}
+			transition={{ delay, duration: 0.8 }}
+			className={className}
+		>
+			{children}
+		</motion.div>
+	);
+}
 																}
 															}
 														}}
