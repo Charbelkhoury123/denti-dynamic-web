@@ -42,7 +42,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           
           {/* Global pages (not clinic-specific) */}
-          <Route path="/about" element={<AboutUsContent />} />
+          <Route path="/about-us" element={<AboutUsContent />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/features" element={<Features />} />
