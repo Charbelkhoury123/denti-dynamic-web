@@ -5,11 +5,11 @@ module.exports = {
   darkMode: ['class'],
   content: [
     './src/**/*.{js,jsx,ts,tsx,html}',
-    // …your other globs
+    // add any other paths you use
   ],
   theme: {
     extend: {
-      // your customizations
+      // your custom theme tweaks
     },
   },
   plugins: [
