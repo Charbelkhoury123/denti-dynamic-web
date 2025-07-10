@@ -15,6 +15,10 @@ export function Services({ dentist }: ServicesProps) {
     threshold: 0.1,
   });
 
+  // Debug log for services data
+  console.log("Services component - dentist:", dentist);
+  console.log("Services component - services_list:", dentist?.services_list);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -62,6 +66,8 @@ export function Services({ dentist }: ServicesProps) {
     'Orthodontics',
     'Emergency Care'
   ];
+
+  console.log("Services component - final services array:", services);
 
   return (
     <section id="services" className="py-20 bg-muted/30">

@@ -136,6 +136,11 @@ const StaticHomepageContent = ({
     'Emergency Care'
   ];
 
+  // Debug log to check services in homepage
+  console.log("StaticHomepageContent - dentist:", dentist);
+  console.log("StaticHomepageContent - services_list:", dentist?.services_list);
+  console.log("StaticHomepageContent - final services:", services);
+
   const displayTestimonials = testimonials.length > 0 ? testimonials : [
     {
       id: '1',

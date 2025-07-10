@@ -32,6 +32,10 @@ const ResponsiveNavbar = ({ services, businessName }: ResponsiveNavbarProps) => 
   const { slug: clinicSlug } = useParams()
   const location = useLocation()
 
+  // Debug log to check services data in navbar
+  console.log("ResponsiveNavbar - services prop:", services);
+  console.log("ResponsiveNavbar - services length:", services?.length);
+
   // Handle mounting for SSR compatibility
   useEffect(() => {
     setIsMounted(true)
@@ -139,7 +143,7 @@ const ResponsiveNavbar = ({ services, businessName }: ResponsiveNavbarProps) => 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex lg:items-center lg:space-x-8">
             {navLinks.map((item) => {
-              if (item.name === "Services" && services && services.length > 0) {
+              if (item.name === "Services" && services && Array.isArray(services) && services.length > 0) {
                 return (
                   <div
                     key="Services"
@@ -279,7 +283,7 @@ const ResponsiveNavbar = ({ services, businessName }: ResponsiveNavbarProps) => 
               >
                 <div className="px-4 py-6 space-y-1 mt-8">
                   {navLinks.map((item, index) => {
-                    if (item.name === "Services" && services && services.length > 0) {
+                    if (item.name === "Services" && services && Array.isArray(services) && services.length > 0) {
                       return (
                         <div key="Services" className="space-y-1">
                           <motion.button

@@ -71,6 +71,7 @@ export function useDentistData(slug?: string) {
       const { data: dentistData, error: dentistError } = await dentistQuery.single();
 
       console.log("Fetched dentist data from Supabase:", dentistData);
+      console.log("Services list from database:", dentistData?.services_list);
 
       if (dentistError) {
         console.error('Error fetching dentist:', dentistError);

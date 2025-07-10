@@ -16,6 +16,10 @@ export default function DentistWebsite() {
     setShowAppointmentForm(true);
   };
 
+  // Debug log to check services data
+  console.log("DentistWebsite - dentist data:", dentist);
+  console.log("DentistWebsite - services_list:", dentist?.services_list);
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
@@ -34,7 +38,10 @@ export default function DentistWebsite() {
     <ThemeProvider>
       <div className="min-h-screen bg-background smooth-scroll">
         {/* Responsive Navbar - always visible */}
-        <ResponsiveNavbar services={dentist?.services_list} businessName={dentist?.business_name} />
+        <ResponsiveNavbar 
+          services={dentist?.services_list || []} 
+          businessName={dentist?.business_name} 
+        />
 
         {/* Conditional rendering based on route */}
         {isNestedRoute ? (
