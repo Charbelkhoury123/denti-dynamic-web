@@ -1,7 +1,15 @@
+```typescript
 import React, { useEffect, useState } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { createClient } from '@supabase/supabase-js';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+
+// Initialize Supabase client (replace with your actual Supabase URL and anon key)
+// You should ideally get these from environment variables or a configuration file.
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const AboutUsContent: React.FC = () => {
   const [aboutUsText, setAboutUsText] = useState<string>('');
@@ -39,39 +47,24 @@ const AboutUsContent: React.FC = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading About Us content...</p>
-        </div>
-      </div>
-    );
+    return <div className="text-center py-8">Loading About Us content...</div>;
   }
 
   if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center py-8 text-destructive">
-          <h2 className="text-2xl font-bold mb-4">Error Loading Content</h2>
-          <p>{error}</p>
-        </div>
-      </div>
-    );
+    return <div className="text-center py-8 text-red-500">{error}</div>;
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
-        {/* Apply Tailwind's prose classes for nicely formatted Markdown */}
-        <div className="prose prose-lg dark:prose-invert max-w-none mx-auto">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {aboutUsText}
-          </ReactMarkdown>
-        </div>
+    <div className="container mx-auto px-4 py-8">
+      {/* Apply Tailwind's prose classes for nicely formatted Markdown */}
+      <div className="prose dark:prose-invert max-w-none">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {aboutUsText}
+        </ReactMarkdown>
       </div>
     </div>
   );
 };
 
 export default AboutUsContent;
+```
