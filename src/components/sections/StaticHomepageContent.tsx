@@ -214,34 +214,34 @@ const StaticHomepageContent = ({
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="max-w-4xl mx-auto"
           >
-            <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm font-medium bg-blue-600 text-white rounded-full shadow-md">
+            <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm font-medium bg-primary text-primary-foreground rounded-full shadow-md">
               Professional Dental Care
             </Badge>
 
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">
               {dentist?.business_name ? `${dentist.business_name}` : 'Your Perfect Smile'}
               <br />
-              <span className="text-black font-bold drop-shadow-lg">Starts Here</span>
+              <span className="text-foreground font-bold drop-shadow-lg">Starts Here</span>
             </h1>
             
-            <p className="text-base sm:text-lg md:text-xl text-black/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-foreground/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
               Experience world-class dental care with our team of expert dentists. 
               We provide comprehensive dental services in a comfortable, modern environment.
             </p>
             
             <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center w-full max-w-md mx-auto">
-              <Button size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 bg-white text-primary hover:bg-white/90 rounded-lg shadow" onClick={onBookAppointment}>
+              <Button size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3" onClick={onBookAppointment}>
                 <CalendarIcon className="mr-2 h-5 w-5" />
                 Book Appointment
               </Button>
-              <Button size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3 bg-white text-primary hover:bg-white/90 rounded-lg shadow">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3">
                 <Phone className="mr-2 h-5 w-5" />
                 Call Now
               </Button>
             </div>
 
             {/* Statistics */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-10 sm:mt-16 pt-8 border-t border-white/20">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-10 sm:mt-16 pt-8 border-t border-border/20">
               {[
                 { number: "5000+", label: "Happy Patients" },
                 { number: "15+", label: "Years Experience" },
@@ -254,10 +254,10 @@ const StaticHomepageContent = ({
                   transition={{ delay: 1 + index * 0.2, duration: 0.5 }}
                   className="text-center"
                 >
-                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-600 mb-1 sm:mb-2">
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-1 sm:mb-2">
                     {stat.number}
                   </div>
-                  <div className="text-blue-600/80 font-medium text-sm sm:text-base">
+                  <div className="text-primary/80 font-medium text-sm sm:text-base">
                     {stat.label}
                   </div>
                 </motion.div>
@@ -340,18 +340,18 @@ const StaticHomepageContent = ({
               whileInView={{ opacity: 1, y: 0 }}
               className="text-center mt-16"
             >
-              <Card className="p-8 bg-dental-gradient text-white shadow-lg rounded-lg shadow-md">
+              <Card className="p-8 bg-primary text-primary-foreground shadow-lg rounded-lg shadow-md">
                 <h3 className="text-2xl md:text-3xl font-bold mb-4">
                   Need a Consultation?
                 </h3>
-                <p className="text-white/90 mb-6 max-w-2xl mx-auto">
+                <p className="text-primary-foreground/90 mb-6 max-w-2xl mx-auto">
                   Our experienced team is ready to help you achieve the smile you've always wanted. Contact us to schedule your appointment today.
                 </p>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-white/90 transition-colors w-full sm:w-auto"
+                  className="bg-background text-foreground px-8 py-3 rounded-lg font-semibold hover:bg-muted transition-colors w-full sm:w-auto"
                 >
                   Schedule Consultation
                 </motion.button>
