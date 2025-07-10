@@ -490,9 +490,9 @@ const StaticHomepageContent = ({
             transition={{ duration: 0.6 }}
           >
             <div className="text-center mb-8 sm:mb-12">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4">Book Your Appointment</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 sm:mb-4">Schedule Your Visit Today</h2>
               <p className="text-base sm:text-lg text-muted-foreground">
-                Choose your preferred date and time for your dental visit
+                Take the first step towards your healthiest smile. Our convenient online booking makes scheduling easy - select your preferred date and time, and we'll confirm your appointment within 24 hours.
               </p>
             </div>
 
