@@ -27,6 +27,7 @@ import { AuroraBackground } from "@/components/sections/AuroraBackground";
 import { SparklesCore } from "@/components/sections/Sparkles";
 import { DentistData, Testimonial, Appointment } from '@/hooks/useDentistData';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
+import ReactMarkdown from 'react-markdown';
 
 // Helper function to parse working hours string into structured data
 const parseWorkingHours = (workingHoursString: string) => {
@@ -378,11 +379,17 @@ const StaticHomepageContent = ({
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Why Choose {dentist?.business_name || 'Our Practice'}?
               </h2>
-              <p className="text-lg text-muted-foreground mb-6">
-                {dentist?.about_text || 
-                  'With over 15 years of experience, our team of certified dentists provides exceptional care using the latest technology and techniques.'
-                }
-              </p>
+              {dentist?.about_text ? (
+                <div className="prose text-muted-foreground mb-6">
+                  <ReactMarkdown>
+                    {dentist.about_text}
+                  </ReactMarkdown>
+                </div>
+              ) : (
+                <p className="text-lg text-muted-foreground mb-6">
+                  With over 15 years of experience, our team of certified dentists provides exceptional care using the latest technology and techniques.
+                </p>
+              )}
               
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">

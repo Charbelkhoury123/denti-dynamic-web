@@ -60,10 +60,11 @@ export function useDentistData(slug?: string) {
     try {
       setLoading(true);
       
-      // Fetch dentist by slug if provided, otherwise fallback to first record
+      // Fetch dentist by slug if provided, otherwise fallback to first record alphabetically
       let dentistQuery: any = supabase
         .from('dentists')
         .select('*')
+        .order('business_name', { ascending: true })
         .limit(1);
       if (slug) {
         dentistQuery = dentistQuery.eq('slug', slug);

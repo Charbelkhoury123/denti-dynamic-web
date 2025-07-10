@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDentistData } from '@/hooks/useDentistData';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import ReactMarkdown from 'react-markdown';
 
 export default function About() {
   const { slug } = useParams();
@@ -40,11 +41,17 @@ export default function About() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="text-2xl font-bold mb-4 text-primary">Our Story</h2>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  {dentist?.about_text || 
-                    'We are dedicated to providing exceptional dental care in a comfortable and welcoming environment. Our team of experienced professionals uses the latest technology and techniques to ensure you receive the best possible treatment.'
-                  }
-                </p>
+                {dentist?.about_text ? (
+                  <div className="prose text-muted-foreground mb-4 leading-relaxed">
+                    <ReactMarkdown>
+                      {dentist.about_text}
+                    </ReactMarkdown>
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground mb-4 leading-relaxed">
+                    We are dedicated to providing exceptional dental care in a comfortable and welcoming environment. Our team of experienced professionals uses the latest technology and techniques to ensure you receive the best possible treatment.
+                  </p>
+                )}
                 <p className="text-muted-foreground mb-4 leading-relaxed">
                   Our mission is to help you achieve and maintain a healthy, beautiful smile for life. We believe in personalized care and building long-term relationships with our patients.
                 </p>
