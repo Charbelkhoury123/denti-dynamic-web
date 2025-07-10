@@ -18,6 +18,7 @@ import Testimonials from "./pages/Testimonials";
 import Service from "./pages/Service";
 import Contact from "./pages/Contact";
 import ServicesList from "./pages/ServicesList";
+import AboutUsContent from './components/AboutUsContent';
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           
           {/* Global pages (not clinic-specific) */}
+          <Route path="/about" element={<AboutUsContent />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/features" element={<Features />} />
