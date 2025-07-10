@@ -65,54 +65,68 @@ export function AppointmentBooking({ onSubmitAppointment }: AppointmentBookingPr
           </div>
 
           <div className="max-w-4xl mx-auto">
-            <div className="rounded-lg border border-border bg-background shadow-lg">
+            <div className="rounded-xl border border-border bg-card shadow-lg overflow-hidden">
               <div className="flex max-lg:flex-col">
-                <Calendar
-                  mode="single"
-                  selected={selectedDate}
-                  onSelect={(newDate) => {
-                    if (newDate) {
-                      setSelectedDate(newDate);
-                      setSelectedTime(null);
-                    }
-                  }}
-                  className="p-4 lg:pe-8"
-                  disabled={[{ before: new Date() }]}
-                />
+                {/* Calendar Section */}
+                <div className="lg:flex-1 border-b lg:border-b-0 lg:border-r border-border">
+                  <Calendar
+                    mode="single"
+                    selected={selectedDate}
+                    onSelect={(newDate) => {
+                      if (newDate) {
+                        setSelectedDate(newDate);
+                        setSelectedTime(null);
+                      }
+                    }}
+                    className="p-6 w-full flex justify-center"
+                    disabled={[{ before: new Date() }]}
+                  />
+                </div>
                 
-                <div className="relative w-full lg:w-80">
-                  <div className="border-border py-6 lg:border-l">
-                    <div className="px-6">
-                      <h3 className="font-semibold mb-4">
-                        Available Times - {format(selectedDate, "EEEE, MMM d")}
-                      </h3>
-                      <div className="grid grid-cols-2 gap-2">
-                        {timeSlots.map(({ time, available }) => (
-                          <Button
-                            key={time}
-                            variant={selectedTime === time ? "default" : "outline"}
-                            size="sm"
-                            className="w-full"
-                            onClick={() => setSelectedTime(time)}
-                            disabled={!available}
-                          >
-                            {time}
-                          </Button>
-                        ))}
-                      </div>
-                      
-                      {selectedTime && (
-                        <div className="mt-6 p-4 bg-muted rounded-lg">
-                          <p className="text-sm font-medium">Selected Appointment:</p>
-                          <p className="text-sm text-muted-foreground">
-                            {format(selectedDate, "EEEE, MMMM d, yyyy")} at {selectedTime}
-                          </p>
-                          <Button className="w-full mt-3" onClick={handleConfirmAppointment}>
-                            Confirm Appointment
-                          </Button>
-                        </div>
-                      )}
+                {/* Time Slots Section */}
+                <div className="w-full lg:w-80 bg-card">
+                  <div className="p-6">
+                    <h3 className="font-semibold text-card-foreground mb-4 text-center lg:text-left">
+                      Available Times
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-4 text-center lg:text-left">
+                      {format(selectedDate, "EEEE, MMM d, yyyy")}
+                    </p>
+                    <div className="grid grid-cols-2 gap-3">
+                      {timeSlots.map(({ time, available }) => (
+                        <Button
+                          key={time}
+                          variant={selectedTime === time ? "default" : "outline"}
+                          size="sm"
+                          className={`w-full transition-all duration-200 ${
+                            !available 
+                              ? "opacity-50 cursor-not-allowed bg-muted text-muted-foreground" 
+                              : selectedTime === time 
+                                ? "bg-primary text-primary-foreground shadow-md" 
+                                : "hover:bg-accent hover:text-accent-foreground"
+                          }`}
+                          onClick={() => available && setSelectedTime(time)}
+                          disabled={!available}
+                        >
+                          {available ? time : `${time} (Booked)`}
+                        </Button>
+                      ))}
                     </div>
+                    
+                    {selectedTime && (
+                      <div className="mt-6 p-4 bg-accent/50 border border-border rounded-lg">
+                        <p className="text-sm font-medium text-accent-foreground mb-1">Selected Appointment:</p>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          {format(selectedDate, "EEEE, MMMM d, yyyy")} at {selectedTime}
+                        </p>
+                        <Button 
+                          className="w-full bg-primary text-primary-foreground hover:bg-primary/90" 
+                          onClick={handleConfirmAppointment}
+                        >
+                          Confirm Appointment
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
