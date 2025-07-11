@@ -28,6 +28,7 @@ import { SparklesCore } from "@/components/sections/Sparkles";
 import { DentistData, Testimonial, Appointment } from '@/hooks/useDentistData';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import ReactMarkdown from 'react-markdown';
+import { Link } from 'react-router-dom';
 
 // Helper function to parse working hours string into structured data
 const parseWorkingHours = (workingHoursString: string) => {
@@ -236,13 +237,17 @@ const StaticHomepageContent = ({
             </p>
             
             <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center w-full max-w-md mx-auto">
-              <Button size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3" onClick={onBookAppointment}>
-                <CalendarIcon className="mr-2 h-5 w-5" />
-                Book Appointment
+              <Button asChild size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3">
+                <Link to={dentist?.slug ? `/${dentist.slug}/contact` : '/contact'}>
+                  <CalendarIcon className="mr-2 h-5 w-5" />
+                  Book Appointment
+                </Link>
               </Button>
-              <Button variant="outline" size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3">
-                <Phone className="mr-2 h-5 w-5" />
-                Call Now
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto text-base sm:text-lg px-6 sm:px-8 py-3">
+                <Link to={dentist?.slug ? `/${dentist.slug}/contact` : '/contact'}>
+                  <Phone className="mr-2 h-5 w-5" />
+                  Call Now
+                </Link>
               </Button>
             </div>
 
