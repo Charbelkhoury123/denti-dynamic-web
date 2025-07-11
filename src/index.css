@@ -277,7 +277,9 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
   html {
     @apply scroll-smooth;
   }
-
+  html, body {
+    overflow-x: hidden;
+  }
 }
 
 @layer components {
