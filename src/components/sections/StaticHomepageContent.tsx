@@ -509,7 +509,7 @@ const StaticHomepageContent = ({
           </div>
 
           <div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-full"
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-full pb-12"
           >
             {displayTestimonials.slice(0, 3).map((testimonial, index) => (
               <motion.div
@@ -517,16 +517,18 @@ const StaticHomepageContent = ({
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-background rounded-lg p-6 shadow-lg border border-border"
+                className="bg-background rounded-lg p-6 shadow-lg border border-border h-full flex flex-col justify-between"
                 style={{ maxWidth: '100%' }}
               >
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating || 5)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                  ))}
+                <div>
+                  <div className="flex mb-4">
+                    {[...Array(testimonial.rating || 5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-muted-foreground mb-4">"{testimonial.review}"</p>
                 </div>
-                <p className="text-muted-foreground mb-4">"{testimonial.review}"</p>
-                <p className="font-semibold">- {testimonial.patient_name}</p>
+                <p className="font-semibold mt-auto mb-4">- {testimonial.patient_name}</p>
               </motion.div>
             ))}
           </div>
