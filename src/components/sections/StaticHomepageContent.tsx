@@ -506,6 +506,7 @@ const StaticHomepageContent = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-background rounded-lg p-6 shadow-lg border border-border"
+                style={{ overflow: 'visible' }}
               >
                 <div className="flex mb-4">
                   {[...Array(testimonial.rating || 5)].map((_, i) => (
