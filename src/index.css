@@ -298,6 +298,17 @@ Follows WCAG 2.1 AA guidelines with minimum 4.5:1 contrast ratios.
     @apply container mx-auto px-4 sm:px-6 lg:px-8;
   }
 
+  .container.mx-auto.px-4 {
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+    max-height: none !important;
+    scrollbar-width: none !important; /* Firefox */
+  }
+  .container.mx-auto.px-4::-webkit-scrollbar {
+    display: none !important; /* Chrome, Safari, Opera */
+  }
+
   /* Hover animations */
   .hover-lift {
     @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-lg;
@@ -491,9 +502,18 @@ img, iframe {
 }
 
 section, .grid, .container, .card, .content, .main {
-  overflow-y: visible !important;
+  overflow-y: hidden !important;
   max-height: none !important;
   height: auto !important;
+  scrollbar-width: none !important;
+}
+section::-webkit-scrollbar,
+.container::-webkit-scrollbar,
+.main::-webkit-scrollbar,
+.content::-webkit-scrollbar,
+.card::-webkit-scrollbar,
+.grid::-webkit-scrollbar {
+  display: none !important;
 }
 
 @media (max-width: 600px) {

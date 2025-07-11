@@ -311,7 +311,6 @@ const StaticHomepageContent = ({
 
             <div
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-full"
-              style={{ overflowY: 'visible', overflow: 'visible', height: 'auto', maxHeight: 'none' }}
             >
               {services.map((service, index) => {
                 const IconComponent = getServiceIcon(service);
@@ -506,7 +505,6 @@ const StaticHomepageContent = ({
 
           <div
             className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-full"
-            style={{ overflowY: 'visible', overflow: 'visible', height: 'auto', maxHeight: 'none' }}
           >
             {displayTestimonials.slice(0, 3).map((testimonial, index) => (
               <motion.div
@@ -515,7 +513,7 @@ const StaticHomepageContent = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-background rounded-lg p-6 shadow-lg border border-border"
-                style={{ overflow: 'visible', maxWidth: '100%' }}
+                style={{ maxWidth: '100%' }}
               >
                 <div className="flex mb-4">
                   {[...Array(testimonial.rating || 5)].map((_, i) => (
