@@ -490,6 +490,12 @@ img, iframe {
   display: block;
 }
 
+section, .grid, .container, .card, .content, .main {
+  overflow-y: visible !important;
+  max-height: none !important;
+  height: auto !important;
+}
+
 @media (max-width: 600px) {
   html, body, #root {
     overflow-x: hidden !important;
