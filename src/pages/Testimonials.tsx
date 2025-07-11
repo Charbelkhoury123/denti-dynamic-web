@@ -30,50 +30,50 @@ export default function Testimonials() {
   const displayTestimonials = testimonials && testimonials.length > 0 ? testimonials : [
     {
       id: '1',
-      patient_name: 'Sarah M.',
-      review: 'The staff was incredibly friendly and made me feel at ease. The office is modern and clean. Highly recommend!',
+      patient_name: 'Jad El Hage',
+      review: 'I had a wonderful experience at the clinic. The staff was very professional and made me feel at ease throughout my treatment.',
       rating: 5,
       is_featured: true,
       display_order: 1
     },
     {
       id: '2',
-      patient_name: 'John D.',
-      review: 'State-of-the-art technology and gentle care. My teeth have never felt better! The team is professional and caring.',
+      patient_name: 'Maya Khoury',
+      review: 'The dentist explained everything clearly and the results were amazing. Highly recommended for anyone looking for quality dental care in Lebanon.',
       rating: 5,
       is_featured: true,
       display_order: 2
     },
     {
       id: '3',
-      patient_name: 'Emily R.',
-      review: 'Professional and caring team. I finally enjoy going to the dentist! They explain everything clearly.',
+      patient_name: 'Rami Chidiac',
+      review: 'Very friendly team and modern clinic. I am very happy with my new smile. Thank you for the excellent service!',
       rating: 5,
       is_featured: true,
       display_order: 3
     },
     {
       id: '4',
-      patient_name: 'Michael C.',
-      review: 'Excellent service and results. The dental implant procedure was smooth and painless. Thank you!',
+      patient_name: 'Layal Fares',
+      review: 'The clinic is spotless and the staff is so welcoming. I felt comfortable from the moment I walked in.',
       rating: 5,
-      is_featured: false,
+      is_featured: true,
       display_order: 4
     },
     {
       id: '5',
-      patient_name: 'Lisa K.',
-      review: 'Amazing experience! The teeth whitening results exceeded my expectations. Very professional staff.',
+      patient_name: 'Karim Abou Jaoude',
+      review: 'Excellent dental care and attention to detail. I will definitely recommend this clinic to my friends and family.',
       rating: 5,
-      is_featured: false,
+      is_featured: true,
       display_order: 5
     },
     {
       id: '6',
-      patient_name: 'David T.',
-      review: 'Great dental practice with modern equipment. The team made my root canal treatment comfortable.',
+      patient_name: 'Nour Matar',
+      review: 'Professional and caring team. My dental anxiety is gone thanks to their gentle approach.',
       rating: 4,
-      is_featured: false,
+      is_featured: true,
       display_order: 6
     }
   ];

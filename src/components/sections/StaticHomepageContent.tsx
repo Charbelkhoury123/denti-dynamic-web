@@ -145,24 +145,24 @@ const StaticHomepageContent = ({
   const displayTestimonials = testimonials.length > 0 ? testimonials : [
     {
       id: '1',
-      patient_name: 'Sarah Johnson',
-      review: 'Dr. Smith and the team provided exceptional care. My smile has never looked better!',
+      patient_name: 'Jad El Hage',
+      review: 'I had a wonderful experience at the clinic. The staff was very professional and made me feel at ease throughout my treatment.',
       rating: 5,
       is_featured: true,
       display_order: 1
     },
     {
       id: '2',
-      patient_name: 'Michael Chen',
-      review: 'Professional, caring, and pain-free experience. Highly recommend this clinic.',
+      patient_name: 'Maya Khoury',
+      review: 'The dentist explained everything clearly and the results were amazing. Highly recommended for anyone looking for quality dental care in Lebanon.',
       rating: 5,
       is_featured: true,
       display_order: 2
     },
     {
       id: '3',
-      patient_name: 'Emily Davis',
-      review: 'The best dental experience I\'ve ever had. The staff is amazing and very gentle.',
+      patient_name: 'Rami Chidiac',
+      review: 'Very friendly team and modern clinic. I am very happy with my new smile. Thank you for the excellent service!',
       rating: 5,
       is_featured: true,
       display_order: 3
