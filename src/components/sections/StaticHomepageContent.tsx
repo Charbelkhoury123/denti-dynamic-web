@@ -309,7 +309,7 @@ const StaticHomepageContent = ({
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-full" style={{ overflow: 'visible', height: 'auto', maxHeight: 'none' }}>
               {services.map((service, index) => {
                 const IconComponent = getServiceIcon(service);
                 return (
@@ -323,8 +323,11 @@ const StaticHomepageContent = ({
                       transition: { duration: 0.2 }
                     }}
                     className="group h-full flex"
+                    style={{ maxWidth: '100%' }}
                   >
-                    <Card className="p-6 h-full min-h-[220px] flex flex-col justify-between text-center hover:shadow-xl transition-shadow border border-border bg-background rounded-lg shadow-md">
+                    <Card className="p-6 h-full min-h-[220px] flex flex-col justify-between text-center hover:shadow-xl transition-shadow border border-border bg-background rounded-lg shadow-md"
+                      style={{ maxWidth: '100%' }}
+                    >
                       <div className="flex flex-col items-center flex-1">
                         <IconComponent className="h-12 w-12 text-primary mb-4 group-hover:scale-110 transition-transform duration-300" />
                         <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
@@ -498,7 +501,7 @@ const StaticHomepageContent = ({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-full" style={{ overflow: 'visible', height: 'auto', maxHeight: 'none' }}>
             {displayTestimonials.slice(0, 3).map((testimonial, index) => (
               <motion.div
                 key={testimonial.id}
@@ -506,7 +509,7 @@ const StaticHomepageContent = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-background rounded-lg p-6 shadow-lg border border-border"
-                style={{ overflow: 'visible' }}
+                style={{ overflow: 'visible', maxWidth: '100%' }}
               >
                 <div className="flex mb-4">
                   {[...Array(testimonial.rating || 5)].map((_, i) => (
