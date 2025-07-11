@@ -242,168 +242,134 @@ const Contact = () => {
               </CardContent>
             </Card>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-          >
-            {/* Static Google Maps image, clickable */}
-            <div className="w-full">
-              {(() => {
-                const latLng = dentist.place_url ? extractLatLngFromUrl(dentist.place_url) : null;
-                const mapsUrl = dentist.place_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(dentist.address)}`;
-                const staticMapUrl = latLng
-                  ? `https://maps.googleapis.com/maps/api/staticmap?center=${latLng.lat},${latLng.lng}&zoom=16&size=600x300&markers=color:red%7C${latLng.lat},${latLng.lng}&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`
-                  : `https://maps.googleapis.com/maps/api/staticmap?center=${encodeURIComponent(dentist.address)}&zoom=16&size=600x300&markers=color:red%7C${encodeURIComponent(dentist.address)}&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`;
-                return (
-                  <a
-                    href={mapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Open Google Maps to clinic location"
-                    className="block rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow"
-                  >
-                    <img
-                      src={staticMapUrl}
-                      alt="Clinic location on map"
-                      className="w-full h-60 object-cover"
-                      onError={(e) => { e.currentTarget.src = '/placeholder.svg'; }}
-                    />
-                    <div className="text-center text-xs text-muted-foreground mt-1">Tap to open in Google Maps</div>
-                  </a>
-                );
-              })()}
-            </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-          >
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl text-primary">Book an Appointment</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {submitted ? (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-8"
-                  >
-                    <div className="text-6xl mb-4">✅</div>
-                    <h3 className="text-xl font-bold text-green-600 mb-2">
-                      Thank you for contacting us!
-                    </h3>
-                    <p className="text-muted-foreground">
-                      We'll get back to you soon to confirm your appointment.
-                    </p>
-                    <Button 
-                      onClick={() => setSubmitted(false)}
-                      variant="outline"
-                      className="mt-4"
+          {/* Right Side: Contact Form and Google Maps */}
+          <div className="flex flex-col gap-8">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-xl text-primary">Book an Appointment</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {submitted ? (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="text-center py-8"
                     >
-                      Send Another Message
-                    </Button>
-                  </motion.div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="text-6xl mb-4">✅</div>
+                      <h3 className="text-xl font-bold text-green-600 mb-2">
+                        Thank you for contacting us!
+                      </h3>
+                      <p className="text-muted-foreground">
+                        We'll get back to you soon to confirm your appointment.
+                      </p>
+                      <Button 
+                        onClick={() => setSubmitted(false)}
+                        variant="outline"
+                        className="mt-4"
+                      >
+                        Send Another Message
+                      </Button>
+                    </motion.div>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2">
+                            Name *
+                          </label>
+                          <Input
+                            type="text"
+                            name="name"
+                            value={form.name}
+                            onChange={handleChange}
+                            required
+                            placeholder="Your full name"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2">
+                            Phone *
+                          </label>
+                          <Input
+                            type="tel"
+                            name="phone"
+                            value={form.phone}
+                            onChange={handleChange}
+                            required
+                            placeholder="Your phone number"
+                          />
+                        </div>
+                      </div>
+
                       <div>
                         <label className="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2">
-                          Name *
+                          Email
+                        </label>
+                        <Input
+                          type="email"
+                          name="email"
+                          value={form.email}
+                          onChange={handleChange}
+                          placeholder="your.email@example.com"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2">
+                          Preferred Time
                         </label>
                         <Input
                           type="text"
-                          name="name"
-                          value={form.name}
+                          name="preferred_time"
+                          value={form.preferred_time}
                           onChange={handleChange}
-                          required
-                          placeholder="Your full name"
+                          placeholder="e.g., Monday morning, weekday afternoons"
                         />
                       </div>
+
                       <div>
                         <label className="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2">
-                          Phone *
+                          Message *
                         </label>
-                        <Input
-                          type="tel"
-                          name="phone"
-                          value={form.phone}
+                        <Textarea
+                          name="message"
+                          value={form.message}
                           onChange={handleChange}
                           required
-                          placeholder="Your phone number"
+                          rows={4}
+                          placeholder="Please describe your dental needs or any questions you have..."
                         />
                       </div>
-                    </div>
 
-                    <div>
-                      <label className="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2">
-                        Email
-                      </label>
-                      <Input
-                        type="email"
-                        name="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        placeholder="your.email@example.com"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2">
-                        Preferred Time
-                      </label>
-                      <Input
-                        type="text"
-                        name="preferred_time"
-                        value={form.preferred_time}
-                        onChange={handleChange}
-                        placeholder="e.g., Monday morning, weekday afternoons"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-2">
-                        Message *
-                      </label>
-                      <Textarea
-                        name="message"
-                        value={form.message}
-                        onChange={handleChange}
-                        required
-                        rows={4}
-                        placeholder="Please describe your dental needs or any questions you have..."
-                      />
-                    </div>
-
-                    <Button 
-                      type="submit" 
-                      className="w-full"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                          Sending...
-                        </>
-                      ) : (
-                        'Send Message'
-                      )}
-                    </Button>
-                  </form>
-                )}
-              </CardContent>
-            </Card>
-          </motion.div>
-            {/* Google Maps Section */}
+                      <Button 
+                        type="submit" 
+                        className="w-full"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                            Sending...
+                          </>
+                        ) : (
+                          'Send Message'
+                        )}
+                      </Button>
+                    </form>
+                  )}
+                </CardContent>
+              </Card>
+            </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="mt-8"
+              className="mt-0"
             >
               <div className="w-full">
                 {(() => {
@@ -432,6 +398,7 @@ const Contact = () => {
                 })()}
               </div>
             </motion.div>
+          </div>
         </div>
       </motion.div>
     </main>
