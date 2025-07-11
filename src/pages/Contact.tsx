@@ -17,14 +17,6 @@ function extractLatLngFromUrl(url: string): { lat: string, lng: string } | null 
   return null;
 }
 
-function extractLatLngFromUrl(url: string): { lat: string, lng: string } | null {
-  const match = url.match(/!3d([0-9.-]+)!4d([0-9.-]+)/);
-  if (match) {
-    return { lat: match[1], lng: match[2] };
-  }
-  return null;
-}
-
 const Contact = () => {
   const { slug } = useParams();
   const { dentist, loading, submitAppointment } = useDentistData(slug);
