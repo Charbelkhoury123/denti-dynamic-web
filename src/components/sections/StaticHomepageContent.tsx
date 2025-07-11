@@ -309,7 +309,10 @@ const StaticHomepageContent = ({
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-full" style={{ overflow: 'visible', height: 'auto', maxHeight: 'none' }}>
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-full"
+              style={{ overflowY: 'visible', overflow: 'visible', height: 'auto', maxHeight: 'none' }}
+            >
               {services.map((service, index) => {
                 const IconComponent = getServiceIcon(service);
                 return (
@@ -501,7 +504,10 @@ const StaticHomepageContent = ({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-full" style={{ overflow: 'visible', height: 'auto', maxHeight: 'none' }}>
+          <div
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-full"
+            style={{ overflowY: 'visible', overflow: 'visible', height: 'auto', maxHeight: 'none' }}
+          >
             {displayTestimonials.slice(0, 3).map((testimonial, index) => (
               <motion.div
                 key={testimonial.id}
