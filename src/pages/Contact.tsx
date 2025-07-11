@@ -398,6 +398,40 @@ const Contact = () => {
               </CardContent>
             </Card>
           </motion.div>
+            {/* Google Maps Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+              className="mt-8"
+            >
+              <div className="w-full">
+                {(() => {
+                  const latLng = dentist.place_url ? extractLatLngFromUrl(dentist.place_url) : null;
+                  const mapsUrl = dentist.place_url || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(dentist.address)}`;
+                  const staticMapUrl = latLng
+                    ? `https://maps.googleapis.com/maps/api/staticmap?center=${latLng.lat},${latLng.lng}&zoom=16&size=600x300&markers=color:red%7C${latLng.lat},${latLng.lng}&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`
+                    : `https://maps.googleapis.com/maps/api/staticmap?center=${encodeURIComponent(dentist.address)}&zoom=16&size=600x300&markers=color:red%7C${encodeURIComponent(dentist.address)}&key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}`;
+                  return (
+                    <a
+                      href={mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Open Google Maps to clinic location"
+                      className="block rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow"
+                    >
+                      <img
+                        src={staticMapUrl}
+                        alt="Clinic location on map"
+                        className="w-full h-60 object-cover"
+                        onError={(e) => { e.currentTarget.src = '/placeholder.svg'; }}
+                      />
+                      <div className="text-center text-xs text-muted-foreground mt-1">Tap to open in Google Maps</div>
+                    </a>
+                  );
+                })()}
+              </div>
+            </motion.div>
         </div>
       </motion.div>
     </main>
