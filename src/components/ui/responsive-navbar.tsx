@@ -177,7 +177,7 @@ const ResponsiveNavbar = ({ services, businessName }: ResponsiveNavbarProps) => 
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: -10, scale: 0.95 }}
                           transition={{ duration: 0.15 }}
-                          className="absolute left-0 top-full mt-2 w-64 bg-white dark:bg-card rounded-lg shadow-lg border border-gray-200 dark:border-border py-2"
+                          className="absolute left-0 top-full mt-2 w-64 bg-white dark:bg-card rounded-lg shadow-lg border border-gray-200 dark:border-border py-2 z-50"
                           role="menu"
                           aria-label="Services submenu"
                         >
